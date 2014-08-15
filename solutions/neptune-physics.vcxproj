@@ -78,8 +78,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\external\lib\LoadShaders.cpp" />
-    <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\particle.cpp" />
+    <ClCompile Include="tmpMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\external\shaders\basic\triangles.frag" />
+    <None Include="..\external\shaders\basic\triangles.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -62,7 +62,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../external/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../external/include;../external/glm-0.9.4.0</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CONSOLE;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

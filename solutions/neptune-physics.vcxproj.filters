@@ -35,11 +35,19 @@
     <ClCompile Include="..\external\lib\LoadShaders.cpp">
       <Filter>External</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tmpMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\external\shaders\basic\triangles.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\external\shaders\basic\triangles.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
