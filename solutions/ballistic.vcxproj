@@ -11,19 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\external\include\LoadShaders.h" />
+    <ClInclude Include="..\external\common\shader.hpp" />
     <ClInclude Include="..\include\ballistic.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\external\lib\LoadShaders.cpp" />
+    <ClCompile Include="..\external\common\shader.cpp" />
     <ClCompile Include="..\src\ballistic.cpp" />
-    <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\particle.cpp" />
+    <ClCompile Include="ballisticMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="neptune-physics.vcxproj">
       <Project>{2a8db219-81a2-4c37-be3f-e67bb5dc4515}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\external\shaders\BasicColorToColorShader.frag" />
+    <None Include="..\external\shaders\TransformVertexShader.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{83386645-9585-47BF-9192-DEC5E1E05313}</ProjectGuid>
@@ -62,13 +66,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../external/include;../external/glm-0.9.4.0</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_CONSOLE;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\external\3rdParty\AntTweakBar-1.16\include;..\external\3rdParty\glfw-3.0.3\include\GLFW;..\external\3rdParty\glm-0.9.4.0;..\external\3rdParty\glew-1.9.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../external/lib</AdditionalLibraryDirectories>
-      <IgnoreSpecificDefaultLibraries>libcmtd</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;..\external\3rdParty\Debug\glfw3.lib;..\external\3rdParty\Debug\GLEW_190.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

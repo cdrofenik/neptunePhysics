@@ -21,7 +21,7 @@
     <ClInclude Include="..\include\ballistic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\external\include\LoadShaders.h">
+    <ClInclude Include="..\external\common\shader.hpp">
       <Filter>External</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,14 +29,22 @@
     <ClCompile Include="..\src\ballistic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\external\lib\LoadShaders.cpp">
-      <Filter>External</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\external\common\shader.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="ballisticMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\external\shaders\BasicColorToColorShader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\external\shaders\TransformVertexShader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

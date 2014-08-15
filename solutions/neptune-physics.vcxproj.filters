@@ -18,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\external\include\LoadShaders.h">
-      <Filter>External</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -30,16 +27,19 @@
     <ClInclude Include="..\include\particle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\external\common\shader.hpp">
+      <Filter>External</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\external\lib\LoadShaders.cpp">
-      <Filter>External</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tmpMain.cpp">
+    <ClCompile Include="TestMain.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\external\common\shader.cpp">
+      <Filter>External</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
