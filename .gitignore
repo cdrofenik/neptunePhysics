@@ -1,3 +1,10 @@
+Generated folder
+===============
+Debug/
+
+=====================================
+Visual Studio generated
+=====================================
 *.exe
 *.ilk
 *.pdb
@@ -6,8 +13,4 @@
 *.obj
 *.idb
 *.suo
-*.cache
 *.sdf
-*.vcxproj
-*.vcxproj
-*.vcxproj
