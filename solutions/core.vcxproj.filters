@@ -13,35 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="External">
-      <UniqueIdentifier>{11ddde62-e92a-4d6c-998e-19d5e05241ce}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\ballistic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\external\common\shader.hpp">
-      <Filter>External</Filter>
+    <ClInclude Include="..\include\core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\precision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\ballistic.cpp">
+    <ClCompile Include="..\src\particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\external\common\shader.cpp">
-      <Filter>External</Filter>
-    </ClCompile>
-    <ClCompile Include="ballisticMain.cpp">
+    <ClCompile Include="..\src\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\external\shaders\BasicColorToColorShader.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\external\shaders\TransformVertexShader.vert">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

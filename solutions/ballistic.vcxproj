@@ -17,17 +17,16 @@
   <ItemGroup>
     <ClCompile Include="..\external\common\shader.cpp" />
     <ClCompile Include="..\src\ballistic.cpp" />
-    <ClCompile Include="..\src\particle.cpp" />
     <ClCompile Include="ballisticMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="neptune-physics.vcxproj">
-      <Project>{2a8db219-81a2-4c37-be3f-e67bb5dc4515}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\external\shaders\BasicColorToColorShader.frag" />
     <None Include="..\external\shaders\TransformVertexShader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="core.vcxproj">
+      <Project>{928591ac-6448-4c57-aa0a-a8166857e1b4}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{83386645-9585-47BF-9192-DEC5E1E05313}</ProjectGuid>
@@ -75,7 +74,7 @@
       </AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;..\external\3rdParty\Debug\glfw3.lib;..\external\3rdParty\Debug\GLEW_190.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;..\external\3rdParty\Debug\glfw3.lib;..\external\3rdParty\Debug\GLEW_190.lib;..\Debug\core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
