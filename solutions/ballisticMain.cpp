@@ -16,7 +16,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 
-#include "../include/camera.h"
+#include "../include/camera.hpp"
+//#include "../include/objectLoader.hpp"
+
+#include <vector>
 
 void init()
 {
@@ -83,12 +86,12 @@ int main()
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
 	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f, -1.0f, -1.0f, // triangle 1 : begin
-		-1.0f, -1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f, // triangle 1 : end
-		1.0f, 1.0f, -1.0f, // triangle 2 : begin
 		-1.0f, -1.0f, -1.0f,
-		-1.0f, 1.0f, -1.0f, // triangle 2 : end
+		-1.0f, -1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
 		1.0f, -1.0f, 1.0f,
 		-1.0f, -1.0f, -1.0f,
 		1.0f, -1.0f, -1.0f,
@@ -121,8 +124,8 @@ int main()
 		1.0f, -1.0f, 1.0f
 	};
 
-	// One color for each vertex. They were generated randomly.
-	static const GLfloat g_color_buffer_data[] = {
+	// Two UV coordinatesfor each vertex. They were created with Blender. You'll learn shortly how to do this yourself.
+	static const GLfloat g_uv_buffer_data[] = {
 		0.583f, 0.771f, 0.014f,
 		0.609f, 0.115f, 0.436f,
 		0.327f, 0.483f, 0.844f,
@@ -163,52 +166,34 @@ int main()
 
 	// This will identify our vertex buffer
 	GLuint vertexbuffer;
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glGenBuffers(1, &vertexbuffer); // Generate 1 buffer, put the resulting identifier in vertexbuffer
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer); // The following commands will talk about our 'vertexbuffer' buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW); // Give our vertices to OpenGL.
 
+	GLuint uvbuffer;
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 
-	GLuint colorbuffer;
-	glGenBuffers(1, &colorbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+	// Use our shader
+	glUseProgram(programID);
 
 	auto cam = Camera();
 	bool showMouse = true;
 
-	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-	// Camera matrix
-	glm::mat4 View = glm::lookAt(
-		glm::vec3(4, 3, 3), // Camera is at (4,3,3), in World Space
-		glm::vec3(0, 0, 0), // and looks at the origin
-		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-		);
-	// Model matrix : an identity matrix (model will be at the origin)
-	glm::mat4 Model = glm::mat4(1.0f);  // Changes for each model !
-	// Our ModelViewProjection : multiplication of our 3 matrices
-	//glm::mat4 MVP = Projection * View * Model; // Remember, matrix multiplication is the other way around
-
-
 	do{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Use our shader
-		glUseProgram(programID);
-
 		//Update camera position and calculate MVP
-		glm::mat4 MVP;
-
 		cam.updateCamera(window);
 
 		glm::mat4 ProjectionMatrix = cam.getProjectionMatrix();
 		glm::mat4 ViewMatrix = cam.getViewMatrix();
 		glm::mat4 ModelMatrix = glm::mat4(1.0);
-		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
 		if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS){
 			showMouse = !showMouse;
-
 			cam.setMouseToVisible(window, showMouse);
 		}
 
@@ -230,7 +215,7 @@ int main()
 
 		// 2nd attribute buffer : colors
 		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 		glVertexAttribPointer(
 			1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
 			3,                                // size
@@ -257,10 +242,9 @@ int main()
 
 	// Cleanup VBO and shader
 	glDeleteBuffers(1, &vertexbuffer);
-	glDeleteBuffers(1, &colorbuffer);
+	glDeleteBuffers(1, &uvbuffer);
 	glDeleteProgram(programID);
 	glDeleteVertexArrays(1, &VertexArrayID);
-#pragma endregion
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();

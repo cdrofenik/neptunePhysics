@@ -1,7 +1,7 @@
 #ifndef NEPTUNE_PARTICLE_H
 #define NEPTUNE_PARTICLE_H
 
-#include "core.h"
+#include "core.hpp"
 
 namespace neptune
 {

@@ -1,7 +1,7 @@
 #include <math.h>
 #include <assert.h>
 
-#include "../include/precision.h"
+#include "../include/precision.hpp"
 #include "../include/particle.h"
 
 namespace neptune
