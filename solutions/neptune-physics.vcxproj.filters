@@ -17,9 +17,4 @@
       <UniqueIdentifier>{8c887dce-f72b-4236-aab5-28a9a7f7258b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TestMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>
