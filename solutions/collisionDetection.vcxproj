@@ -11,22 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{224E0A91-59BB-4AFA-88C9-ECBEDE1E63EA}</ProjectGuid>
-    <RootNamespace>glUtils</RootNamespace>
+    <ProjectGuid>{EBDF1D0A-9179-42AC-808B-8FB9B1E8BEA3}</ProjectGuid>
+    <RootNamespace>collisionDetection</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -42,22 +42,18 @@
     <IntDir>$(SolutionDir)$(Configuration)\temp\</IntDir>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>$(SolutionDir)$(Configuration)\temp\</IntDir>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\external\3rdParty\assimp-3.1.1\include;..\external\3rdParty\glfw-3.0.3\include\GLFW;..\external\3rdParty\glm-0.9.4.0;..\external\3rdParty\glew-1.9.0\include;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;TW_STATIC;TW_NO_LIB_PRAGMA;TW_NO_DIRECT3D;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;..\external\3rdParty\Debug\glfw3.lib;..\external\3rdParty\Debug\GLEW_190.lib;..\Debug\glUtilsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;..\external\3rdParty\Debug\glfw3.lib;..\external\3rdParty\Debug\GLEW_190.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -74,12 +70,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\assimpLoader.h" />
-    <ClInclude Include="..\include\camera.h" />
+    <ClCompile Include="..\external\common\shader.cpp" />
+    <ClCompile Include="..\external\common\texture.cpp" />
+    <ClCompile Include="collisionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\assimpLoader.cpp" />
-    <ClCompile Include="..\src\camera.cpp" />
+    <ClInclude Include="..\external\common\shader.hpp" />
+    <ClInclude Include="..\external\common\texture.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\external\shaders\collisionDetection\basicShader.frag" />
+    <None Include="..\external\shaders\collisionDetection\basicShader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="glUtils.vcxproj">
+      <Project>{224e0a91-59bb-4afa-88c9-ecbede1e63ea}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
