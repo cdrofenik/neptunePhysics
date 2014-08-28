@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="assimpLoader.h">
+    <ClInclude Include="..\include\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\camera.h">
+    <ClInclude Include="..\include\assimpLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
