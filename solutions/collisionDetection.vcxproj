@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>$(SolutionDir)$(Configuration)\temp\</IntDir>
+    <IntDir>$(SolutionDir)$(Configuration)\$(ProjectName)\temp\</IntDir>
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -77,10 +77,6 @@
   <ItemGroup>
     <ClInclude Include="..\external\common\shader.hpp" />
     <ClInclude Include="..\external\common\texture.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\external\shaders\collisionDetection\basicShader.frag" />
-    <None Include="..\external\shaders\collisionDetection\basicShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="glUtils.vcxproj">

@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\core.hpp">
+    <ClInclude Include="..\include\core\core.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\particle.h">
+    <ClInclude Include="..\include\core\precision.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\precision.hpp">
+    <ClInclude Include="..\include\core\particle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\particle.cpp">
+    <ClCompile Include="..\src\core\particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

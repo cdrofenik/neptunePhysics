@@ -12,7 +12,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../include/camera.h"
+#include "glUtils/camera.hpp"
 
 //TODO: write custom
 #include "../../common/shader.hpp"
@@ -65,13 +65,13 @@ int main()
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = LoadShaders("..\\external\\shaders\\collisionDetection\\basicShader.vert", "..\\external\\shaders\\collisionDetection\\basicShader.frag");
+	GLuint programID = LoadShaders("..\\resources\\shaders\\basic\\basicShader.vert", "..\\resources\\shaders\\basic\\basicShader.frag");
 
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
 	// Load the texture using any two methods
-	GLuint Texture = loadDDS("..\\external\\textures\\uvmap.DDS");
+	GLuint Texture = loadDDS("..\\resources\\textures\\uvmap.DDS");
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");

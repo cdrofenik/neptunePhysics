@@ -1,4 +1,4 @@
-#include "../include/camera.h"
+#include "glUtils/camera.hpp"
 
 
 void Camera::updateCamera(GLFWwindow* window)

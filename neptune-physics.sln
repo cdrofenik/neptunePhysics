@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glUtils", "solutions\glUtils.vcxproj", "{224E0A91-59BB-4AFA-88C9-ECBEDE1E63EA}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "neptuneTest", "solutions\mainTesting.vcxproj", "{18D3D84C-959B-4F9C-8664-20AADA84FCCB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "neptuneCore", "solutions\neptuneCore.vcxproj", "{4B977637-4394-4262-8E06-CD87E2FD7D23}"
 EndProject
@@ -21,10 +19,6 @@ Global
 		{224E0A91-59BB-4AFA-88C9-ECBEDE1E63EA}.Debug|Win32.Build.0 = Debug|Win32
 		{224E0A91-59BB-4AFA-88C9-ECBEDE1E63EA}.Release|Win32.ActiveCfg = Release|Win32
 		{224E0A91-59BB-4AFA-88C9-ECBEDE1E63EA}.Release|Win32.Build.0 = Release|Win32
-		{18D3D84C-959B-4F9C-8664-20AADA84FCCB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{18D3D84C-959B-4F9C-8664-20AADA84FCCB}.Debug|Win32.Build.0 = Debug|Win32
-		{18D3D84C-959B-4F9C-8664-20AADA84FCCB}.Release|Win32.ActiveCfg = Release|Win32
-		{18D3D84C-959B-4F9C-8664-20AADA84FCCB}.Release|Win32.Build.0 = Release|Win32
 		{4B977637-4394-4262-8E06-CD87E2FD7D23}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4B977637-4394-4262-8E06-CD87E2FD7D23}.Debug|Win32.Build.0 = Debug|Win32
 		{4B977637-4394-4262-8E06-CD87E2FD7D23}.Release|Win32.ActiveCfg = Release|Win32

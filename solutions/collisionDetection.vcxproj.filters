@@ -16,9 +16,6 @@
     <Filter Include="External Helpers">
       <UniqueIdentifier>{09df287c-aa88-4dc2-a239-e76d5cc1619c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\shaders">
-      <UniqueIdentifier>{01d8a9e4-b171-4685-beb2-4cb1071c0a92}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="collisionTest.cpp">
@@ -38,13 +35,5 @@
     <ClInclude Include="..\external\common\texture.hpp">
       <Filter>External Helpers</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\external\shaders\collisionDetection\basicShader.frag">
-      <Filter>Resource Files\shaders</Filter>
-    </None>
-    <None Include="..\external\shaders\collisionDetection\basicShader.vert">
-      <Filter>Resource Files\shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>
