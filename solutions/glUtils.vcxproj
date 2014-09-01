@@ -13,12 +13,14 @@
   <ItemGroup>
     <ClInclude Include="..\include\glUtils\assimpLoader.hpp" />
     <ClInclude Include="..\include\glUtils\camera.hpp" />
+    <ClInclude Include="..\include\glUtils\nv_dds.h" />
     <ClInclude Include="..\include\glUtils\shaderLoader.hpp" />
     <ClInclude Include="..\include\glUtils\textureLoader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\glUtils\assimpLoader.cpp" />
     <ClCompile Include="..\src\glUtils\camera.cpp" />
+    <ClCompile Include="..\src\glUtils\nv_dds.cpp" />
     <ClCompile Include="..\src\glUtils\shaderLoader.cpp" />
     <ClCompile Include="..\src\glUtils\textureLoader.cpp" />
   </ItemGroup>
@@ -67,6 +69,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\external\3rdParty\assimp-3.1.1\include;..\external\3rdParty\glfw-3.0.3\include\GLFW;..\external\3rdParty\glm-0.9.4.0;..\external\3rdParty\glew-1.9.0\include;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

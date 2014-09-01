@@ -42,7 +42,7 @@ bool _sanityCheck(GLuint shader)
 	return true;
 }
 
-GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path)
+GLuint Load2Shaders(const char * vertex_file_path, const char * fragment_file_path)
 {
 	GLuint vertexShaderID, fragmentShaderID;
 
@@ -58,8 +58,6 @@ GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_pat
 	msgLogger.push_back("Reading fragment shader at " + *fragment_file_path);
 	std::string fragShaderSrc = _getStringFromFile(fragment_file_path);
 	char const * p_fragSourcePointer = fragShaderSrc.c_str();
-
-
 
 	//Compiling Vertex Shader
 	msgLogger.push_back("Compiling fragment shader at " + *vertex_file_path);

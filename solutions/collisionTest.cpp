@@ -65,7 +65,7 @@ int main()
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = LoadShaders("..\\resources\\shaders\\basic\\basicShadeer.vert", "..\\resources\\shaders\\basic\\basicShader.frag");
+	GLuint programID = Load2Shaders("..\\resources\\shaders\\basic\\basicShadeer.vert", "..\\resources\\shaders\\basic\\basicShader.frag");
 
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
