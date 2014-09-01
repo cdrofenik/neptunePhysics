@@ -15,7 +15,15 @@ class Camera {
 	//TODO: Documentation
 
 public:
-	Camera() : position(glm::vec3(-2, -2, 6)), direction(glm::vec3(0, 0, 0)), up(glm::vec3(0, 1, 0)), speed(3.0f), mouseSpeed(0.005f), horizontalAngle(-4.05f), verticalAngle(0.9f) {}
+	Camera() : 
+		position(glm::vec3(-2, -2, 6)),
+		direction(glm::vec3(0, 0, 0)),
+		up(glm::vec3(0, 1, 0)),
+		speed(3.0f),
+		mouseSpeed(0.005f),
+		horizontalAngle(-4.05f),
+		verticalAngle(0.9f)
+	{}
 
 	void setMouseToVisible(GLFWwindow* window, const bool& value);
 

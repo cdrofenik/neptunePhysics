@@ -13,9 +13,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "glUtils/camera.hpp"
+#include "glUtils/shaderLoader.hpp"
 
 //TODO: write custom
-#include "../../common/shader.hpp"
 #include "../../common/texture.hpp"
 
 int main()
@@ -65,7 +65,7 @@ int main()
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = LoadShaders("..\\resources\\shaders\\basic\\basicShader.vert", "..\\resources\\shaders\\basic\\basicShader.frag");
+	GLuint programID = LoadShaders("..\\resources\\shaders\\basic\\basicShadeer.vert", "..\\resources\\shaders\\basic\\basicShader.frag");
 
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");

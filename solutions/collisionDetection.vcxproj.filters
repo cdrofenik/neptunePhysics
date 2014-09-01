@@ -21,17 +21,11 @@
     <ClCompile Include="collisionTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\external\common\shader.cpp">
-      <Filter>External Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="..\external\common\texture.cpp">
       <Filter>External Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\external\common\shader.hpp">
-      <Filter>External Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="..\external\common\texture.hpp">
       <Filter>External Helpers</Filter>
     </ClInclude>

@@ -70,12 +70,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\external\common\shader.cpp" />
     <ClCompile Include="..\external\common\texture.cpp" />
     <ClCompile Include="collisionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\external\common\shader.hpp" />
     <ClInclude Include="..\external\common\texture.hpp" />
   </ItemGroup>
   <ItemGroup>
