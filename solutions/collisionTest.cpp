@@ -65,10 +65,12 @@ int main()
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	GLuint programID = Load2Shaders("..\\resources\\shaders\\basic\\basicShadeer.vert", "..\\resources\\shaders\\basic\\basicShader.frag");
+	GLuint programID = Load2Shaders("..\\resources\\shaders\\advanced\\advancedShader.vert", "..\\resources\\shaders\\advanced\\advancedShader.frag");
 
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+	GLuint ViewMatrixID = glGetUniformLocation(programID, "V");
+	GLuint ModelMatrixID = glGetUniformLocation(programID, "M");
 
 	// Load the texture using any two methods
 	GLuint Texture = loadDDS("..\\resources\\textures\\uvmap.DDS");
@@ -174,6 +176,13 @@ int main()
 	auto cam = Camera();
 	bool showMouse = true;
 
+	// Get a handle for our "LightPosition" uniform
+	glUseProgram(programID);
+	//GLuint LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+
+	double moveValue = 0.05;
+	float xPos = 10.0f;
+
 	do{
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -182,17 +191,26 @@ int main()
 		cam.updateCamera(window);
 		glm::mat4 ProjectionMatrix = cam.getProjectionMatrix();
 		glm::mat4 ViewMatrix = cam.getViewMatrix();
-		glm::mat4 ModelMatrix = glm::mat4(1.0);
-		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 		
 		if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS){
 			showMouse = !showMouse;
 			cam.setMouseToVisible(window, showMouse);
 		}
 
+		if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS){
+			xPos = 10.0f;
+		}
+
+#pragma region first object
+		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
+
+		glm::mat4 ModelMatrix1 = glm::mat4(1.0);
+		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix1;
+
 		// Send our transformation to the currently bound shader, 
 		// in the "MVP" uniform
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix1[0][0]);
 
 		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
@@ -203,30 +221,44 @@ int main()
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-			);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 		// 2nd attribute buffer : UVs
 		glEnableVertexAttribArray(1);
 		glBindBuffer(GL_ARRAY_BUFFER, texBuffer);
-		glVertexAttribPointer(
-			1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-			2,                                // size : U+V => 2
-			GL_FLOAT,                         // type
-			GL_FALSE,                         // normalized?
-			0,                                // stride
-			(void*)0                          // array buffer offset
-			);
-
-
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 		// Draw the triangle !
 		glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
+#pragma endregion
+
+
+#pragma region second object
+		// BUT the Model matrix is different (and the MVP too)
+		glm::mat4 ModelMatrix2 = glm::mat4(1.0);
+
+		xPos -= moveValue;
+		//printf(xPos.);
+		ModelMatrix2 = glm::translate(ModelMatrix2, glm::vec3(xPos, xPos, 0.0f));
+		ModelMatrix2 = glm::scale(ModelMatrix2, glm::vec3(0.5,0.5,0.5));
+		glm::mat4 MVP2 = ProjectionMatrix * ViewMatrix * ModelMatrix2;
+
+		// Send our transformation to the currently bound shader, 
+		// in the "MVP" uniform
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP2[0][0]);
+		glUniformMatrix4fv(ModelMatrixID, 1, GL_FALSE, &ModelMatrix2[0][0]);
+
+		// 1rst attribute buffer : vertices
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, texBuffer);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+		glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
+#pragma endregion
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);

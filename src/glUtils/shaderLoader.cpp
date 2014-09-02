@@ -23,7 +23,7 @@ std::string _getStringFromFile(const char * vertex_file_path)
 	return vertexShaderString;
 }
 
-bool _sanityCheck(GLuint shader)
+bool _sanityCheck(GLuint& shader)
 {
 	GLint isCompiled = 0;
 	int logLength;
@@ -35,8 +35,6 @@ bool _sanityCheck(GLuint shader)
 		std::vector<char> errorLog(logLength + 1); //The maxLength includes the NULL character
 		glGetShaderInfoLog(shader, logLength, &logLength, &errorLog[0]);
 		msgLogger.push_back(&errorLog[0]);
-		glDeleteShader(shader); //Don't leak the shader.
-		return false;
 	}
 
 	return true;

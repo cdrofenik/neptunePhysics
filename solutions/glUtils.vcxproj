@@ -25,6 +25,8 @@
     <ClCompile Include="..\src\glUtils\textureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\resources\shaders\advanced\advancedShader.frag" />
+    <None Include="..\resources\shaders\advanced\advancedShader.vert" />
     <None Include="..\resources\shaders\basic\basicShader.frag" />
     <None Include="..\resources\shaders\basic\basicShader.vert" />
   </ItemGroup>

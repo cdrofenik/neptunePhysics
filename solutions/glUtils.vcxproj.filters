@@ -19,6 +19,9 @@
     <Filter Include="Resource Files\shaders\basic">
       <UniqueIdentifier>{af9c2d80-0116-46a5-921c-c0f2d189568a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\shaders\advanced">
+      <UniqueIdentifier>{5b1648a4-e235-4b71-90d1-b9ed5aa79ac3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\glUtils\assimpLoader.hpp">
@@ -60,6 +63,12 @@
     </None>
     <None Include="..\resources\shaders\basic\basicShader.frag">
       <Filter>Resource Files\shaders\basic</Filter>
+    </None>
+    <None Include="..\resources\shaders\advanced\advancedShader.frag">
+      <Filter>Resource Files\shaders\advanced</Filter>
+    </None>
+    <None Include="..\resources\shaders\advanced\advancedShader.vert">
+      <Filter>Resource Files\shaders\advanced</Filter>
     </None>
   </ItemGroup>
 </Project>
