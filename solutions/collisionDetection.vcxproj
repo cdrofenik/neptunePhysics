@@ -71,10 +71,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\external\common\texture.cpp" />
+    <ClCompile Include="collisionHandler.cpp" />
     <ClCompile Include="collisionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\common\texture.hpp" />
+    <ClInclude Include="..\include\collisionHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="glUtils.vcxproj">

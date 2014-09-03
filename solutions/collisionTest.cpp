@@ -14,6 +14,7 @@
 
 #include "glUtils/camera.hpp"
 #include "glUtils/shaderLoader.hpp"
+#include "collisionHandler.h"
 
 //TODO: write custom
 #include "../../common/texture.hpp"
@@ -80,7 +81,7 @@ int main()
 
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-	static const GLfloat g_vertex_buffer_data[] = {
+	const GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, -1.0f,
 		-1.0f, -1.0f, 1.0f,
 		-1.0f, 1.0f, 1.0f,
@@ -120,7 +121,7 @@ int main()
 	};
 
 	// Two UV coordinatesfor each vertex. They were created with Blender. You'll learn shortly how to do this yourself.
-	static const GLfloat g_uv_buffer_data[] = {
+	const GLfloat g_uv_buffer_data[] = {
 		0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
@@ -183,6 +184,12 @@ int main()
 	double moveValue = 0.05;
 	float xPos = 10.0f;
 
+	basicCollisionHandler bch = basicCollisionHandler();
+	basicCollisionHandler::AABB obj1 = bch.generateAABB(g_vertex_buffer_data, 36);
+	basicCollisionHandler::AABB obj2 = bch.generateAABB(g_vertex_buffer_data, 36);
+
+	glm::vec3 translationVectorObj2;
+
 	do{
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -201,10 +208,12 @@ int main()
 			xPos = 10.0f;
 		}
 
+		
+
 #pragma region first object
 		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
 
-		glm::mat4 ModelMatrix1 = glm::mat4(1.0);
+		glm::mat4 ModelMatrix1 = glm::mat4(2.0);
 		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix1;
 
 		// Send our transformation to the currently bound shader, 
@@ -234,10 +243,10 @@ int main()
 
 #pragma region second object
 		// BUT the Model matrix is different (and the MVP too)
-		glm::mat4 ModelMatrix2 = glm::mat4(1.0);
-		xPos -= moveValue;
-		ModelMatrix2 = glm::translate(ModelMatrix2, glm::vec3(xPos, xPos, 0.0f));
-		ModelMatrix2 = glm::scale(ModelMatrix2, glm::vec3(0.5,0.5,0.5));
+		glm::mat4 ModelMatrix2 = glm::mat4(2.0);
+		translationVectorObj2 = glm::vec3(xPos, xPos, 0.0f);		
+		ModelMatrix2 = glm::translate(ModelMatrix2, translationVectorObj2);
+		//ModelMatrix2 = glm::scale(ModelMatrix2, glm::vec3(0.5,0.5,0.5));
 		glm::mat4 MVP2 = ProjectionMatrix * ViewMatrix * ModelMatrix2;
 
 		// Send our transformation to the currently bound shader, 
@@ -257,6 +266,19 @@ int main()
 
 		glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
 #pragma endregion
+
+		//collision test
+		bch.updateAABB(obj1, ModelMatrix1);
+		bch.updateAABB(obj2, ModelMatrix2);
+		if (!bch.testAABBAABB(obj1, obj2))
+			xPos -= moveValue;
+		else
+		{
+			printf("Center distance x: %d\n", abs(obj1.center.x - obj2.center.x));
+			printf("Collision!");
+			moveValue = 0;
+		}
+			
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);

@@ -24,10 +24,16 @@
     <ClCompile Include="..\external\common\texture.cpp">
       <Filter>External Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="collisionHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\external\common\texture.hpp">
       <Filter>External Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\collisionHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
