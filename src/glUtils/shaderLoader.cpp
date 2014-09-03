@@ -30,7 +30,7 @@ bool _sanityCheck(GLuint& shader)
 
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
 	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
-	if (isCompiled == GL_FALSE || logLength > 0)
+	if (logLength > 0)
 	{
 		std::vector<char> errorLog(logLength + 1); //The maxLength includes the NULL character
 		glGetShaderInfoLog(shader, logLength, &logLength, &errorLog[0]);

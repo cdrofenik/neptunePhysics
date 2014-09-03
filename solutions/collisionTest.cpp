@@ -235,9 +235,7 @@ int main()
 #pragma region second object
 		// BUT the Model matrix is different (and the MVP too)
 		glm::mat4 ModelMatrix2 = glm::mat4(1.0);
-
 		xPos -= moveValue;
-		//printf(xPos.);
 		ModelMatrix2 = glm::translate(ModelMatrix2, glm::vec3(xPos, xPos, 0.0f));
 		ModelMatrix2 = glm::scale(ModelMatrix2, glm::vec3(0.5,0.5,0.5));
 		glm::mat4 MVP2 = ProjectionMatrix * ViewMatrix * ModelMatrix2;
