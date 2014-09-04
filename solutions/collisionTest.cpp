@@ -273,11 +273,7 @@ int main()
 		if (!bch.testAABBAABB(obj1, obj2))
 			xPos -= moveValue;
 		else
-		{
-			printf("Center distance x: %d\n", abs(obj1.center.x - obj2.center.x));
-			printf("Collision!");
 			moveValue = 0;
-		}
 			
 
 		glDisableVertexAttribArray(0);

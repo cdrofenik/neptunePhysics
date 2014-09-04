@@ -31,15 +31,15 @@ basicCollisionHandler::AABB basicCollisionHandler::generateAABB(const GLfloat ve
 			minZ = vertexArray[i + 2];
 	}
 
-	float dx = (maxX - minX);
-	float dy = (maxY - minY);
-	float dz = (maxZ - minZ);
+	float dx = (maxX - minX)/2;
+	float dy = (maxY - minY)/2;
+	float dz = (maxZ - minZ)/2;
 
 	AABB res = AABB();
 	res.center = glm::vec3(dx, dy, dz);
-	res.dx = dx / 2;
-	res.dy = dy / 2;
-	res.dz = dz / 2;
+	res.dx = dx;
+	res.dy = dy;
+	res.dz = dz;
 
 	return res;
 }
