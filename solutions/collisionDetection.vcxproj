@@ -71,7 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\external\common\texture.cpp" />
-    <ClCompile Include="collisionHandler.cpp" />
+    <ClCompile Include="..\src\collisionHandler.cpp" />
     <ClCompile Include="collisionTest.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,7 @@
     <ClCompile Include="..\external\common\texture.cpp">
       <Filter>External Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="collisionHandler.cpp">
+    <ClCompile Include="..\src\collisionHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

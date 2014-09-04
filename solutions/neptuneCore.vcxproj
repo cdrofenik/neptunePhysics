@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\core\core.hpp" />
+    <ClInclude Include="..\include\core\logging.h" />
     <ClInclude Include="..\include\core\particle.hpp" />
     <ClInclude Include="..\include\core\precision.hpp" />
   </ItemGroup>
