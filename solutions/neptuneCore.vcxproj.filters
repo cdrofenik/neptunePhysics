@@ -24,9 +24,6 @@
     <ClInclude Include="..\include\core\particle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\core\logging.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\core\particle.cpp">

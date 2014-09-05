@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "neptuneCore", "solutions\ne
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collisionDetection", "solutions\collisionDetection.vcxproj", "{EBDF1D0A-9179-42AC-808B-8FB9B1E8BEA3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "logging", "solutions\logging.vcxproj", "{D45F8E87-011B-4C8D-9D59-6E419A029F24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,10 @@ Global
 		{EBDF1D0A-9179-42AC-808B-8FB9B1E8BEA3}.Debug|Win32.Build.0 = Debug|Win32
 		{EBDF1D0A-9179-42AC-808B-8FB9B1E8BEA3}.Release|Win32.ActiveCfg = Release|Win32
 		{EBDF1D0A-9179-42AC-808B-8FB9B1E8BEA3}.Release|Win32.Build.0 = Release|Win32
+		{D45F8E87-011B-4C8D-9D59-6E419A029F24}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D45F8E87-011B-4C8D-9D59-6E419A029F24}.Debug|Win32.Build.0 = Debug|Win32
+		{D45F8E87-011B-4C8D-9D59-6E419A029F24}.Release|Win32.ActiveCfg = Release|Win32
+		{D45F8E87-011B-4C8D-9D59-6E419A029F24}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

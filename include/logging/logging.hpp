@@ -19,9 +19,7 @@ public:
 	{
 		string res = "";
 		for (size_t i = 0; i < loggerStack.size; i++)
-		{
 			res += loggerStack[i] + "/n";
-		}
 
 		return res.c_str;
 	}
@@ -29,9 +27,7 @@ public:
 	static void printToOutput()
 	{
 		for(size_t i = 0; i < loggerStack.size; i++)
-		{
 			printf_s(loggerStack[i].c_str+"\n");
-		}
 	}
 
 	//static void addToLogger(float a) { loggerStack.push_back(atoi(a)); }
