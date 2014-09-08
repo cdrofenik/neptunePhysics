@@ -10,7 +10,7 @@ std::string _getStringFromFile(const char * vertex_file_path)
 
 	if (!vertexIfStream)
 	{
-		msgLogger.push_back("Bad file read (probably file path mistake)...");
+		printf("Bad file read (probably file path mistake)...\n");
 		return "";
 	}
 
@@ -34,7 +34,7 @@ bool _sanityCheck(GLuint& shader)
 	{
 		std::vector<char> errorLog(logLength + 1); //The maxLength includes the NULL character
 		glGetShaderInfoLog(shader, logLength, &logLength, &errorLog[0]);
-		msgLogger.push_back(&errorLog[0]);
+		//Logger::addToLogger("Bad file read (probably file path mistake)..." + errorLog[0]);
 	}
 
 	return true;
@@ -50,15 +50,16 @@ GLuint Load2Shaders(const char * vertex_file_path, const char * fragment_file_pa
 	GLint res = GL_FALSE;
 
 	//Vertex Shader
-	msgLogger.push_back("Reading vertex shader at " + *vertex_file_path);
+	printf("Reading vertex shader at %s \n", vertex_file_path);
 	std::string vertShaderSrc = _getStringFromFile(vertex_file_path);
 	char const * p_vertexSourcePointer = vertShaderSrc.c_str();
-	msgLogger.push_back("Reading fragment shader at " + *fragment_file_path);
+
+	printf("Reading fragment shader at %s \n", fragment_file_path);
 	std::string fragShaderSrc = _getStringFromFile(fragment_file_path);
 	char const * p_fragSourcePointer = fragShaderSrc.c_str();
 
 	//Compiling Vertex Shader
-	msgLogger.push_back("Compiling fragment shader at " + *vertex_file_path);
+	printf("Compiling vertex shader at %s \n", vertex_file_path);
 	glShaderSource(vertexShaderID, 1, &p_vertexSourcePointer, NULL);
 	glCompileShader(vertexShaderID);
 
@@ -66,7 +67,7 @@ GLuint Load2Shaders(const char * vertex_file_path, const char * fragment_file_pa
 		return res;
 
 	//Compiling Fragment Shader
-	msgLogger.push_back("Compiling fragment shader at " + *fragment_file_path);
+	printf("Compiling fragment shader at %s \n", fragment_file_path);
 	glShaderSource(fragmentShaderID, 1, &p_fragSourcePointer, NULL);
 	glCompileShader(fragmentShaderID);
 	
@@ -74,7 +75,7 @@ GLuint Load2Shaders(const char * vertex_file_path, const char * fragment_file_pa
 		return res;
 
 	//Main shader program
-	msgLogger.push_back("Linking main program... ");
+	printf("Linking main program...\n");
 	GLuint ProgramID;
 	ProgramID = glCreateProgram();
 	glAttachShader(ProgramID, vertexShaderID);
@@ -84,7 +85,7 @@ GLuint Load2Shaders(const char * vertex_file_path, const char * fragment_file_pa
 	if (!_sanityCheck(ProgramID))
 		return res;
 
-	msgLogger.push_back("Cleaning up shaders... ");
+	printf("Cleaning up shaders... \n");
 	glDeleteShader(vertexShaderID);
 	glDeleteShader(fragmentShaderID);
 

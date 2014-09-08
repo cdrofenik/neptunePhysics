@@ -41,6 +41,10 @@ basicCollisionHandler::AABB basicCollisionHandler::generateAABB(const GLfloat ve
 	res.dy = dy;
 	res.dz = dz;
 
+	char buffer[50];
+	sprintf(buffer, "Center(%f, %f, %f) created", dx, dy, dz);
+	printf("Created object center: %s \n", buffer);
+
 	return res;
 }
 
@@ -56,12 +60,13 @@ basicCollisionHandler::AABB basicCollisionHandler::updateAABB(AABB& a, glm::mat4
 
 int basicCollisionHandler::testAABBAABB(AABB a, AABB b)
 {
-	/*printf("Center distance x: %d\n", abs(a.center.x - b.center.x));
-	printf("Center distance y: %d\n", abs(a.center.y - b.center.y));
-	printf("Center distance z: %d\n", abs(a.center.z - b.center.z));*/
 	int r;
 	r = a.dx + b.dx; if ((unsigned short)(a.center.x - b.center.x + r) > r + r) return 0;
 	r = a.dy + b.dy; if ((unsigned short)(a.center.y - b.center.y + r) > r + r) return 0;
 	r = a.dz + b.dz; if ((unsigned short)(a.center.z - b.center.z + r) > r + r) return 0;
+
+	char buffer[100];
+	//sprintf(buffer, "Center A(%d,%d,%d) tested. \n Center B(%d,%d,%d) tested.", a.center.x, a.center.y, a.center.z, b.center.x, b.center.y, b.center.z);
+	//printf("Centers are at \n %s", buffer);
 	return 1;
 }

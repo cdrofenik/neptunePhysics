@@ -206,9 +206,8 @@ int main()
 
 		if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS){
 			xPos = 10.0f;
+			moveValue = 0.05;
 		}
-
-		
 
 #pragma region first object
 		glUniformMatrix4fv(ViewMatrixID, 1, GL_FALSE, &ViewMatrix[0][0]); // This one doesn't change between objects, so this can be done once for all objects that use "programID"
@@ -239,7 +238,6 @@ int main()
 		// Draw the triangle !
 		glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
 #pragma endregion
-
 
 #pragma region second object
 		// BUT the Model matrix is different (and the MVP too)
