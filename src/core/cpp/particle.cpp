@@ -1,8 +1,8 @@
 #include <math.h>
 #include <assert.h>
 
-#include "core/precision.hpp"
-#include "core/particle.hpp"
+#include "../h/precision.hpp"
+#include "../h/particle.hpp"
 
 namespace neptune
 {

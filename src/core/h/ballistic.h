@@ -1,7 +1,7 @@
 #ifndef NEPTUNE_BALLISTIC_H
 #define NEPTUNE_BALLISTIC_H
 
-#include "particle.h"
+#include "particle.hpp"
 
 namespace neptune
 {

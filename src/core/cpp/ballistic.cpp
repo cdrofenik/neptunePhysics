@@ -1,4 +1,4 @@
-#include "../include/ballistic.h"
+#include "../h/ballistic.h"
 
 namespace neptune
 {
