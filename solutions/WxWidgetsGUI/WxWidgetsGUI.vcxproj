@@ -35,10 +35,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\wxwidgetsgui\main.cpp" />
+    <ClCompile Include="Source\GUI\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\wxwidgetsgui\main.h" />
+    <ClInclude Include="Source\GUI\main.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>WxWidgetsGUI</ProjectName>
@@ -187,7 +187,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <ProgramDataBaseFileName>$Configuration\$(AssemblyName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(Configuration)\$(AssemblyName).pdb</ProgramDataBaseFileName>
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>

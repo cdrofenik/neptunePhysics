@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{4ebf4632-ab33-4c49-859d-ea58b6c190d4}</UniqueIdentifier>
+    <Filter Include="Source">
+      <UniqueIdentifier>{705ecf9f-998d-41ec-a207-553ae857a0b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{b7b44b7a-917e-4631-9249-cb98b70c8614}</UniqueIdentifier>
+    <Filter Include="Source\GUI">
+      <UniqueIdentifier>{d657d1d4-f185-460d-82a2-012b5965ee9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\wxwidgetsgui\main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\src\wxwidgetsgui\main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\GUI\main.cpp">
+      <Filter>Source\GUI</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\GUI\main.h">
+      <Filter>Source\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
