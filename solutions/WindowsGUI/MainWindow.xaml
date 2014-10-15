@@ -1,0 +1,68 @@
+﻿<Window xmlns:WPF="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"  x:Class="WindowsGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="595.3" Width="949">
+    <Grid>
+        <Menu HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="702" Background="{x:Null}">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Close" Click="MenuItem_Click">
+                    <!--
+                        <MenuItem.Icon>
+                            <Image Source="Images/cut.png" />
+                        </MenuItem.Icon>
+                    -->
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Scene">
+                <MenuItem Header="_Open New Scene" Command="">
+                    <!--
+                        <MenuItem.Icon>
+                            <Image Source="Images/cut.png" />
+                        </MenuItem.Icon>
+                    -->
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Reset Scene" Command="">
+                    <!--
+                        <MenuItem.Icon>
+                            <Image Source="Images/cut.png" />
+                        </MenuItem.Icon>
+                    -->
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Object">
+                <MenuItem Header="_Add Object" Command="">
+                    <!--
+                        <MenuItem.Icon>
+                            <Image Source="Images/cut.png" />
+                        </MenuItem.Icon>
+                    -->
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,38,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <WPF:OpenGLControl OpenGLDraw="OpenGLControl_OpenGLDraw" OpenGLInitialized="OpenGLControl_OpenGLInitialized" 
+                               DrawFPS="True" Resized="OpenGLControl_Resized"/>
+
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+
+            <TabControl Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="2">
+                <TabItem Header="Objects Settings">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Header="Collision Settings">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+
+
+    </Grid>
+</Window>

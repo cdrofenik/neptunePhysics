@@ -20,4 +20,32 @@
       <UniqueIdentifier>{55232700-9dab-43a6-a6e5-af54afc09e6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\kernel\cpp\collisionHandler.cpp">
+      <Filter>Source\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\kernel\cpp\ballistic.cpp">
+      <Filter>Source\Core\Ballistics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\kernel\cpp\particle.cpp">
+      <Filter>Source\Core\Particles</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\kernel\h\collisionHandler.h">
+      <Filter>Source\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\kernel\h\ballistic.h">
+      <Filter>Source\Core\Ballistics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\kernel\h\core.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\kernel\h\particle.hpp">
+      <Filter>Source\Core\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\kernel\h\precision.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

@@ -10,6 +10,18 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\kernel\cpp\ballistic.cpp" />
+    <ClCompile Include="..\..\src\kernel\cpp\collisionHandler.cpp" />
+    <ClCompile Include="..\..\src\kernel\cpp\particle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\kernel\h\ballistic.h" />
+    <ClInclude Include="..\..\src\kernel\h\collisionHandler.h" />
+    <ClInclude Include="..\..\src\kernel\h\core.hpp" />
+    <ClInclude Include="..\..\src\kernel\h\particle.hpp" />
+    <ClInclude Include="..\..\src\kernel\h\precision.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3FAACA9F-9226-43C4-A3AD-8D05280CD096}</ProjectGuid>
     <RootNamespace>neptuneKernel</RootNamespace>
@@ -39,7 +51,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>$(SolutionDir)$(Configuration)\temp</IntDir>
+    <IntDir>$(SolutionDir)$(Configuration)\temp\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\$(ProjectName)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(SolutionDir)$(Configuration)\temp\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
