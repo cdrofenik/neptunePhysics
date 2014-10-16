@@ -34,19 +34,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Apex, Version=1.2.1.0, Culture=neutral, PublicKeyToken=98d06957926c086d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\c3rtz0r\Downloads\Core\SharpGL.WPF\Apex.dll</HintPath>
+    <Reference Include="Apex">
+      <HintPath>..\..\external\3rdParty\SharpGL\SharpGL.WPF\Apex.dll</HintPath>
     </Reference>
-    <Reference Include="SharpGL">
-      <HintPath>C:\Users\c3rtz0r\Downloads\Core\SharpGL.WPF\SharpGL.dll</HintPath>
+    <Reference Include="SharpGL, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\external\3rdParty\SharpGL\SharpGL.WPF\SharpGL.dll</HintPath>
     </Reference>
     <Reference Include="SharpGL.SceneGraph, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\c3rtz0r\Downloads\Core\SharpGL.WPF\SharpGL.SceneGraph.dll</HintPath>
+      <HintPath>..\..\external\3rdParty\SharpGL\SharpGL.WPF\SharpGL.SceneGraph.dll</HintPath>
     </Reference>
     <Reference Include="SharpGL.WPF">
-      <HintPath>C:\Users\c3rtz0r\Downloads\Core\SharpGL.WPF\SharpGL.WPF.dll</HintPath>
+      <HintPath>..\..\external\3rdParty\SharpGL\SharpGL.WPF\SharpGL.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
