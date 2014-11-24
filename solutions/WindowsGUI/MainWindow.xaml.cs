@@ -14,8 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using SharpGL;
-using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
+using SharpGL.SceneGraph.Shaders;
+using SharpGL.SceneGraph;
+
+using System.Windows.Media.Media3D;
 
 namespace WindowsGUI
 {
@@ -24,6 +27,11 @@ namespace WindowsGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private float rotateX = 1.0f;
+        private Point3D eye = new Point3D(0.0, 0.0f, -5.0f);
+        private Point3D up = new Point3D(0.0, 1.0, 1.0);
+        private Point3D center = new Point3D(0.0, 0.0, 0.0);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,24 +63,20 @@ namespace WindowsGUI
             //  Reset the modelview matrix.
             gl.LoadIdentity();
 
+            gl.LookAt(eye.X, eye.Y, eye.Z, center.X, center.Y, center.Z, up.X, up.Y, up.Z);
+
             //  Move the geometry into a fairly central position.
-            gl.Translate(-5.5f, -2.0f, -16.0f);
+            //gl.Translate(-5.5f, -2.0f, -16.0f);
 
             //  Draw a pyramid. First, rotate the modelview matrix.
-            //gl.Rotate(rotatePyramid, 1.0f, 0.0f, 0.0f);
+            //gl.Rotate(rotateX, up.X, up.Y, up.Z);
 
             DrawGrid(gl);
 
             //  Flush OpenGL.
             gl.Flush();
 
-            //  Rotate the geometry a bit.
-            rotatePyramid += 3.0f;
-            rquad -= 3.0f;
         }
-
-        float rotatePyramid = 0;
-        float rquad = 0;
 
         private void OpenGLControl_OpenGLInitialized(object sender, OpenGLEventArgs args)
         {
@@ -100,6 +104,36 @@ namespace WindowsGUI
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.A)
+            {
+                rotateX += 2.0f;
+                //calculate left
+            }
+            else if(e.Key == Key.D)
+            {
+                rotateX -= 2.0f;
+                //calculate -left
+            }
+
+            if (e.Key == Key.W)
+            {
+                rotateX += 1.0f;
+                //calculate up
+            }
+            else if (e.Key == Key.S)
+            {
+                rotateX -= 1.0f;
+                //calculate -up
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
         }
     }
 }
