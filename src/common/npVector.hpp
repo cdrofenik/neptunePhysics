@@ -58,10 +58,10 @@ public:
 	Normalizes the vector = vector / length(vector)
 	*/
 	void normalize() {
-		T l = this->magnitude();
+		float l = this->magnitude<T>();
 		if (l > 0)
 		{
-			(*this) *= ((T)l) / l;
+			(*this) *= ((float)l) / l;
 		}
 	}
 

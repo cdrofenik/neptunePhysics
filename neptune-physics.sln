@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NeptunePhysics", "solutions\NeptunePhysics\NeptunePhysics.vcxproj", "{F4603886-422C-4644-9279-D4E73A5D1943}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WxGUI", "solutions\WxGUI\WxGUI.vcxproj", "{240C7940-1AEB-4574-A2CA-4C50306A5150}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VisualisationInterface", "solutions\VisualisationInterface\VisualisationInterface.vcxproj", "{81D853FF-41B7-4E14-8506-945020B37E2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,30 +17,19 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Debug|Win32.Build.0 = Debug|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Debug|x64.ActiveCfg = Debug|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Release|Any CPU.ActiveCfg = Release|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Release|Win32.ActiveCfg = Release|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Release|Win32.Build.0 = Release|Win32
-		{F4603886-422C-4644-9279-D4E73A5D1943}.Release|x64.ActiveCfg = Release|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Debug|Win32.ActiveCfg = Debug|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Debug|Win32.Build.0 = Debug|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Debug|x64.ActiveCfg = Debug|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Release|Any CPU.ActiveCfg = Release|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Release|Win32.ActiveCfg = Release|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Release|Win32.Build.0 = Release|Win32
-		{240C7940-1AEB-4574-A2CA-4C50306A5150}.Release|x64.ActiveCfg = Release|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Debug|Win32.Build.0 = Debug|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Debug|x64.ActiveCfg = Debug|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Release|Any CPU.ActiveCfg = Release|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Release|Any CPU.Build.0 = Release|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Release|Win32.ActiveCfg = Release|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Release|Win32.Build.0 = Release|Win32
+		{81D853FF-41B7-4E14-8506-945020B37E2A}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
