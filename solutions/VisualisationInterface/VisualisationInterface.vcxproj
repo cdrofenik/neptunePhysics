@@ -53,7 +53,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\src;..\..\external\3rdParty\glm-0.9.6.3\glm;..\..\external\3rdParty\glew-1.12.0\include;..\..\external\3rdParty\AntTweakBar_116\include;..\..\external\3rdParty\glfw-3.1.1.bin.WIN32\include\GLFW</AdditionalIncludeDirectories>
     </ClCompile>
@@ -84,11 +84,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\external\common\objloader.hpp" />
     <ClInclude Include="..\..\src\glUtils\shaderLoader.hpp" />
+    <ClInclude Include="BasicMesh.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\external\common\controls.cpp" />
+    <ClCompile Include="..\..\external\common\objloader.cpp" />
+    <ClCompile Include="..\..\external\common\shader.cpp" />
+    <ClCompile Include="..\..\external\common\texture.cpp" />
     <ClCompile Include="..\..\src\glUtils\shaderLoader.cpp" />
+    <ClCompile Include="BasicMesh.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
