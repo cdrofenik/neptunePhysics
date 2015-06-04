@@ -7,12 +7,13 @@ namespace neptunePhysics {
 
 	namespace narrowSearch {
 	
-		int TestAABB_AABB(npAABB a, npAABB b);
+		void ClosestPtPointAABB(const npVector3& p, const npAABB& b, npVector3& q);
 
-		int TestAABB_Sphere(npAABB a, npSphere b);
+		int TestAABB_AABB(const npAABB& a, const npAABB& b);
 
-		int TestShere_Sphere(npSphere a, npSphere b);
+		int TestSphere_AABB(const npSphere& b, const npAABB& a);
 
+		int TestShere_Sphere(const npSphere& a, const npSphere& b);
 	}
 }
 
