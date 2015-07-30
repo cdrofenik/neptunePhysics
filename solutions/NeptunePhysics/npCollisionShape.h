@@ -4,46 +4,46 @@
 #include "npPrecision.h"
 #include "npVector.h"
 
-namespace neptunePhysics {
+namespace NeptunePhysics {
 
-	enum npCollisionShapeType
+	enum npBoundingVolumeType
 	{
 		AABB,
 		Sphere,
 		Particle
 	};
 
-	class npCollisionShape {
-		npCollisionShapeType type;
+	class npBoundingVolume {
+		npBoundingVolumeType type;
 	};
 
-	class npAABB : npCollisionShape {
+	class npAABB : npBoundingVolume {
 
 	public:
 		npVector3 c; // Center point
 		npReal halfX, halfY, halfZ; // Halfway extents of AABB along each axis
-		npCollisionShapeType type = npCollisionShapeType::AABB;
+		npBoundingVolumeType type = npBoundingVolumeType::AABB;
 		npAABB() : c(0.0, 0, 0), halfX(0), halfY(0), halfZ(0) {}
 		npAABB(npVector3& centerPoint, npReal half_x, npReal half_y, npReal half_z) : c(centerPoint),
 			halfX(half_x), halfY(half_y), halfZ(half_z) {}
 	};
 
-	class npSphere : npCollisionShape {
+	class npSphere : npBoundingVolume {
 
 	public:
 		npVector3 c; // Center point
 		npReal r; // Radius
-		npCollisionShapeType type = npCollisionShapeType::Sphere;
+		npBoundingVolumeType type = npBoundingVolumeType::Sphere;
 		npSphere() : c(0.0, 0, 0), r(0) {}
 		npSphere(npVector3& centerPoint, npReal radius) : c(centerPoint), r(radius) {}
 	};
 
-	class npParticle : npCollisionShape {
+	class npParticle : npBoundingVolume {
 
 	public:
 		npVector3 pos;
 		npReal size;
-		npCollisionShapeType type = npCollisionShapeType::Particle;
+		npBoundingVolumeType type = npBoundingVolumeType::Particle;
 		npParticle() : pos(0.0, 0, 0), size(0) {}
 		npParticle(npVector3& centerPoint, npReal radius) : pos(centerPoint), size(radius) {}
 	};

@@ -1,7 +1,7 @@
 #ifndef NEPTUNE_BROAD_SEARCH_H
 #define NEPTUNE_BROAD_SEARCH_H
 
-namespace neptunePhysics {
+namespace NeptunePhysics {
 
 	class npBroadSearch {
 

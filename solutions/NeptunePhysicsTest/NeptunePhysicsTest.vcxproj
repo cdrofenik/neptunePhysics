@@ -91,6 +91,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="npNarrowSearchTest.cpp" />
     <ClCompile Include="npVectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>

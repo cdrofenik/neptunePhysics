@@ -5,7 +5,7 @@
 
 #include "npPrecision.h"
 
-#ifdef NO_NEPTUNEPHYSICS_DLL
+#ifdef NO_NeptunePhysics_DLL
 	#define NEPTUNE_PHYSICS_API
 #else
 	#ifdef NEPTUNE_PHYSICS_EXPORT
@@ -15,7 +15,7 @@
 	#endif
 #endif
 
-namespace neptunePhysics {
+namespace NeptunePhysics {
 
 	class npVector3 {
 
@@ -32,7 +32,7 @@ namespace neptunePhysics {
 		/*!
 		Returns the length of this vector.
 		*/
-		npReal length();
+		npReal length() const;
 
 		/*!
 		Inverts the vector values.
@@ -55,10 +55,10 @@ namespace neptunePhysics {
 		*/
 		void componentProductUpdate(const npVector3& v);
 
-		//TODO: implement
-		/*npReal angle(const npVector3& v) {
-		return acoshf(this->dotProduct(v) / (this->length() * v.length()));
-		}*/
+		/*!
+		Angle between two vectors in degrees
+		*/
+		npReal angle(const npVector3& v);
 
 		void operator+=(const npVector3& v);
 

@@ -1,12 +1,14 @@
 #include "npVector.h"
 
-namespace neptunePhysics {
+#include <math.h>
+
+namespace NeptunePhysics {
 
 	npReal npVector3::squareLength() {
 		return (x * x) + (y * y) + (z * z);
 	}
 
-	npReal npVector3::length() {
+	npReal npVector3::length() const {
 		return sqrt((x * x) + (y * y) + (z * z));
 	}
 
@@ -37,6 +39,13 @@ namespace neptunePhysics {
 		x *= v.x;
 		y *= v.y;
 		z *= v.z;
+	}
+
+	npReal npVector3::angle(const npVector3& v)
+	{
+		auto top = (x * v.x) + (y * v.y) + (z * v.z);
+		auto bottom = this->length() * v.length();
+		return (npReal)(acos(top/bottom) * (180 / PI));
 	}
 
 #pragma region operator overloads

@@ -50,7 +50,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDLL;NEPTUNE_PHYSICS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;NEPTUNE_PHYSICS_EXPORTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -63,7 +63,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDLL;NEPTUNE_PHYSICS_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;NEPTUNE_PHYSICS_EXPORTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -72,18 +72,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="npBroadSearch.h" />
-    <ClInclude Include="npBVTree.h" />
+    <ClInclude Include="npBroadPhase.h" />
+    <ClInclude Include="npBVHNode.h" />
+    <ClInclude Include="npCollisionBody.h" />
     <ClInclude Include="npCollisionShape.h" />
     <ClInclude Include="npContact.h" />
-    <ClInclude Include="npNarrowSearch.h" />
+    <ClInclude Include="npNarrowPhase.h" />
     <ClInclude Include="npPrecision.h" />
     <ClInclude Include="npVector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="npBroadSearch.cpp" />
-    <ClCompile Include="npBVTree.cpp" />
-    <ClCompile Include="npNarrowSearch.cpp" />
+    <ClCompile Include="npBroadPhase.cpp" />
+    <ClCompile Include="npBVHNode.cpp" />
+    <ClCompile Include="npNarrowPhase.cpp" />
     <ClCompile Include="npVector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

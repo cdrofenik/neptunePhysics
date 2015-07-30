@@ -3,9 +3,9 @@
 
 #include "npCollisionShape.h"
 
-namespace neptunePhysics {
+namespace NeptunePhysics {
 
-	namespace narrowSearch {
+	namespace NarrowPhase {
 	
 		void ClosestPtPointAABB(const npVector3& p, const npAABB& b, npVector3& q);
 
@@ -13,7 +13,7 @@ namespace neptunePhysics {
 
 		int TestSphere_AABB(const npSphere& b, const npAABB& a);
 
-		int TestShere_Sphere(const npSphere& a, const npSphere& b);
+		int TestSphere_Sphere(const npSphere& a, const npSphere& b);
 	}
 }
 

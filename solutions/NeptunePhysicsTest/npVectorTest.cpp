@@ -3,7 +3,7 @@
 #include "../NeptunePhysics/npPrecision.h"
 #include "../NeptunePhysics/npVector.h"
 
-using namespace neptunePhysics;
+using namespace NeptunePhysics;
 
 TEST(npVectorTest, VectorAddition) {
 
@@ -209,4 +209,34 @@ TEST(npVectorTest, Normalize) {
 	EXPECT_FLOAT_EQ(a.x, 0.70710677f);
 	EXPECT_FLOAT_EQ(a.y, 0.56568545f);
 	EXPECT_FLOAT_EQ(a.z, 0.42426407f);
+}
+
+TEST(npVectorTest, GetAngleFromTwoVectors) {
+
+	npVector3 a1(1, 0, 0);
+	npVector3 a2(1, 1, 0);
+	npVector3 a3(0, 1, 0);
+	npReal r = a1.angle(a3);
+
+	EXPECT_FLOAT_EQ(a1.x, 1.0f);
+	EXPECT_FLOAT_EQ(a1.y, 0.0f);
+	EXPECT_FLOAT_EQ(a1.z, 0.0f);
+
+	EXPECT_FLOAT_EQ(a3.x, 0.0f);
+	EXPECT_FLOAT_EQ(a3.y, 1.0f);
+	EXPECT_FLOAT_EQ(a3.z, 0.0f);
+
+	EXPECT_FLOAT_EQ(90.0f, r);
+
+	r = a1.angle(a2);
+
+	EXPECT_FLOAT_EQ(a1.x, 1.0f);
+	EXPECT_FLOAT_EQ(a1.y, 0.0f);
+	EXPECT_FLOAT_EQ(a1.z, 0.0f);
+
+	EXPECT_FLOAT_EQ(a2.x, 1.0f);
+	EXPECT_FLOAT_EQ(a2.y, 1.0f);
+	EXPECT_FLOAT_EQ(a2.z, 0.0f);
+
+	EXPECT_FLOAT_EQ(45.0f, r);
 }

@@ -15,39 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="npCollisionShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="npNarrowSearch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="npPrecision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="npVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="npBroadSearch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="npBVTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="npContact.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="npBroadPhase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="npCollisionShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="npNarrowPhase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="npCollisionBody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="npBVHNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="npNarrowSearch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="npBroadSearch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="npBVTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="npVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="npNarrowPhase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="npBroadPhase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="npBVHNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
