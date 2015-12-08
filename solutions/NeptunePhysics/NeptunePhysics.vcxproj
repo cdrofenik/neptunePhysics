@@ -10,10 +10,29 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\neptunePhysics\npBroadPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npBVHNode.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npCollisionBody.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npCollisionShape.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npContact.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npMatrix.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npNarrowPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npPrecision.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npTransform.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\npVector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\neptunePhysics\npBroadPhase.cpp" />
+    <ClCompile Include="..\..\src\neptunePhysics\npBVHNode.cpp" />
+    <ClCompile Include="..\..\src\neptunePhysics\npMatrix.cpp" />
+    <ClCompile Include="..\..\src\neptunePhysics\npNarrowPhase.cpp" />
+    <ClCompile Include="..\..\src\neptunePhysics\npTransform.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD4E152F-8E0F-4261-8AE7-AD277D26AA98}</ProjectGuid>
     <RootNamespace>NeptunePhysics</RootNamespace>
-    <ProjectName>neptunePhysics</ProjectName>
+    <ProjectName>NeptunePhysics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -51,6 +70,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDLL;NEPTUNE_PHYSICS_EXPORTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,6 +84,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDLL;NEPTUNE_PHYSICS_EXPORTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -71,22 +92,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="npBroadPhase.h" />
-    <ClInclude Include="npBVHNode.h" />
-    <ClInclude Include="npCollisionBody.h" />
-    <ClInclude Include="npCollisionShape.h" />
-    <ClInclude Include="npContact.h" />
-    <ClInclude Include="npNarrowPhase.h" />
-    <ClInclude Include="npPrecision.h" />
-    <ClInclude Include="npVector.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="npBroadPhase.cpp" />
-    <ClCompile Include="npBVHNode.cpp" />
-    <ClCompile Include="npNarrowPhase.cpp" />
-    <ClCompile Include="npVector.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
