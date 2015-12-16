@@ -11,23 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\neptunePhysics\npBroadPhase.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npBVHNode.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npCollisionBody.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npCollisionShape.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npContact.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npMatrix.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npNarrowPhase.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npPrecision.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npTransform.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\npVector.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npAABB.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npBVHNode.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionBody.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionShape.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npContact.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npNarrowPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3.hpp" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix4.hpp" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npPrecision.hpp" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npTransform.hpp" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npVector2.hpp" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npVector3.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\neptunePhysics\npBroadPhase.cpp" />
-    <ClCompile Include="..\..\src\neptunePhysics\npBVHNode.cpp" />
-    <ClCompile Include="..\..\src\neptunePhysics\npMatrix.cpp" />
-    <ClCompile Include="..\..\src\neptunePhysics\npNarrowPhase.cpp" />
-    <ClCompile Include="..\..\src\neptunePhysics\npTransform.cpp" />
+    <ClCompile Include="..\..\src\neptunePhysics\collision\npBroadPhase.cpp" />
+    <ClCompile Include="..\..\src\neptunePhysics\collision\npBVHNode.cpp" />
+    <ClCompile Include="..\..\src\neptunePhysics\collision\npNarrowPhase.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD4E152F-8E0F-4261-8AE7-AD277D26AA98}</ProjectGuid>

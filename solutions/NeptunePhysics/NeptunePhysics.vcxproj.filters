@@ -9,61 +9,72 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{a211293e-e15e-4553-ac47-99993a3a44f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Helpers">
-      <UniqueIdentifier>{f0a26d2c-4146-4ee0-921d-cceafb067102}</UniqueIdentifier>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{e4c437c2-21a8-436c-8fc0-dc3f3612fb2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{f9301944-a2d0-45e4-b9ef-23273c319189}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\neptunePhysics\npBroadPhase.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npAABB.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npBVHNode.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npCollisionBody.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npBVHNode.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npCollisionShape.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionBody.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npContact.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionShape.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npMatrix.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npContact.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npNarrowPhase.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npNarrowPhase.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npPrecision.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npTransform.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix.h">
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\npVector.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix4.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npPrecision.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npTransform.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npVector2.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npVector3.hpp">
+      <Filter>Header Files\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\neptunePhysics\npBroadPhase.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\neptunePhysics\collision\npBroadPhase.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\neptunePhysics\npBVHNode.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\neptunePhysics\collision\npBVHNode.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\neptunePhysics\npMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\neptunePhysics\npNarrowPhase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\neptunePhysics\npTransform.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\neptunePhysics\collision\npNarrowPhase.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

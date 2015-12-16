@@ -135,7 +135,13 @@ int main() {
 	mainShader.AddShader("fragmentShader.frag", ShaderType::FRAGMENT_SHADER);
 	mainShader.SetupProgram();
 
-	Model _model("..\\..\\external\\resources\\objects\\suzanne.obj");
+	Model _model("..\\..\\external\\resources\\objects\\basicSphere.obj");
+
+	//Initialize physics engine
+
+	// Add shape with vertices to engine
+	
+	// finish up initialization
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -160,12 +166,17 @@ int main() {
 
 		// Draw the loaded model
 		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+		//model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-		glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		//ourModel.Draw(shader);
+		
+		for (int i = 1; i < 4; i++) {
 
-		_model.Draw(mainShader);
+			model = glm::translate(model, glm::vec3(0.0f, - i -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+			glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "model"), 1, GL_FALSE, glm::value_ptr(model));
+
+			_model.Draw(mainShader);
+		}
+		
 
 		// Swap the buffers
 		glfwSwapBuffers(window); 

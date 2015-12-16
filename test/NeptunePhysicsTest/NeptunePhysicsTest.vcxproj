@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\3rdParty\gtest-1.7.0\include;..\..\external\3rdParty\glm-0.9.6.3\glm;..\..\include\neptunePhysics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\3rdParty\gtest-1.7.0\include;..\..\external\3rdParty\glm-0.9.6.3\glm;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_UNICODE;UNICODE;_VARIADIC_MAX=10;NO_NEPTUNEPHYSICS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -91,10 +91,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="npMatrixTest.cpp" />
-    <ClCompile Include="npNarrowSearchTest.cpp" />
-    <ClCompile Include="npTransformTest.cpp" />
-    <ClCompile Include="npVectorTest.cpp" />
+    <ClCompile Include="npMatrix3_Test.cpp" />
+    <ClCompile Include="npMatrix4_Test.cpp" />
+    <ClCompile Include="npNarrowSearch_Test.cpp" />
+    <ClCompile Include="npTransform_Test.cpp" />
+    <ClCompile Include="npVector_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\solutions\NeptunePhysics\NeptunePhysics.vcxproj">

@@ -55,7 +55,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\external\3rdParty\glfw-3.1.1.bin.WIN32\lib-vc2013;..\..\external\3rdParty\glew-1.13.0\lib\Release\Win32;..\..\external\3rdParty\AntTweakBar_116\lib\;..\..\external\3rdParty\assimp-3.1.1\lib32;..\..\external\3rdParty\soil\lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glu32.lib;opengl32.lib;glfw3.lib;glew32.lib;AntTweakBar64.lib;assimp.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;glfw3.lib;glew32.lib;assimp.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
