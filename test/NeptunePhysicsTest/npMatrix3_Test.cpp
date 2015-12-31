@@ -164,7 +164,7 @@ TEST(npMatrixTest, MATRIX_VECTOR_MULTIPLICATION) {
 	EXPECT_FLOAT_EQ(a.m[2][1], 1);
 	EXPECT_FLOAT_EQ(a.m[2][2], 1);
 
-	npVector3<npReal> b(3.0f, 2.0f, 5.0f);
+	npVector3 b(3.0f, 2.0f, 5.0f);
 
 	EXPECT_FLOAT_EQ(b.x, 3);
 	EXPECT_FLOAT_EQ(b.y, 2);

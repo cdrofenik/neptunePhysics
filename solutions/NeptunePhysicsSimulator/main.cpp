@@ -2,7 +2,14 @@
 
 #include "Camera.hpp"
 #include "Shader.hpp"
-#include "Model.hpp"
+#include "DrawableObject.h"
+#include "Utils.hpp"
+
+// Neptune Physics
+#include "neptunePhysics/math/npTransform.hpp"
+#include "neptunePhysics/collision/npRigidBody.h"
+#include "neptunePhysics/collision/npCollisionShape.h"
+#include "neptunePhysics/core/npDiscreteDynamicsWorld.h"
 
 // GLEW
 #include <GL/glew.h>
@@ -14,7 +21,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 
 #include <stdio.h>
 #include <string>
@@ -28,9 +34,13 @@
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 768
 
+using namespace NeptunePhysics;
+
 Camera gameCamera;
 
 bool wireFrameMode = false;
+bool pauseSimulation = false;
+bool showBoundingVolumes = false;
 bool keys[1024];
 bool firstMouse = true;
 
@@ -38,6 +48,9 @@ GLfloat deltaTime = 0;
 GLfloat lastFrame = 0;
 double lastX;
 double lastY;
+
+//Create Manager struct as container for data
+std::vector<DrawableObject> drawableList;
 
 // Keyboard input callback
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -47,7 +60,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		wireFrameMode = !wireFrameMode;
 		glPolygonMode(GL_FRONT_AND_BACK, wireFrameMode ? GL_LINE : GL_FILL);
 	}
-		
+
+	//Pause simulation
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+		pauseSimulation = !pauseSimulation;
+	}
+
+	//Pause simulation
+	if (key == GLFW_KEY_B && action == GLFW_PRESS) {
+		showBoundingVolumes = !showBoundingVolumes;
+	}
+
 	//Close application
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
@@ -135,13 +158,30 @@ int main() {
 	mainShader.AddShader("fragmentShader.frag", ShaderType::FRAGMENT_SHADER);
 	mainShader.SetupProgram();
 
-	Model _model("..\\..\\external\\resources\\objects\\basicSphere.obj");
+	// Loading mesh
+	Mesh _mesh("..\\..\\external\\resources\\objects\\suzanne.obj");
+	//drawableList.push_back(_mesh);
 
 	//Initialize physics engine
+	npDiscreteDynamicsWorld* world = new npDiscreteDynamicsWorld();
 
 	// Add shape with vertices to engine
-	
-	// finish up initialization
+	int rigidBodyCount = 4;
+	for (size_t i = 0; i < rigidBodyCount; i++)
+	{
+		npAABB boundVol;
+		npTransform startPos;
+		startPos.setOrigin(0.0f, i * 2.75f, 0.0f);
+		startPos.setScale(0.5f, 0.5f, 0.5f);
+		npMotionState mState = npMotionState(startPos.getTransformMatrix());
+		npRigidBody tmpBody(1, 2.0f, boundVol, mState);
+		
+		Box drawnBody(_mesh.getMinValues(), _mesh.getMaxValues());
+		//list_rigidBody.push_back(RigidBody(tmpBody));
+		drawableList.push_back(drawnBody);
+
+		world->addRigidBody(tmpBody);
+	}
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -157,6 +197,10 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		if (!pauseSimulation) {
+			world->stepSimulation(deltaTime);
+		}
+
 		mainShader.Use();   // <-- Don't forget this one!
 		// Transformation matrices
 		glm::mat4 projection = glm::perspective(45.0f, WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
@@ -164,19 +208,19 @@ int main() {
 		glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-		// Draw the loaded model
 		glm::mat4 model;
-		//model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-		
-		for (int i = 1; i < 4; i++) {
+		for (int i = 0; i < rigidBodyCount; i++) {
 
-			model = glm::translate(model, glm::vec3(0.0f, - i -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+			auto rigidBdy = world->getRigidBody(i);
+			
+			//Position model based on rigid body position
+			model = ConvertNpMatrixToGlm(rigidBdy.getMotionState().GetStateMatrix4());
 			glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "model"), 1, GL_FALSE, glm::value_ptr(model));
+			
+			_mesh.Draw(mainShader, wireFrameMode);
 
-			_model.Draw(mainShader);
+			drawableList.at(i).Draw(mainShader, wireFrameMode);
 		}
-		
 
 		// Swap the buffers
 		glfwSwapBuffers(window); 
@@ -184,5 +228,11 @@ int main() {
 
 	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
+
+	for (auto& _drawable: drawableList )
+		_drawable.Clear();
+
+	drawableList.clear();
+
 	return 0;
 }

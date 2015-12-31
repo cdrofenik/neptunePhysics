@@ -15,6 +15,7 @@ namespace NeptunePhysics {
 
 
 #define NP_PI 3.14159265
+#define M_PI_2 1.57079632
 
 #define ToRadian(x) ((x) * NP_PI / 180.0f)
 #define ToDegree(x) ((x) * 180.0f / NP_PI)

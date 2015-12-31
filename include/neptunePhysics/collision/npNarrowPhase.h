@@ -7,7 +7,7 @@ namespace NeptunePhysics {
 
 	namespace NarrowPhase {
 	
-		void ClosestPtPointAABB(const npVector3<npReal>& p, const npAABB& b, npVector3<npReal>& q);
+		void ClosestPtPointAABB(const npVector3& p, const npAABB& b, npVector3& q);
 
 		int TestAABB_AABB(const npAABB& a, const npAABB& b);
 

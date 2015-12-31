@@ -11,6 +11,9 @@
     <Filter Include="Tests\Collision">
       <UniqueIdentifier>{11aaaa60-ef19-4c3e-8ac3-659fbe0287a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\Logging">
+      <UniqueIdentifier>{fef2c842-19e6-4d86-bbce-ff619cf2aed6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="npMatrix3_Test.cpp">
@@ -27,6 +30,9 @@
     </ClCompile>
     <ClCompile Include="npNarrowSearch_Test.cpp">
       <Filter>Tests\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="npLogging_Test.cpp">
+      <Filter>Tests\Logging</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

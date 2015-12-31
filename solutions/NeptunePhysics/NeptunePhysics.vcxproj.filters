@@ -18,11 +18,17 @@
     <Filter Include="Source Files\Collision">
       <UniqueIdentifier>{f9301944-a2d0-45e4-b9ef-23273c319189}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Logging">
+      <UniqueIdentifier>{6a4804c9-768b-455a-9de1-fe3dfcc7faf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{5b2a63d0-0d2f-4dec-9319-9a3efd61482d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{c8515d16-fe96-489e-8602-926c73d754f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npAABB.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
@@ -65,15 +71,33 @@
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector3.hpp">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\logging\npLogging.hpp">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\core\npDiscreteDynamicsWorld.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\core\npMotionState.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\neptunePhysics\collision\npBroadPhase.cpp">
+    <ClCompile Include="..\..\src\collision\npBVHNode.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\neptunePhysics\collision\npBVHNode.cpp">
+    <ClCompile Include="..\..\src\collision\npNarrowPhase.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\neptunePhysics\collision\npNarrowPhase.cpp">
+    <ClCompile Include="..\..\src\collision\npBroadPhase.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\npDiscreteDynamicsWorld.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\collision\npRigidBody.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>

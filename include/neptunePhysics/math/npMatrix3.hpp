@@ -16,12 +16,10 @@
 
 namespace NeptunePhysics {
 
-	//TODO: Set row major setting for both classes
-
 	class npMatrix3 {
 
 	public:
-		npReal m[3][3];
+		npReal m[3][3]; //TODO: Create single array that is opengl compatible
 
 		npMatrix3(const npReal& v = 1.0f) {
 			m[0][0] = v;	 m[0][1] = 0.0f;   m[0][2] = 0.0f;
@@ -62,8 +60,8 @@ namespace NeptunePhysics {
 			return Ret;
 		}
 
-		npVector3<npReal> operator*(const npVector3<npReal>& _vector) {
-			return npVector3<npReal>(
+		npVector3 operator*(const npVector3& _vector) {
+			return npVector3(
 				_vector.x * m[0][0] + _vector.y * m[1][0] + _vector.z * m[2][0],
 				_vector.x * m[0][1] + _vector.y * m[1][1] + _vector.z * m[2][1],
 				_vector.x * m[0][2] + _vector.y * m[2][1] + _vector.z * m[2][2]);
@@ -94,7 +92,7 @@ namespace NeptunePhysics {
 			}
 		}
 	
-		npMatrix3 rotate(const npReal& _angle, const npVector3<npReal>& axis) {
+		npMatrix3 rotate(const npReal& _angle, const npVector3& axis) {
 			npReal radian = ToRadian(_angle);
 
 			npMatrix3 aaT(

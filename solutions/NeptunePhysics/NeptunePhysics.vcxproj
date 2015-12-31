@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npAABB.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npBVHNode.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionBody.h" />
@@ -19,6 +18,10 @@
     <ClInclude Include="..\..\include\neptunePhysics\collision\npContact.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npNarrowPhase.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\core\npDiscreteDynamicsWorld.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\core\npMotionState.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\logging\npLogging.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix.h" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix4.hpp" />
@@ -28,9 +31,11 @@
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector3.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\neptunePhysics\collision\npBroadPhase.cpp" />
-    <ClCompile Include="..\..\src\neptunePhysics\collision\npBVHNode.cpp" />
-    <ClCompile Include="..\..\src\neptunePhysics\collision\npNarrowPhase.cpp" />
+    <ClCompile Include="..\..\src\collision\npBroadPhase.cpp" />
+    <ClCompile Include="..\..\src\collision\npBVHNode.cpp" />
+    <ClCompile Include="..\..\src\collision\npNarrowPhase.cpp" />
+    <ClCompile Include="..\..\src\collision\npRigidBody.cpp" />
+    <ClCompile Include="..\..\src\core\npDiscreteDynamicsWorld.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD4E152F-8E0F-4261-8AE7-AD277D26AA98}</ProjectGuid>
@@ -73,7 +78,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDLL;NEPTUNE_PHYSICS_EXPORTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include\neptunePhysics;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

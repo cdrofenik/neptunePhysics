@@ -1,52 +1,68 @@
 #ifndef NEPTUNE_NPCOLLISIONSHAPE_H
 #define NEPTUNE_NPCOLLISIONSHAPE_H
 
-#include "neptunePhysics/math/npPrecision.hpp"
-#include "neptunePhysics/math/npVector3.hpp"
+#include "math/npPrecision.hpp"
+#include "math/npVector3.hpp"
 
 namespace NeptunePhysics {
 
-	enum npBoundingVolumeType
+	enum npBVType
 	{
 		AABB,
-		Sphere,
+		bSphere,
 		Particle
 	};
 
-	class npBoundingVolume {
-		npBoundingVolumeType type;
-	};
-
-	class npAABB : npBoundingVolume {
+	class npBVInterface {
 
 	public:
-		npVector3<npReal> c; // Center point
+		virtual npBVType getBvType() = 0;
+	};
+
+	class npBV : public npBVInterface {
+
+	public:
+		npBV() {}
+		~npBV() {}
+
+		virtual npBVType getBvType() { return type; }
+
+	private:
+		npBVType type;
+	};
+
+	class npAABB : public npBV {
+
+	public:
+		npVector3 c; // Center point
 		npReal halfX, halfY, halfZ; // Halfway extents of AABB along each axis
-		npBoundingVolumeType type = npBoundingVolumeType::AABB;
+		npBVType type = npBVType::AABB;
 		npAABB() : c(0.0, 0, 0), halfX(0), halfY(0), halfZ(0) {}
-		npAABB(npVector3<npReal>& centerPoint, npReal half_x, npReal half_y, npReal half_z) : c(centerPoint),
+		npAABB(npVector3& centerPoint, npReal half_x, npReal half_y, npReal half_z) : c(centerPoint),
 			halfX(half_x), halfY(half_y), halfZ(half_z) {}
+		~npAABB() {}
 	};
 
-	class npSphere : npBoundingVolume {
+	class npSphere : public npBV {
 
 	public:
-		npVector3<npReal> c; // Center point
+		npVector3 c; // Center point
 		npReal r; // Radius
-		npBoundingVolumeType type = npBoundingVolumeType::Sphere;
+		npBVType type = npBVType::bSphere;
 		npSphere() : c(0.0, 0, 0), r(0) {}
-		npSphere(npVector3<npReal>& centerPoint, npReal radius) : c(centerPoint), r(radius) {}
+		npSphere(npVector3& centerPoint, npReal radius) : c(centerPoint), r(radius) {}
+		~npSphere() {}
 	};
 
-	class npParticle : npBoundingVolume {
+	//class npParticle : npBoundingVolume {
 
-	public:
-		npVector3<npReal> pos;
-		npReal size;
-		npBoundingVolumeType type = npBoundingVolumeType::Particle;
-		npParticle() : pos(0.0, 0, 0), size(0) {}
-		npParticle(npVector3<npReal>& centerPoint, npReal radius) : pos(centerPoint), size(radius) {}
-	};
+	//public:
+	//	npVector3 pos;
+	//	npReal size;
+	//	npBoundingVolumeType type = npBoundingVolumeType::Particle;
+	//	npParticle() : pos(0.0, 0, 0), size(0) {}
+	//	npParticle(npVector3& centerPoint, npReal radius) : pos(centerPoint), size(radius) {}
+	//};
 }
 
 

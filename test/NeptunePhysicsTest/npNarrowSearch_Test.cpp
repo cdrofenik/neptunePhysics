@@ -7,12 +7,12 @@ using namespace NeptunePhysics::NarrowPhase;
 
 TEST(npNarrowPhase, ClosestPtPointAABB) {
 
-	npVector3<npReal> cntr(2, 2, 4);
+	npVector3 cntr(2, 2, 4);
 	npAABB a1(cntr, 1.0f, 2.0f, 4.0f);
 
-	npVector3<npReal> pnt(0, 3, 0);
+	npVector3 pnt(0, 3, 0);
 
-	npVector3<npReal> res;
+	npVector3 res;
 	ClosestPtPointAABB(pnt, a1, res);
 
 	EXPECT_FLOAT_EQ(a1.c.x, 2.0f);
@@ -32,8 +32,8 @@ TEST(npNarrowPhase, ClosestPtPointAABB) {
 }
 
 TEST(npNarrowPhase, AABB_AABB) {
-	npAABB a1(npVector3<npReal>(2, 2, 4), 1.0f, 2.0f, 4.0f);
-	npAABB a2(npVector3<npReal>(4, -2, 11), 1.0f, 1.0f, 1.0f);
+	npAABB a1(npVector3(2, 2, 4), 1.0f, 2.0f, 4.0f);
+	npAABB a2(npVector3(4, -2, 11), 1.0f, 1.0f, 1.0f);
 	int r1 = TestAABB_AABB(a1, a2); //don't collide
 
 	EXPECT_FLOAT_EQ(a1.c.x, 2.0f);
@@ -52,15 +52,15 @@ TEST(npNarrowPhase, AABB_AABB) {
 
 	EXPECT_EQ(r1, 0.0f);
 
-	a2 = npAABB(npVector3<npReal>(0, 1, 3), 2.0f, 3.0f, 3.0f);
+	a2 = npAABB(npVector3(0, 1, 3), 2.0f, 3.0f, 3.0f);
 	r1 = TestAABB_AABB(a1, a2); //collide
 
 	EXPECT_EQ(r1, 1.0f);
 }
 
 TEST(npNarrowPhase, TestSphere_AABB) {
-	npAABB a1(npVector3<npReal>(2.0f, 2.0f, 4.0f), 1.0f, 2.0f, 4.0f);
-	npSphere s1(npVector3<npReal>(15.0f, 15.0f, 15.0f), 2.0f);
+	npAABB a1(npVector3(2.0f, 2.0f, 4.0f), 1.0f, 2.0f, 4.0f);
+	npSphere s1(npVector3(15.0f, 15.0f, 15.0f), 2.0f);
 	int r1 = TestSphere_AABB(s1, a1); //don't collide
 
 	EXPECT_FLOAT_EQ(s1.c.x, 15.0f);
@@ -77,15 +77,15 @@ TEST(npNarrowPhase, TestSphere_AABB) {
 
 	EXPECT_EQ(r1, 0);
 
-	s1 = npSphere(npVector3<npReal>(3, 3, 3), 2.5f);
+	s1 = npSphere(npVector3(3, 3, 3), 2.5f);
 	r1 = TestSphere_AABB(s1, a1); //collide
 
 	EXPECT_EQ(r1, 1);
 }
 
 TEST(npNarrowPhase, TestSphere_Sphere) {
-	npSphere s1(npVector3<npReal>(0, 0, 0), 2.0f);
-	npSphere s2(npVector3<npReal>(4, 4, 4), 0.5f);
+	npSphere s1(npVector3(0, 0, 0), 2.0f);
+	npSphere s2(npVector3(4, 4, 4), 0.5f);
 	bool r1 = TestSphere_Sphere(s1, s2); //don't collide
 
 	EXPECT_FLOAT_EQ(s1.c.x, 0.0f);
@@ -100,7 +100,7 @@ TEST(npNarrowPhase, TestSphere_Sphere) {
 
 	EXPECT_FALSE(r1, 2);
 
-	npSphere s3 = npSphere(npVector3<npReal>(3, 3, 3), 2.5f);
+	npSphere s3 = npSphere(npVector3(3, 3, 3), 2.5f);
 	int r2 = TestSphere_Sphere(s2, s3); //collide
 
 	EXPECT_TRUE(r2);

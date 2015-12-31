@@ -19,19 +19,20 @@ namespace NeptunePhysics {
 	class npTransform
 	{
 	public:
-		npTransform() { m_scale = npVector3<npReal>(1.0f, 1.0f, 1.0f); m_origin = npVector3<npReal>(0.0f, 0.0f, 0.0f); }
+		npTransform() { m_scale = npVector3(1.0f, 1.0f, 1.0f); m_origin = npVector3(0.0f, 0.0f, 0.0f); m_translation = npVector3(0.0f, 0.0f, 0.0f); }
 		~npTransform() { }
 
-		void setScale(const npReal& _x, const npReal& _y, const npReal& _z)  { m_scale = npVector3<npReal>(_x, _y, _z); m_wasChanged = true; }
-		void setOrigin(const npReal& _x, const npReal& _y, const npReal& _z) { m_origin = npVector3<npReal>(_x, _y, _z); m_wasChanged = true; }
-		void setRotation(const npReal& _alfaX, const npReal& _alfaY, const npReal& _alfaZ) { m_rotation = npVector3<npReal>(_alfaX, _alfaY, _alfaZ); m_wasChanged = true; }
+		void setScale(const npReal& _x, const npReal& _y, const npReal& _z)  { m_scale = npVector3(_x, _y, _z); m_wasChanged = true; }
+		void setOrigin(const npReal& _x, const npReal& _y, const npReal& _z) { m_origin = npVector3(_x, _y, _z); m_wasChanged = true; }
+		void setRotation(const npReal& _alfaX, const npReal& _alfaY, const npReal& _alfaZ) { m_rotation = npVector3(_alfaX, _alfaY, _alfaZ); m_wasChanged = true; }
+		void setTranslation(const npReal& _x, const npReal& _y, const npReal& _z) { m_translation = npVector3(_x, _y, _z); m_wasChanged = true; }
 
 		/*
 		Returns Model matrix which can be manipulated through setScale, setOrigin and setRotation
 		*/
 		const npMatrix4 getTransformMatrix() {
 			if (m_wasChanged) {
-				m_finalTransformation = getOriginMatrix() * getRotationMatrix() * getScaleMatrix();
+				m_finalTransformation = getTranslationMatrix() * getRotationMatrix() * getScaleMatrix();
 				m_wasChanged = false;
 			}
 			
@@ -40,16 +41,17 @@ namespace NeptunePhysics {
 
 	private:
 		bool m_wasChanged = false;
-		npVector3<npReal> m_scale;
-		npVector3<npReal> m_rotation;
-		npVector3<npReal> m_origin;
+		npVector3 m_scale;
+		npVector3 m_rotation;
+		npVector3 m_origin;
+		npVector3 m_translation;
 		npMatrix4 m_finalTransformation;
 
-		npMatrix4 getOriginMatrix() {
+		npMatrix4 getTranslationMatrix() {
 			npMatrix4 v;
-			v.m[0][0] = 1.0f;	v.m[0][1] = 0.0f;   v.m[0][2] = 0.0f;   v.m[0][3] = m_origin.x;
-			v.m[1][0] = 0.0f;   v.m[1][1] = 1.0f;   v.m[1][2] = 0.0f;   v.m[1][3] = m_origin.y;
-			v.m[2][0] = 0.0f;   v.m[2][1] = 0.0f;   v.m[2][2] = 1.0f;   v.m[2][3] = m_origin.z;
+			v.m[0][0] = 1.0f;	v.m[0][1] = 0.0f;   v.m[0][2] = 0.0f;   v.m[0][3] = m_origin.x + m_translation.x;
+			v.m[1][0] = 0.0f;   v.m[1][1] = 1.0f;   v.m[1][2] = 0.0f;   v.m[1][3] = m_origin.y + m_translation.y;
+			v.m[2][0] = 0.0f;   v.m[2][1] = 0.0f;   v.m[2][2] = 1.0f;   v.m[2][3] = m_origin.z + m_translation.z;
 			v.m[3][0] = 0.0f;   v.m[3][1] = 0.0f;   v.m[3][2] = 0.0f;   v.m[3][3] = 1.0f;
 
 			return v;

@@ -18,7 +18,7 @@ namespace NeptunePhysics {
 class npMatrix4 {
 
 public:
-	npReal m[4][4];
+	npReal m[4][4]; //TODO: Create single array that is opengl compatible
 
 	npMatrix4(const npReal& v = 1.0f) {
 		m[0][0] = v;	 m[0][1] = 0.0f;   m[0][2] = 0.0f;	m[0][3] = 0.0f;
@@ -56,6 +56,29 @@ public:
 		return ret;
 	}
 
+	npMatrix4 operator+(const npMatrix4& _right) const
+	{
+		npMatrix4 ret;
+		for (unsigned int i = 0; i < 4; i++) {
+			for (unsigned int j = 0; j < 4; j++) {
+				ret.m[i][j] = m[i][j] + _right.m[i][j];
+			}
+		}
+
+		return ret;
+	}
+
+	//TODO test
+	npMatrix4 Transpose() {
+		npMatrix4 result;
+		result.m[0][0] = m[0][0];	result.m[0][1] = m[1][0];	result.m[0][2] = m[2][0];	result.m[0][3] = m[3][0];
+		result.m[1][0] = m[0][1];	result.m[1][1] = m[1][1];	result.m[1][2] = m[2][1];	result.m[1][3] = m[3][1];
+		result.m[2][0] = m[0][2];	result.m[2][1] = m[1][2];	result.m[2][2] = m[2][2];	result.m[2][3] = m[3][2];
+		result.m[3][0] = m[0][3];	result.m[3][1] = m[1][3];	result.m[3][2] = m[2][3];	result.m[3][3] = m[3][3];
+
+		return result;
+	}
+
 	/** Init
 	Fills the 4x4 matrix with input value
 
@@ -70,6 +93,7 @@ public:
 			m[i][3] = v;
 		}
 	}
+	
 };
 }
 

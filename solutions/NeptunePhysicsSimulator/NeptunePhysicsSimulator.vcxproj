@@ -49,7 +49,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\include\neptunePhyisics;..\..\external\3rdParty\glm-0.9.6.3\glm;..\..\external\3rdParty\glew-1.13.0\include;..\..\external\3rdParty\AntTweakBar_116\include;..\..\external\3rdParty\glfw-3.1.1.bin.WIN32\include\GLFW;..\..\external\3rdParty\assimp-3.1.1\include;..\..\external\3rdParty\soil\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\include\neptunePhysics;..\..\external\3rdParty\glm-0.9.6.3\glm;..\..\external\3rdParty\glew-1.13.0\include;..\..\external\3rdParty\AntTweakBar_116\include;..\..\external\3rdParty\glfw-3.1.1.bin.WIN32\include\GLFW;..\..\external\3rdParty\assimp-3.1.1\include;..\..\external\3rdParty\soil\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -78,12 +78,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Mesh.hpp" />
-    <ClInclude Include="Model.hpp" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
