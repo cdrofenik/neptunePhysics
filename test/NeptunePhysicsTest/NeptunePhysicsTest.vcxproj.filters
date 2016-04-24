@@ -22,9 +22,6 @@
     <ClCompile Include="npMatrix4_Test.cpp">
       <Filter>Tests\Math</Filter>
     </ClCompile>
-    <ClCompile Include="npTransform_Test.cpp">
-      <Filter>Tests\Math</Filter>
-    </ClCompile>
     <ClCompile Include="npVector_Test.cpp">
       <Filter>Tests\Math</Filter>
     </ClCompile>
@@ -33,6 +30,15 @@
     </ClCompile>
     <ClCompile Include="npLogging_Test.cpp">
       <Filter>Tests\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="npMatrix3x4_Test.cpp">
+      <Filter>Tests\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="npQuaternion_Test.cpp">
+      <Filter>Tests\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="npRigidBody_Test.cpp">
+      <Filter>Tests\Collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

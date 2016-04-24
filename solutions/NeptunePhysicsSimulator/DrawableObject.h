@@ -1,7 +1,7 @@
 #ifndef RIGIDBODYMESH_H
 #define RIGIDBODYMESH_H
 
-#include "Shader.hpp"
+#include "ShaderComponent.hpp"
 
 #include "collision/npRigidBody.h"
 
@@ -35,7 +35,7 @@ class DrawableInterface
 {
 public:
 	virtual void Init() = 0;
-	virtual void Draw(Shader _shader, bool _displayWireframe) = 0;
+	virtual void Draw(ShaderComponent _shader, bool _displayWireframe) = 0;
 	virtual void Clear() = 0;
 
 };
@@ -53,7 +53,7 @@ public:
 	std::vector<Texture> textures_;
 
 	virtual void Init();
-	virtual void Draw(Shader _shader, bool _displayWireframe);
+	virtual void Draw(ShaderComponent _shader, bool _displayWireframe);
 	virtual void Clear();
 
 private:
@@ -94,7 +94,7 @@ class Sphere : public DrawableObject
 {
 public:
 	Sphere(const glm::vec3& minValues, const glm::vec3& maxValues);
-	~Sphere() { }
+	~Sphere() { };
 
 private:
 	void GenerateSphere(float radius, unsigned int rings, unsigned int sectors);
@@ -109,5 +109,18 @@ public:
 	~Box() { }
 private:
 	void GenerateBox(const glm::vec3& minValues, const glm::vec3& maxValues);
+};
+
+///////////////////////////////////////////////////////////////////////
+
+class Plane : public DrawableObject
+{
+public:
+	Plane(const glm::vec3& minValues, const float& width, const float& length);
+	~Plane() {};
+
+private:
+	void GeneratePlane(const glm::vec3& startPoint, const float& width, const float& length);
+
 };
 #endif

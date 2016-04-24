@@ -5,7 +5,7 @@
 
 using namespace NeptunePhysics;
 
-TEST(npVectorTest, VectorAddition) {
+TEST(npVector3Test, ADDITION) {
 
 	npVector3 a(1, 1, 1);
 	npVector3 b(2, 2, 2);
@@ -34,7 +34,7 @@ TEST(npVectorTest, VectorAddition) {
 	EXPECT_FLOAT_EQ(c.z, 4);
 }
 
-TEST(npVectorTest, VectorSubtraction) {
+TEST(npVector3Test, SUBTRACTION) {
 
 	npVector3 a(5, 5, 5);
 	npVector3 b(2, 2, 2);
@@ -63,7 +63,7 @@ TEST(npVectorTest, VectorSubtraction) {
 	EXPECT_FLOAT_EQ(c.z, -2);
 }
 
-TEST(npVectorTest, ScalarMultiplication) {
+TEST(npVector3Test, SCALAR_MULTIPLICATION) {
 
 	npReal sc = 0.25f;
 	npVector3 a(5, 5, 5);
@@ -100,7 +100,7 @@ TEST(npVectorTest, ScalarMultiplication) {
 
 }
 
-TEST(npVectorTest, VectorMultiplication) {
+TEST(npVector3Test, VECTOR_MULTIPLICATION) {
 
 	npVector3 a(5, 4, 3);
 	npVector3 b(2, 1, 8);
@@ -129,7 +129,7 @@ TEST(npVectorTest, VectorMultiplication) {
 	EXPECT_FLOAT_EQ(c.z, 97);
 }
 
-TEST(npVectorTest, VectorVectorToScalar) {
+TEST(npVector3Test, VECTOR_VECTOR_TO_SCALAR) {
 
 	npVector3 a(5, 4, 3);
 	npVector3 b(2, 1, 8);
@@ -146,7 +146,7 @@ TEST(npVectorTest, VectorVectorToScalar) {
 	EXPECT_FLOAT_EQ(c, 38);
 }
 
-TEST(npVectorTest, ComponentUpdate) {
+TEST(npVector3Test, COMPONENT_UPDATE) {
 
 	npVector3 a(5, 4, 3);
 	npVector3 b(2, 1, 8);
@@ -161,7 +161,7 @@ TEST(npVectorTest, ComponentUpdate) {
 	EXPECT_FLOAT_EQ(b.z, 8);
 }
 
-TEST(npVectorTest, AddScaledVector) {
+TEST(npVector3Test, ADD_SCALER_VECTOR) {
 
 	npVector3 a(5, 4, 3);
 	npVector3 b(2, 1, 8);
@@ -179,7 +179,7 @@ TEST(npVectorTest, AddScaledVector) {
 	EXPECT_FLOAT_EQ(c, 2);
 }
 
-TEST(npVectorTest, SquareLength) {
+TEST(npVector3Test, SQUARE_LENGTH) {
 
 	npVector3 a(5, 4, 3);
 	npReal r = a.squareLength();
@@ -191,7 +191,7 @@ TEST(npVectorTest, SquareLength) {
 	EXPECT_FLOAT_EQ(r, 50);
 }
 
-TEST(npVectorTest, Length) {
+TEST(npVector3Test, LENGTH) {
 
 	npVector3 a(5, 4, 3);
 	npReal r = a.length();
@@ -203,7 +203,7 @@ TEST(npVectorTest, Length) {
 	EXPECT_FLOAT_EQ(r, 7.0710678f);
 }
 
-TEST(npVectorTest, Invert) {
+TEST(npVector3Test, INVERT) {
 
 	npVector3 a(5, 4, 3);
 	a.invert();
@@ -213,7 +213,7 @@ TEST(npVectorTest, Invert) {
 	EXPECT_FLOAT_EQ(a.z, -3);
 }
 
-TEST(npVectorTest, Normalize) {
+TEST(npVector3Test, NORMALIZE) {
 
 	npVector3 a(5, 4, 3);
 	a.normalize();
@@ -223,7 +223,7 @@ TEST(npVectorTest, Normalize) {
 	EXPECT_FLOAT_EQ(a.z, 0.42426407f);
 }
 
-TEST(npVectorTest, GetAngleFromTwoVectors) {
+TEST(npVector3Test, GET_ANGLE_FROM_TWO_VECTORS) {
 
 	npVector3 a1(1, 0, 0);
 	npVector3 a2(1, 1, 0);

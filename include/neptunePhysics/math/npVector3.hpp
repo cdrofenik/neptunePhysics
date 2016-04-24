@@ -84,6 +84,12 @@ namespace NeptunePhysics {
 			z += v.z;
 		}
 
+		void operator+=(const npReal& v) {
+			x += v;
+			y += v;
+			z += v;
+		}
+
 		void operator-=(const npVector3& v) {
 			x -= v.x;
 			y -= v.y;
@@ -101,15 +107,15 @@ namespace NeptunePhysics {
 			(*this) = r;
 		}
 
-		npVector3& operator+(const npVector3& v) const {
+		npVector3 operator+(const npVector3& v) const {
 			return npVector3(x + v.x, y + v.y, z + v.z);
 		}
 
-		npVector3& operator-(const npVector3& v) const {
+		npVector3 operator-(const npVector3& v) const {
 			return npVector3(x - v.x, y - v.y, z - v.z);
 		}
 
-		npVector3& operator*(const npReal& v) const {
+		npVector3 operator*(const npReal& v) const {
 			return npVector3(x * v, y * v, z * v);
 		}
 
@@ -120,7 +126,7 @@ namespace NeptunePhysics {
 		/*!
 		Returns cross product between two vectors
 		*/
-		npVector3& operator%(const npVector3& v) const {
+		npVector3 operator%(const npVector3& v) const {
 			return npVector3(
 				y*v.z - z*v.y,
 				z*v.x - x*v.z,

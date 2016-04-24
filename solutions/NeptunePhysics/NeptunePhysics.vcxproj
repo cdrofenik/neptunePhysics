@@ -20,15 +20,20 @@
     <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npDiscreteDynamicsWorld.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\core\npForceGenerator.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npMotionState.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\core\npParticle.h" />
     <ClInclude Include="..\..\include\neptunePhysics\logging\npLogging.hpp" />
-    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix.h" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3.hpp" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3x4.h" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix4.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npPrecision.hpp" />
+    <ClInclude Include="..\..\include\neptunePhysics\math\npQuaternion.h" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npTransform.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector2.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector3.hpp" />
+    <ClInclude Include="npParticleContact.h" />
+    <ClInclude Include="npParticleContactResolver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\collision\npBroadPhase.cpp" />
@@ -36,6 +41,10 @@
     <ClCompile Include="..\..\src\collision\npNarrowPhase.cpp" />
     <ClCompile Include="..\..\src\collision\npRigidBody.cpp" />
     <ClCompile Include="..\..\src\core\npDiscreteDynamicsWorld.cpp" />
+    <ClCompile Include="..\..\src\core\npParticle.cpp" />
+    <ClCompile Include="npForceGenerator.cpp" />
+    <ClCompile Include="npParticleContact.cpp" />
+    <ClCompile Include="npParticleContactResolver.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD4E152F-8E0F-4261-8AE7-AD277D26AA98}</ProjectGuid>

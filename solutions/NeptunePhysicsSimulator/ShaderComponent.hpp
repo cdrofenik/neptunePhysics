@@ -21,11 +21,11 @@ enum ShaderType
 	PROGRAM
 };
 
-class Shader
+class ShaderComponent
 {
 public:
-	Shader() {};
-	~Shader()
+	ShaderComponent() {};
+	~ShaderComponent()
 	{
 		glDeleteProgram(programId);
 	};
@@ -114,7 +114,7 @@ private:
 		}
 	}
 
-	GLuint Shader::LoadShader(const char * _fPath, const ShaderType& _shaderHandle)
+	GLuint LoadShader(const char * _fPath, const ShaderType& _shaderHandle)
 	{
 		GLuint shaderId;
 

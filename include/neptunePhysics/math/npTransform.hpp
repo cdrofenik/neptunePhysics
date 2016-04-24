@@ -2,7 +2,7 @@
 #define NEPTUNE_NPTRANSFORM_H
 
 #include "npVector3.hpp"
-#include "npMatrix.h"
+#include "npMatrix4.hpp"
 
 #ifdef NO_NeptunePhysics_DLL
 #define NEPTUNE_PHYSICS_API
@@ -49,20 +49,20 @@ namespace NeptunePhysics {
 
 		npMatrix4 getTranslationMatrix() {
 			npMatrix4 v;
-			v.m[0][0] = 1.0f;	v.m[0][1] = 0.0f;   v.m[0][2] = 0.0f;   v.m[0][3] = m_origin.x + m_translation.x;
-			v.m[1][0] = 0.0f;   v.m[1][1] = 1.0f;   v.m[1][2] = 0.0f;   v.m[1][3] = m_origin.y + m_translation.y;
-			v.m[2][0] = 0.0f;   v.m[2][1] = 0.0f;   v.m[2][2] = 1.0f;   v.m[2][3] = m_origin.z + m_translation.z;
-			v.m[3][0] = 0.0f;   v.m[3][1] = 0.0f;   v.m[3][2] = 0.0f;   v.m[3][3] = 1.0f;
+			v.m[0] = 1.0f;	v.m[1] = 0.0f;	v.m[2] = 0.0f;	v.m[3] = m_origin.x + m_translation.x;
+			v.m[4] = 0.0f;	v.m[5] = 1.0f;	v.m[6] = 0.0f;	v.m[7] = m_origin.y + m_translation.y;
+			v.m[8] = 0.0f;	v.m[9] = 0.0f;	v.m[10] = 1.0f;	v.m[11] = m_origin.z + m_translation.z;
+			v.m[12] = 0.0f;	v.m[13] = 0.0f;	v.m[14] = 0.0f;	v.m[15] = 1.0f;
 
 			return v;
 		}
 
 		npMatrix4 getScaleMatrix() {
 			npMatrix4 v;
-			v.m[0][0] = m_scale.x;	v.m[0][1] = 0.0f;		v.m[0][2] = 0.0f;		v.m[0][3] = 0.0f;
-			v.m[1][0] = 0.0f;		v.m[1][1] = m_scale.y;	v.m[1][2] = 0.0f;		v.m[1][3] = 0.0f;
-			v.m[2][0] = 0.0f;		v.m[2][1] = 0.0f;		v.m[2][2] = m_scale.z;	v.m[2][3] = 0.0f;
-			v.m[3][0] = 0.0f;		v.m[3][1] = 0.0f;		v.m[3][2] = 0.0f;		v.m[3][3] = 1.0f;
+			v.m[0] = m_scale.x;	v.m[1] = 0.0f;		v.m[2] = 0.0f;		v.m[3] = 0.0f;
+			v.m[4] = 0.0f;		v.m[5] = m_scale.y;	v.m[6] = 0.0f;		v.m[7] = 0.0f;
+			v.m[8] = 0.0f;		v.m[9] = 0.0f;		v.m[10] = m_scale.z;	v.m[11] = 0.0f;
+			v.m[12] = 0.0f;		v.m[13] = 0.0f;		v.m[14] = 0.0f;		v.m[15] = 1.0f;
 			return v;
 		}
 
@@ -71,24 +71,24 @@ namespace NeptunePhysics {
 
 			//Rotation around z
 			npMatrix4 aroundZ;
-			aroundZ.m[0][0] = cosf(m_rotation.z);	aroundZ.m[0][1] = -sinf(m_rotation.z);	aroundZ.m[0][2] = 0.0f; aroundZ.m[0][3] = 0.0f;
-			aroundZ.m[1][0] = sinf(m_rotation.z);	aroundZ.m[1][1] = cosf(m_rotation.z);	aroundZ.m[1][2] = 0.0f; aroundZ.m[1][3] = 0.0f;
-			aroundZ.m[2][0] = 0.0f;					aroundZ.m[2][1] = 0.0f;					aroundZ.m[2][2] = 1.0f; aroundZ.m[2][3] = 0.0f;
-			aroundZ.m[3][0] = 0.0f;		    		aroundZ.m[3][1] = 0.0f;					aroundZ.m[3][2] = 0.0f; aroundZ.m[3][3] = 1.0f;
+			aroundZ.m[0] = cosf(m_rotation.z);	aroundZ.m[1] = -sinf(m_rotation.z);	aroundZ.m[2] = 0.0f;	aroundZ.m[3] = 0.0f;
+			aroundZ.m[4] = sinf(m_rotation.z);	aroundZ.m[5] = cosf(m_rotation.z);	aroundZ.m[6] = 0.0f;	aroundZ.m[7] = 0.0f;
+			aroundZ.m[8] = 0.0f;				aroundZ.m[9] = 0.0f;				aroundZ.m[10] = 1.0f;	aroundZ.m[11] = 0.0f;
+			aroundZ.m[12] = 0.0f;				aroundZ.m[13] = 0.0f;				aroundZ.m[14] = 0.0f;	aroundZ.m[15] = 1.0f;
 
 			//Rotation around y
 			npMatrix4 aroundY;
-			aroundY.m[0][0] = cosf(m_rotation.y);	aroundY.m[0][1] = 0.0f;			aroundY.m[0][2] = -sinf(m_rotation.y);	aroundY.m[0][3] = 0.0f;
-			aroundY.m[1][0] = 0.0f;					aroundY.m[1][1] = 1.0f;			aroundY.m[1][2] = 0.0f;					aroundY.m[1][3] = 0.0f;
-			aroundY.m[2][0] = sinf(m_rotation.y);	aroundY.m[2][1] = 0.0f;         aroundY.m[2][2] = cosf(m_rotation.y);	aroundY.m[2][3] = 0.0f;
-			aroundY.m[3][0] = 0.0f;					aroundY.m[3][1] = 0.0f;         aroundY.m[3][2] = 0.0f;					aroundY.m[3][3] = 1.0f;
+			aroundY.m[0] = cosf(m_rotation.y);	aroundY.m[1] = 0.0f;	aroundY.m[2] = -sinf(m_rotation.y);	aroundY.m[3] = 0.0f;
+			aroundY.m[4] = 0.0f;				aroundY.m[5] = 1.0f;	aroundY.m[6] = 0.0f;				aroundY.m[7] = 0.0f;
+			aroundY.m[8] = sinf(m_rotation.y);	aroundY.m[9] = 0.0f;	aroundY.m[10] = cosf(m_rotation.y);	aroundY.m[11] = 0.0f;
+			aroundY.m[12] = 0.0f;				aroundY.m[13] = 0.0f;	aroundY.m[14] = 0.0f;				aroundY.m[15] = 1.0f;
 
 			//Rotation around x
 			npMatrix4 aroundX;
-			aroundX.m[0][0] = 1.0f; aroundX.m[0][1] = 0.0f;					aroundX.m[0][2] = 0.0f;					aroundX.m[0][3] = 0.0f;
-			aroundX.m[1][0] = .0f;	aroundX.m[1][1] = cosf(m_rotation.x);	aroundX.m[1][2] = sinf(m_rotation.x);	aroundX.m[1][3] = 0.0f;
-			aroundX.m[2][0] = 0.0f;	aroundX.m[2][1] = -sinf(m_rotation.x);	aroundX.m[2][2] = cosf(m_rotation.x);	aroundX.m[2][3] = 0.0f;
-			aroundX.m[3][0] = 0.0f;	aroundX.m[3][1] = 0.0f;					aroundX.m[3][2] = 0.0f;					aroundX.m[3][3] = 1.0f;
+			aroundX.m[0] = 1.0f;	aroundX.m[1] = 0.0f;				aroundX.m[2] = 0.0f;				aroundX.m[3] = 0.0f;
+			aroundX.m[4] = 0.0f;	aroundX.m[5] = cosf(m_rotation.x);	aroundX.m[6] = sinf(m_rotation.x);	aroundX.m[7] = 0.0f;
+			aroundX.m[8] = 0.0f;	aroundX.m[9] = -sinf(m_rotation.x);	aroundX.m[10] = cosf(m_rotation.x);	aroundX.m[11] = 0.0f;
+			aroundX.m[12] = 0.0f;	aroundX.m[13] = 0.0f;				aroundX.m[14] = 0.0f;				aroundX.m[15] = 1.0f;
 
 			v = aroundZ * aroundY * aroundX;
 			return v;

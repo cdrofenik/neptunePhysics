@@ -8,11 +8,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-class Camera
+class CameraComponent
 {
 
 public:
-	Camera() :
+	CameraComponent() :
 		position(glm::vec3(0.0f, 0.0f, 3.0f)),
 		worldUp(glm::vec3(0.0f, 1.0f, 0.0f)),
 		front(glm::vec3(0.0f, 0.0f, -1.0f)),
@@ -38,7 +38,7 @@ public:
 		// SPEED * deltaTime = Velocity
 
 		if (keys[GLFW_KEY_W])
-			this->position += this->front * SPEED * deltaTime; 
+			this->position += this->front * SPEED * deltaTime;
 		if (keys[GLFW_KEY_S])
 			this->position -= this->front * SPEED * deltaTime;
 		if (keys[GLFW_KEY_A])

@@ -9,8 +9,8 @@ namespace NeptunePhysics {
 	enum npBVType
 	{
 		AABB,
-		bSphere,
-		Particle
+		bSphere
+		//Particle
 	};
 
 	class npBVInterface {

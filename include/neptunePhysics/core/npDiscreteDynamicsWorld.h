@@ -1,8 +1,12 @@
 #ifndef NEPTUNE_NPDISCRETEWORLD_H
 #define NEPTUNE_NPDISCRETEWORLD_H
 
+#include "npForceGenerator.h"
+#include "npParticle.h"
+
+#include "../collision/npRigidBody.h"
+
 #include "math/npVector3.hpp"
-#include "collision/npRigidBody.h"
 
 #include <vector>
 
@@ -16,13 +20,23 @@ namespace NeptunePhysics {
 
 		void stepSimulation(float _deltaTime);
 
-		void addRigidBody(npRigidBody _body);
+		void addParticle(npParticle _body);
+		void addToForceRegistry();
 
-		npRigidBody getRigidBody(int _idx);
+		npParticle getParticle(int _idx);
 
 	private:
-		std::vector<npVector3> m_forces;
-		std::vector<npRigidBody> m_rigidBodyList = std::vector<npRigidBody>();
+		//std::vector<npRigidBody> m_rigidBody = std::vector<npRigidBody>();
+
+		npParticleForceRegistry m_registry;
+		std::vector<npParticle> m_particleList = std::vector<npParticle>();
+
+		//Force Generators
+		npParticleGravity* m_particleGravity;
+		npParticle* m__particleBungee;
+		npParticleBungee* m_particleBungee;
+		npParticleAnchoredSpring* m_particleAnchored;
+		npParticleBouyancy* m_particleBouyancy;
 	};
 }
 #endif

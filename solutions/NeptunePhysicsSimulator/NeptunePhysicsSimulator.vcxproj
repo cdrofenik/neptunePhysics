@@ -77,15 +77,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="CameraComponent.hpp" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="ParticleSimulator.h" />
+    <ClInclude Include="ShaderComponent.hpp" />
     <ClInclude Include="Utils.hpp" />
+    <ClInclude Include="OpenGLComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenGLComponent.cpp" />
+    <ClCompile Include="ParticleSimulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.frag" />

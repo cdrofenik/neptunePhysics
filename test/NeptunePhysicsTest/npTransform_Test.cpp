@@ -21,25 +21,25 @@ TEST(npTransformTest, SCALE) {
 
 	npMatrix4 a = p.getTransformMatrix();
 
-	EXPECT_FLOAT_EQ(a.m[0][0], 5);
-	EXPECT_FLOAT_EQ(a.m[0][1], 0);
-	EXPECT_FLOAT_EQ(a.m[0][2], 0);
-	EXPECT_FLOAT_EQ(a.m[0][3], 0);
+	EXPECT_FLOAT_EQ(a.m[0], 5);
+	EXPECT_FLOAT_EQ(a.m[1], 0);
+	EXPECT_FLOAT_EQ(a.m[2], 0);
+	EXPECT_FLOAT_EQ(a.m[3], 0);
 
-	EXPECT_FLOAT_EQ(a.m[1][0], 0);
-	EXPECT_FLOAT_EQ(a.m[1][1], 1);
-	EXPECT_FLOAT_EQ(a.m[1][2], 0);
-	EXPECT_FLOAT_EQ(a.m[1][3], 0);
+	EXPECT_FLOAT_EQ(a.m[4], 0);
+	EXPECT_FLOAT_EQ(a.m[5], 1);
+	EXPECT_FLOAT_EQ(a.m[6], 0);
+	EXPECT_FLOAT_EQ(a.m[7], 0);
 
-	EXPECT_FLOAT_EQ(a.m[2][0], 0);
-	EXPECT_FLOAT_EQ(a.m[2][1], 0);
-	EXPECT_FLOAT_EQ(a.m[2][2], 5);
-	EXPECT_FLOAT_EQ(a.m[2][3], 0);
+	EXPECT_FLOAT_EQ(a.m[8], 0);
+	EXPECT_FLOAT_EQ(a.m[9], 0);
+	EXPECT_FLOAT_EQ(a.m[10], 5);
+	EXPECT_FLOAT_EQ(a.m[11], 0);
 
-	EXPECT_FLOAT_EQ(a.m[3][0], 0);
-	EXPECT_FLOAT_EQ(a.m[3][1], 0);
-	EXPECT_FLOAT_EQ(a.m[3][2], 0);
-	EXPECT_FLOAT_EQ(a.m[3][3], 1);
+	EXPECT_FLOAT_EQ(a.m[12], 0);
+	EXPECT_FLOAT_EQ(a.m[13], 0);
+	EXPECT_FLOAT_EQ(a.m[14], 0);
+	EXPECT_FLOAT_EQ(a.m[15], 1);
 }
 
 TEST(npTransformationPipelineTest, TRANSLATION) {
@@ -52,25 +52,25 @@ TEST(npTransformationPipelineTest, TRANSLATION) {
 	
 	npMatrix4 a = p.getTransformMatrix();
 
-	EXPECT_FLOAT_EQ(a.m[0][0], 1);
-	EXPECT_FLOAT_EQ(a.m[0][1], 0);
-	EXPECT_FLOAT_EQ(a.m[0][2], 0);
-	EXPECT_FLOAT_EQ(a.m[0][3], 5);
+	EXPECT_FLOAT_EQ(a.m[0], 1);
+	EXPECT_FLOAT_EQ(a.m[1], 0);
+	EXPECT_FLOAT_EQ(a.m[2], 0);
+	EXPECT_FLOAT_EQ(a.m[3], 5);
 
-	EXPECT_FLOAT_EQ(a.m[1][0], 0);
-	EXPECT_FLOAT_EQ(a.m[1][1], 2);
-	EXPECT_FLOAT_EQ(a.m[1][2], 0);
-	EXPECT_FLOAT_EQ(a.m[1][3], 3);
+	EXPECT_FLOAT_EQ(a.m[4], 0);
+	EXPECT_FLOAT_EQ(a.m[5], 2);
+	EXPECT_FLOAT_EQ(a.m[6], 0);
+	EXPECT_FLOAT_EQ(a.m[7], 3);
 
-	EXPECT_FLOAT_EQ(a.m[2][0], 0);
-	EXPECT_FLOAT_EQ(a.m[2][1], 0);
-	EXPECT_FLOAT_EQ(a.m[2][2], 1);
-	EXPECT_FLOAT_EQ(a.m[2][3], 0);
+	EXPECT_FLOAT_EQ(a.m[8], 0);
+	EXPECT_FLOAT_EQ(a.m[9], 0);
+	EXPECT_FLOAT_EQ(a.m[10], 1);
+	EXPECT_FLOAT_EQ(a.m[11], 0);
 
-	EXPECT_FLOAT_EQ(a.m[3][0], 0);
-	EXPECT_FLOAT_EQ(a.m[3][1], 0);
-	EXPECT_FLOAT_EQ(a.m[3][2], 0);
-	EXPECT_FLOAT_EQ(a.m[3][3], 1);
+	EXPECT_FLOAT_EQ(a.m[12], 0);
+	EXPECT_FLOAT_EQ(a.m[13], 0);
+	EXPECT_FLOAT_EQ(a.m[14], 0);
+	EXPECT_FLOAT_EQ(a.m[15], 1);
 
 }
 
@@ -80,49 +80,47 @@ TEST(npTransformationPipelineTest, ROTATION) {
 
 	npMatrix4 a = p.getTransformMatrix();
 
-	EXPECT_FLOAT_EQ(a.m[0][0], -0.448073626f);
-	EXPECT_FLOAT_EQ(a.m[0][1], 0);
-	EXPECT_FLOAT_EQ(a.m[0][2], -0.893996656f);
-	EXPECT_FLOAT_EQ(a.m[0][3], 0);
+	EXPECT_FLOAT_EQ(a.m[0], -0.448073626f);
+	EXPECT_FLOAT_EQ(a.m[1], 0);
+	EXPECT_FLOAT_EQ(a.m[2], -0.893996656f);
+	EXPECT_FLOAT_EQ(a.m[3], 0);
 
-	EXPECT_FLOAT_EQ(a.m[1][0], 0);
-	EXPECT_FLOAT_EQ(a.m[1][1], 1);
-	EXPECT_FLOAT_EQ(a.m[1][2], 0);
-	EXPECT_FLOAT_EQ(a.m[1][3], 0);
+	EXPECT_FLOAT_EQ(a.m[4], 0);
+	EXPECT_FLOAT_EQ(a.m[5], 1);
+	EXPECT_FLOAT_EQ(a.m[6], 0);
+	EXPECT_FLOAT_EQ(a.m[7], 0);
 
-	EXPECT_FLOAT_EQ(a.m[2][0], 0.893996656f);
-	EXPECT_FLOAT_EQ(a.m[2][1], 0);
-	EXPECT_FLOAT_EQ(a.m[2][2], -0.448073626f);
-	EXPECT_FLOAT_EQ(a.m[2][3], 0);
+	EXPECT_FLOAT_EQ(a.m[8], 0.893996656f);
+	EXPECT_FLOAT_EQ(a.m[9], 0);
+	EXPECT_FLOAT_EQ(a.m[10], -0.448073626f);
+	EXPECT_FLOAT_EQ(a.m[11], 0);
 
-	EXPECT_FLOAT_EQ(a.m[3][0], 0);
-	EXPECT_FLOAT_EQ(a.m[3][1], 0);
-	EXPECT_FLOAT_EQ(a.m[3][2], 0);
-	EXPECT_FLOAT_EQ(a.m[3][3], 1);
-
+	EXPECT_FLOAT_EQ(a.m[12], 0);
+	EXPECT_FLOAT_EQ(a.m[13], 0);
+	EXPECT_FLOAT_EQ(a.m[14], 0);
+	EXPECT_FLOAT_EQ(a.m[15], 1);
 
 	p.setRotation(0.0f, 0.0f, 90.0f);
 	npMatrix4 b = p.getTransformMatrix();
 
-	EXPECT_FLOAT_EQ(b.m[0][0], -0.448073626f);
-	EXPECT_FLOAT_EQ(b.m[0][1], -0.893996656f);
-	EXPECT_FLOAT_EQ(b.m[0][2], 0);
-	EXPECT_FLOAT_EQ(b.m[0][3], 0);
+	EXPECT_FLOAT_EQ(b.m[0], -0.448073626f);
+	EXPECT_FLOAT_EQ(b.m[1], -0.893996656f);
+	EXPECT_FLOAT_EQ(b.m[2], 0);
+	EXPECT_FLOAT_EQ(b.m[3], 0);
 
-	EXPECT_FLOAT_EQ(b.m[1][0], 0.893996656f);
-	EXPECT_FLOAT_EQ(b.m[1][1], -0.448073626f);
-	EXPECT_FLOAT_EQ(b.m[1][2], 0);
-	EXPECT_FLOAT_EQ(b.m[1][3], 0);
+	EXPECT_FLOAT_EQ(b.m[4], 0.893996656f);
+	EXPECT_FLOAT_EQ(b.m[5], -0.448073626f);
+	EXPECT_FLOAT_EQ(b.m[6], 0);
+	EXPECT_FLOAT_EQ(b.m[7], 0);
 
-	EXPECT_FLOAT_EQ(b.m[2][0], 0);
-	EXPECT_FLOAT_EQ(b.m[2][1], 0);
-	EXPECT_FLOAT_EQ(b.m[2][2], 1);
-	EXPECT_FLOAT_EQ(b.m[2][3], 0);
+	EXPECT_FLOAT_EQ(b.m[8], 0);
+	EXPECT_FLOAT_EQ(b.m[9], 0);
+	EXPECT_FLOAT_EQ(b.m[10], 1);
+	EXPECT_FLOAT_EQ(b.m[11], 0);
 
-	EXPECT_FLOAT_EQ(b.m[3][0], 0);
-	EXPECT_FLOAT_EQ(b.m[3][1], 0);
-	EXPECT_FLOAT_EQ(b.m[3][2], 0);
-	EXPECT_FLOAT_EQ(b.m[3][3], 1);
-
+	EXPECT_FLOAT_EQ(b.m[12], 0);
+	EXPECT_FLOAT_EQ(b.m[13], 0);
+	EXPECT_FLOAT_EQ(b.m[14], 0);
+	EXPECT_FLOAT_EQ(b.m[15], 1);
 	//TODO: Add test for x axis
 }

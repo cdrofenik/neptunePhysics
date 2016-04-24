@@ -1,21 +1,23 @@
 #include "main.h"
 
-#include "Camera.hpp"
-#include "Shader.hpp"
+#include "CameraComponent.hpp"
+#include "ShaderComponent.hpp"
 #include "DrawableObject.h"
 #include "Utils.hpp"
 
 // Neptune Physics
 #include "neptunePhysics/math/npTransform.hpp"
-#include "neptunePhysics/collision/npRigidBody.h"
 #include "neptunePhysics/collision/npCollisionShape.h"
 #include "neptunePhysics/core/npDiscreteDynamicsWorld.h"
+#include "neptunePhysics/collision/npRigidBody.h"
 
-// GLEW
-#include <GL/glew.h>
+// Logging
+#include "logging\npLogging.hpp"
 
-// GLFW
-#include <glfw3.h>
+// Refactoring
+#include "OpenGLComponent.h"
+
+#include "core/npParticle.h"
 
 // GLM
 #include <glm/glm.hpp>
@@ -31,21 +33,23 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "ParticleSimulator.h"
+
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 768
 
 using namespace NeptunePhysics;
 
-Camera gameCamera;
+CameraComponent gameCamera;
 
-bool wireFrameMode = false;
+bool wireFrameMode = true;
 bool pauseSimulation = false;
-bool showBoundingVolumes = false;
+bool showBoundingVolumes = true;
 bool keys[1024];
 bool firstMouse = true;
 
-GLfloat deltaTime = 0;
-GLfloat lastFrame = 0;
+GLdouble deltaTime = 0;
+GLdouble lastFrame = 0;
 double lastX;
 double lastY;
 
@@ -75,11 +79,49 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 
-	// Resolves muliple buttons pressed at the same time
+	// Resolves muliple buttons pressed at the same 
 	if (action == GLFW_PRESS)
 		keys[key] = true;
 	else if (action == GLFW_RELEASE)
 		keys[key] = false;
+}
+
+void initialize(npDiscreteDynamicsWorld* world, Mesh _mesh)
+{
+	int rigidBodyCount = 4;
+
+	npVector3 Pos(0.0f, 2.75f, 0.0f);
+	npVector3 veloPos(0, 0, 0);
+	npVector3 accelPos(0, 0, 0);
+
+	drawableList.clear();
+	for (size_t i = 0; i < rigidBodyCount; i++)
+	{
+		npVector3 startPos = Pos + npVector3(i * 1.5f, i * 2.75f, 0.0f);
+
+		npParticle tmpBody(startPos, veloPos, accelPos, 0.1, 10);
+		//(20, startPos, veloPos, accelPos);
+		if (i == 1) {
+			tmpBody.m_acceleration = npVector3(0, -1.0f, 0);
+		}
+		else if (i == 0) {
+			//tmpBody.m_velocity = npVector3(0, -1.0f, 0);
+		}
+
+		world->addParticle(tmpBody);
+
+		Box drawnBody(_mesh.getMinValues(), _mesh.getMaxValues());
+		drawableList.push_back(drawnBody);
+	}
+
+	//Earth plane (approx.)
+	npParticle _tmpBody(npVector3(0.0f, 0.0f, 0.0f), veloPos, accelPos, 0.0f, 0.0f);
+	world->addParticle(_tmpBody);
+
+	Plane tmpPlane(glm::vec3(-50, 0, -50), 100, 100);
+	drawableList.push_back(tmpPlane);
+
+	world->addToForceRegistry();
 }
 
 // Callback for mouse movement
@@ -92,8 +134,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 		firstMouse = false;
 	}
 
-	GLfloat xoffset = xpos - lastX;
-	GLfloat yoffset = lastY - ypos;
+	GLdouble xoffset = xpos - lastX;
+	GLdouble yoffset = lastY - ypos;
 	lastX = xpos;
 	lastY = ypos;
 
@@ -102,58 +144,23 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 int main() {
 
-	fprintf(stderr, "[Main] Starting simulator!\n");
+	OpenGLComponent mainWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-#pragma region GLFW, Window & GLEW setup
-	if (!glfwInit())
-	{
-		fprintf(stderr, "Failed to initialize GLFW!\n");
-		return -1;
-	}
+	//Input handling
+	glfwSetInputMode(mainWindow.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetKeyCallback(mainWindow.getWindow(), key_callback);
+	glfwSetCursorPosCallback(mainWindow.getWindow(), mouse_callback);
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Watchdog for bad coding habits
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // MacOS compatibility
-
-	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Neptune Physics Viewer", nullptr, nullptr);
-	if (window == nullptr)
-	{
-		fprintf(stderr, "Failed to open GLFW window!\n");
-		glfwTerminate();
-		return -1;
-	}
-
-	glfwMakeContextCurrent(window); // Set OpenGL context as the current window object
-
-	glewExperimental = GL_TRUE; // Needed in core profile 
-	if (glewInit() != GLEW_OK)
-	{
-		fprintf(stderr, "Failed to initialize GLEW!\n");
-		return -1;
-	}
-
-	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	glEnable(GL_DEPTH_TEST);
-#pragma endregion
-
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, mouse_callback);
-
+	//Camera and perspective setup
 	glm::mat4 model;
 	model = glm::rotate(model, -45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-
 	glm::mat4 view;
-
 	glm::mat4 projection;
 	projection = glm::perspective(45.0f, WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
 
+
 	// Shader
-	Shader mainShader;
+	ShaderComponent mainShader;
 	mainShader.AddShader("vertexShader.vert", ShaderType::VERTEX_SHADER);
 	mainShader.AddShader("fragmentShader.frag", ShaderType::FRAGMENT_SHADER);
 	mainShader.SetupProgram();
@@ -164,28 +171,12 @@ int main() {
 
 	//Initialize physics engine
 	npDiscreteDynamicsWorld* world = new npDiscreteDynamicsWorld();
+	initialize(world, _mesh);
 
-	// Add shape with vertices to engine
-	int rigidBodyCount = 4;
-	for (size_t i = 0; i < rigidBodyCount; i++)
+
+	while (!glfwWindowShouldClose(mainWindow.getWindow()))
 	{
-		npAABB boundVol;
-		npTransform startPos;
-		startPos.setOrigin(0.0f, i * 2.75f, 0.0f);
-		startPos.setScale(0.5f, 0.5f, 0.5f);
-		npMotionState mState = npMotionState(startPos.getTransformMatrix());
-		npRigidBody tmpBody(1, 2.0f, boundVol, mState);
-		
-		Box drawnBody(_mesh.getMinValues(), _mesh.getMaxValues());
-		//list_rigidBody.push_back(RigidBody(tmpBody));
-		drawableList.push_back(drawnBody);
-
-		world->addRigidBody(tmpBody);
-	}
-
-	while (!glfwWindowShouldClose(window))
-	{
-		GLfloat currentFrame = glfwGetTime();
+		GLdouble currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
@@ -197,39 +188,49 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		if (!pauseSimulation) {
-			world->stepSimulation(deltaTime);
-		}
-
-		mainShader.Use();   // <-- Don't forget this one!
+		mainShader.Use();
 		// Transformation matrices
-		glm::mat4 projection = glm::perspective(45.0f, WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = gameCamera.GetViewMatrix();
 		glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-		glm::mat4 model;
-		for (int i = 0; i < rigidBodyCount; i++) {
+		if (!pauseSimulation) {
+			world->stepSimulation(deltaTime);
+		}
 
-			auto rigidBdy = world->getRigidBody(i);
-			
+		for (int i = 0; i < 5; i++) {
+
+			auto rigidBdy = world->getParticle(i);
+
 			//Position model based on rigid body position
-			model = ConvertNpMatrixToGlm(rigidBdy.getMotionState().GetStateMatrix4());
-			glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "model"), 1, GL_FALSE, glm::value_ptr(model));
-			
-			_mesh.Draw(mainShader, wireFrameMode);
+			npTransform startPos;
 
-			drawableList.at(i).Draw(mainShader, wireFrameMode);
+			if (!pauseSimulation) {
+				Log_DEBUG("main.cpp - 197", "Index", i);
+				Log_DEBUG("main.cpp - 197", "Body position:", rigidBdy.m_position);
+			}
+
+			startPos.setOrigin(rigidBdy.m_position.x, rigidBdy.m_position.y, rigidBdy.m_position.z);
+			startPos.setScale(0.5f, 0.5f, 0.5f);
+			npMotionState mState = npMotionState(startPos.getTransformMatrix());
+
+			glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "model"), 1, GL_FALSE, mState.GetStateMatrix4().transpose().m);
+
+			if (showBoundingVolumes)
+			{
+				drawableList.at(i).Draw(mainShader, wireFrameMode);
+			}
+
 		}
 
 		// Swap the buffers
-		glfwSwapBuffers(window); 
+		glfwSwapBuffers(mainWindow.getWindow());
 	}
 
 	// Terminate GLFW, clearing any resources allocated by GLFW.
 	glfwTerminate();
 
-	for (auto& _drawable: drawableList )
+	for (auto& _drawable : drawableList)
 		_drawable.Clear();
 
 	drawableList.clear();

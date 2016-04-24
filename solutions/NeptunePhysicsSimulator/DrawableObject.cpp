@@ -31,7 +31,7 @@ void DrawableObject::Init()
 	glBindVertexArray(0);
 }
 
-void DrawableObject::Draw(Shader _shader, bool _displayWireframe)
+void DrawableObject::Draw(ShaderComponent _shader, bool _displayWireframe)
 {
 	glPolygonMode(GL_FRONT_AND_BACK, _displayWireframe ? GL_LINE : GL_FILL);
 
@@ -269,4 +269,55 @@ void Box::GenerateBox(const glm::vec3& minValues, const glm::vec3& maxValues)
 	{
 		indices_.push_back(indices_data[i]);
 	}
+}
+
+
+///////////////////////////////////////////////////////////////////////
+
+Plane::Plane(const glm::vec3& minValues, const float& width, const float& length)
+{
+	GeneratePlane(minValues, width, length);
+	Init();
+}
+
+void Plane::GeneratePlane(const glm::vec3& startPoint, const float& width, const float& length)
+{
+	float vertex_data[] = {
+		startPoint.x, startPoint.y, startPoint.z,
+		startPoint.x + width, startPoint.y, startPoint.z,
+		startPoint.x + width, startPoint.y, startPoint.z + length,
+		startPoint.x, startPoint.y, startPoint.z + length
+	};
+
+	for (size_t i = 0; i < 12; i += 3)
+	{
+		Vertex vertex;
+
+		//Position
+		glm::vec3 vector;
+		vector.x = vertex_data[i];
+		vector.y = vertex_data[i + 1];
+		vector.z = vertex_data[i + 2];
+
+		vertex.Position = vector;
+
+		//Texture
+		vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+
+		vertices_.push_back(vertex);
+	}
+
+	float indices_data[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+	indices_.clear();
+	indices_.reserve(6);
+	for (size_t i = 0; i < 6; i++)
+	{
+		indices_.push_back(indices_data[i]);
+	}
+	//length
+	//width
+
 }

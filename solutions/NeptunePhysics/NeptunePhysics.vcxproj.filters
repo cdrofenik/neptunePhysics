@@ -50,9 +50,6 @@
     <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3.hpp">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
@@ -83,6 +80,24 @@
     <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\core\npParticle.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\core\npForceGenerator.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="npParticleContact.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="npParticleContactResolver.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3x4.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\math\npQuaternion.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\collision\npBVHNode.cpp">
@@ -98,6 +113,18 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\collision\npRigidBody.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\npParticle.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="npForceGenerator.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="npParticleContact.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="npParticleContactResolver.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>

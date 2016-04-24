@@ -1,7 +1,7 @@
 //#ifndef NEPTUNE_NPLOGGING_H
 //#define NEPTUNE_NPLOGGING_H
 
-#include "math/npMatrix.h"
+#include "math/npMatrix4.hpp"
 #include "math/npVector2.hpp"
 #include "math/npVector3.hpp"
 
@@ -37,16 +37,16 @@ namespace NeptunePhysics {
 	}
 
 	void Log_DEBUG(const char* _location, const char* _message, const npMatrix3& _value) {
-		printf("DEBUG: [%s] %s:\n(%f, %f, %f)\n(%f, %f, %f)\n(%f, %f, %f)\n", _location, _message, _value.m[0][0], _value.m[0][1], _value.m[0][2],
-			_value.m[1][0], _value.m[1][1], _value.m[1][2], _value.m[2][0], _value.m[2][1], _value.m[2][2]);
+		printf("DEBUG: [%s] %s:\n(%f, %f, %f)\n(%f, %f, %f)\n(%f, %f, %f)\n", _location, _message, _value.m[0], _value.m[1], _value.m[2],
+			_value.m[3], _value.m[3], _value.m[4], _value.m[5], _value.m[7], _value.m[8]);
 	}
 
 	void Log_DEBUG(const char* _location, const char* _message, const npMatrix4& _value) {
 		printf("DEBUG: [%s] %s:\n(%f, %f, %f, %f)\n(%f, %f, %f, %f)\n(%f, %f, %f, %f)\n(%f, %f, %f, %f)\n", _location, _message,
-			_value.m[0][0], _value.m[0][1], _value.m[0][2], _value.m[0][3],
-			_value.m[1][0], _value.m[1][1], _value.m[1][2], _value.m[1][3],
-			_value.m[2][0], _value.m[2][1], _value.m[2][2], _value.m[2][3],
-			_value.m[3][0], _value.m[3][1], _value.m[3][2], _value.m[3][3]);
+			_value.m[0], _value.m[1], _value.m[2], _value.m[3],
+			_value.m[4], _value.m[5], _value.m[6], _value.m[7],
+			_value.m[8], _value.m[9], _value.m[10], _value.m[11],
+			_value.m[12], _value.m[13], _value.m[14], _value.m[15]);
 	}
 #endif
 }
