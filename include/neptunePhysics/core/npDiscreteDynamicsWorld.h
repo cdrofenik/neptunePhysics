@@ -20,23 +20,17 @@ namespace NeptunePhysics {
 
 		void stepSimulation(float _deltaTime);
 
-		void addParticle(npParticle _body);
+		void addRigidBody(npRigidBody _body);
 		void addToForceRegistry();
 
-		npParticle getParticle(int _idx);
+		npRigidBody getRigidBody(int _idx);
 
 	private:
-		//std::vector<npRigidBody> m_rigidBody = std::vector<npRigidBody>();
-
-		npParticleForceRegistry m_registry;
-		std::vector<npParticle> m_particleList = std::vector<npParticle>();
+		npForceRegistry m_registry;
+		std::vector<npRigidBody> m_rigidBodyList = std::vector<npRigidBody>();
 
 		//Force Generators
-		npParticleGravity* m_particleGravity;
-		npParticle* m__particleBungee;
-		npParticleBungee* m_particleBungee;
-		npParticleAnchoredSpring* m_particleAnchored;
-		npParticleBouyancy* m_particleBouyancy;
+		npGravityForce* m_gravityForce;
 	};
 }
 #endif

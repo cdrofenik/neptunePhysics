@@ -2,6 +2,7 @@
 #define NEPTUNE_NPMATRIX4_H
 
 #include "npMatrix3.hpp"
+#include "npMatrix3x4.h"
 
 #ifdef NO_NeptunePhysics_DLL
 #define NEPTUNE_PHYSICS_API
@@ -40,6 +41,23 @@ namespace NeptunePhysics {
 			m[10] = _matrix3.m[8];
 			m[15] = 1; //homogeneous
 			m[11] = m[7] = m[3] = m[12] = m[13] = m[14] = 0;
+		}
+
+		npMatrix4(const npMatrix3x4& _matrix3x4) {
+			m[0] = _matrix3x4.m[0];
+			m[1] = _matrix3x4.m[1];
+			m[2] = _matrix3x4.m[2];
+			m[3] = _matrix3x4.m[3];
+			m[4] = _matrix3x4.m[4];
+			m[5] = _matrix3x4.m[5];
+			m[6] = _matrix3x4.m[6];
+			m[7] = _matrix3x4.m[7];
+			m[8] = _matrix3x4.m[8];
+			m[9] = _matrix3x4.m[9];
+			m[10] = _matrix3x4.m[10];
+			m[11] = _matrix3x4.m[11];
+			m[12] = m[13] = m[14] = 0;
+			m[15] = 1;
 		}
 
 		npMatrix4(const npReal& a0, const npReal& a1, const npReal& a2, const npReal& a3,

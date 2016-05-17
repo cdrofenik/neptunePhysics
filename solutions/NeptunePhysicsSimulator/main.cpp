@@ -1,10 +1,5 @@
 #include "main.h"
 
-#include "CameraComponent.hpp"
-#include "ShaderComponent.hpp"
-#include "DrawableObject.h"
-#include "Utils.hpp"
-
 // Neptune Physics
 #include "neptunePhysics/math/npTransform.hpp"
 #include "neptunePhysics/collision/npCollisionShape.h"
@@ -15,36 +10,28 @@
 #include "logging\npLogging.hpp"
 
 // Refactoring
-#include "OpenGLComponent.h"
-
-#include "core/npParticle.h"
+#include "Camera.h"
+#include "ModelShader.h"
+#include "DisplayManager.h"
+#include "ObjectLoader.h"
+#include "Renderer.h"
+#include "TextureLoader.h"
+#include "DrawableBV.h"
 
 // GLM
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include <stdio.h>
-#include <string>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <algorithm>
-#include <stdlib.h>
-#include <string.h>
-
-#include "ParticleSimulator.h"
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 768
 
 using namespace NeptunePhysics;
 
-CameraComponent gameCamera;
+Camera gameCamera;
 
 bool wireFrameMode = true;
-bool pauseSimulation = false;
 bool showBoundingVolumes = true;
+
+bool pauseSimulation = false;
 bool keys[1024];
 bool firstMouse = true;
 
@@ -53,187 +40,193 @@ GLdouble lastFrame = 0;
 double lastX;
 double lastY;
 
-//Create Manager struct as container for data
-std::vector<DrawableObject> drawableList;
+//TODO: Create Manager struct as container for data
+std::vector<DrawableBV> drawableModelList;
 
 // Keyboard input callback
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-	//Wireframe mode
-	if (key == GLFW_KEY_I && action == GLFW_PRESS) {
-		wireFrameMode = !wireFrameMode;
-		glPolygonMode(GL_FRONT_AND_BACK, wireFrameMode ? GL_LINE : GL_FILL);
-	}
+    //Wireframe mode
+    if (key == GLFW_KEY_I && action == GLFW_PRESS) {
+        wireFrameMode = !wireFrameMode;
+        glPolygonMode(GL_FRONT_AND_BACK, wireFrameMode ? GL_LINE : GL_FILL);
+    }
 
-	//Pause simulation
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
-		pauseSimulation = !pauseSimulation;
-	}
+    //Pause simulation
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+        pauseSimulation = !pauseSimulation;
+    }
 
-	//Pause simulation
-	if (key == GLFW_KEY_B && action == GLFW_PRESS) {
-		showBoundingVolumes = !showBoundingVolumes;
-	}
+    //Pause simulation
+    if (key == GLFW_KEY_B && action == GLFW_PRESS) {
+        showBoundingVolumes = !showBoundingVolumes;
+    }
 
-	//Close application
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
+    //Close application
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GL_TRUE);
 
-	// Resolves muliple buttons pressed at the same 
-	if (action == GLFW_PRESS)
-		keys[key] = true;
-	else if (action == GLFW_RELEASE)
-		keys[key] = false;
+    // Resolves muliple buttons pressed at the same 
+    if (action == GLFW_PRESS)
+        keys[key] = true;
+    else if (action == GLFW_RELEASE)
+        keys[key] = false;
 }
 
-void initialize(npDiscreteDynamicsWorld* world, Mesh _mesh)
+void initializeObjects(npDiscreteDynamicsWorld* world, const glm::vec3& minValues, const glm::vec3& maxValues)
 {
-	int rigidBodyCount = 4;
+    unsigned int rigidBodyCount = 4;
 
-	npVector3 Pos(0.0f, 2.75f, 0.0f);
-	npVector3 veloPos(0, 0, 0);
-	npVector3 accelPos(0, 0, 0);
+    npVector3 Pos(0.0f, 2.75f, 0.0f);
+    npVector3 veloPos(0, 0, 0);
+    npVector3 accelPos(0, 0, 0);
 
-	drawableList.clear();
-	for (size_t i = 0; i < rigidBodyCount; i++)
-	{
-		npVector3 startPos = Pos + npVector3(i * 1.5f, i * 2.75f, 0.0f);
+    drawableModelList.clear();
+    for (size_t i = 0; i < rigidBodyCount; i++)
+    {
+        npVector3 startPos = Pos + npVector3(i * 1.5f, i * 2.75f, 0.0f);
 
-		npParticle tmpBody(startPos, veloPos, accelPos, 0.1, 10);
-		//(20, startPos, veloPos, accelPos);
-		if (i == 1) {
-			tmpBody.m_acceleration = npVector3(0, -1.0f, 0);
-		}
-		else if (i == 0) {
-			//tmpBody.m_velocity = npVector3(0, -1.0f, 0);
-		}
+        npRigidBody tmpBody(5, startPos, veloPos, accelPos);
+        tmpBody.setAngularDamping(0.05f);
+        tmpBody.setLinearDamping(0.011f);
+        world->addRigidBody(tmpBody);
 
-		world->addParticle(tmpBody);
+        //Adding drawable bounding volume
+        DrawableAABB drawnBody(minValues, maxValues);
+        drawableModelList.push_back(drawnBody);
+    }
 
-		Box drawnBody(_mesh.getMinValues(), _mesh.getMaxValues());
-		drawableList.push_back(drawnBody);
-	}
+    //Earth plane (approx.)
+    npRigidBody _tmpBody(0, npVector3(0.0f, 0.0f, 0.0f), veloPos, accelPos);
+    world->addRigidBody(_tmpBody);
 
-	//Earth plane (approx.)
-	npParticle _tmpBody(npVector3(0.0f, 0.0f, 0.0f), veloPos, accelPos, 0.0f, 0.0f);
-	world->addParticle(_tmpBody);
+    DrawablePlane tmpPlane(glm::vec3(-50, 0, -50), 100, 100);
+    drawableModelList.push_back(tmpPlane);
 
-	Plane tmpPlane(glm::vec3(-50, 0, -50), 100, 100);
-	drawableList.push_back(tmpPlane);
+    //Adding force generators
+    world->addToForceRegistry();
+}
 
-	world->addToForceRegistry();
+//TODO refactor this
+NeptunePhysics::npMatrix4 create4x4Matrix(const NeptunePhysics::npMatrix3x4& matrix_)
+{
+    NeptunePhysics::npMatrix4 result(matrix_);
+    return result;
 }
 
 // Callback for mouse movement
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	if (firstMouse)
-	{
-		lastX = xpos;
-		lastY = ypos;
-		firstMouse = false;
-	}
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
 
-	GLdouble xoffset = xpos - lastX;
-	GLdouble yoffset = lastY - ypos;
-	lastX = xpos;
-	lastY = ypos;
+    GLfloat xoffset = xpos - lastX;
+    GLfloat yoffset = lastY - ypos;
+    lastX = xpos;
+    lastY = ypos;
 
-	gameCamera.ProcessMouseMovement(xoffset, yoffset);
+    gameCamera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 int main() {
 
-	OpenGLComponent mainWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+    DisplayManager displayManager(WINDOW_WIDTH, WINDOW_HEIGHT, "Neptune Physics Simulator");
+    displayManager.Enable(GL_DEPTH_TEST);
+    displayManager.Enable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
 
-	//Input handling
-	glfwSetInputMode(mainWindow.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetKeyCallback(mainWindow.getWindow(), key_callback);
-	glfwSetCursorPosCallback(mainWindow.getWindow(), mouse_callback);
+    //Input handling
+    glfwSetInputMode(displayManager.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetKeyCallback(displayManager.getWindow(), key_callback);
+    glfwSetCursorPosCallback(displayManager.getWindow(), mouse_callback);
 
-	//Camera and perspective setup
-	glm::mat4 model;
-	model = glm::rotate(model, -45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 view;
-	glm::mat4 projection;
-	projection = glm::perspective(45.0f, WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
+    //TODO: Add to camera setup
+    glm::mat4 model;
+    glm::mat4 view;
+    glm::mat4 projection;
+    projection = glm::perspective(45.0f, WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
+
+    Renderer objRenderer;
+    ObjectLoader objLoader;
+
+    //Load Texture
+    TextureLoader textLoader;
+    GLuint textureId = textLoader.LoadTexture("..\\..\\external\\resources\\textures\\container.png");
+
+    //Loading OBJ mesh
+    auto meshRawModel = objLoader.LoadMesh("..\\..\\external\\resources\\objects\\dragon.obj");
+
+    //Init physics system
+    npDiscreteDynamicsWorld* world = new npDiscreteDynamicsWorld();
+    initializeObjects(world, meshRawModel.minVector, meshRawModel.maxVector);
+
+    Light staticLight;
+    staticLight.position = glm::vec3(0.0f, 1.0f, 10.0f);
+    staticLight.color = glm::vec3(1.0f, 1.0f, 1.0f);
+
+    //Init Shaders
+    ModelShader meshShader("shaders\\vertexShader.vert", "shaders\\fragmentShader.frag");
+    ModelShader BVShader("shaders\\BVvertexShader.vert", "shaders\\BVfragmentShader.frag");
+
+    while (!glfwWindowShouldClose(displayManager.getWindow()))
+    {
+        GLdouble currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
+        glfwPollEvents();
+        gameCamera.ProcessKeyboard(keys, deltaTime);
+
+        objRenderer.PrepareForRendering();
+
+        if (!pauseSimulation) {
+            world->stepSimulation(deltaTime);
+        }
+        
+
+        for (size_t i = 0; i < 5; i++)
+        {
+            auto rigidBdy = world->getRigidBody(i);
+
+            if (!pauseSimulation) {
+                Log_DEBUG("main.cpp - 197", "Body position:", rigidBdy.getPosition());
+            }
+
+            npMatrix4 resultingModelMatrix = create4x4Matrix(rigidBdy.getTransformMatrix()).transpose();
+
+            //drawableBV has VBOs (vertex, color)
+            BVShader.Use();
+            BVShader.LoadViewMatrix(gameCamera.GetViewMatrix());
+            BVShader.LoadProjectionMatrix(projection);
+            BVShader.LoadModelMatrix(resultingModelMatrix);
+            objRenderer.Render(drawableModelList.at(i));
+            BVShader.Stop();
 
 
-	// Shader
-	ShaderComponent mainShader;
-	mainShader.AddShader("vertexShader.vert", ShaderType::VERTEX_SHADER);
-	mainShader.AddShader("fragmentShader.frag", ShaderType::FRAGMENT_SHADER);
-	mainShader.SetupProgram();
+            //meshRawModel has other VBOs (vertex, normal, texCoords)
+            meshShader.Use();
+            meshShader.LoadViewMatrix(gameCamera.GetViewMatrix());
+            meshShader.LoadProjectionMatrix(projection);
+            meshShader.LoadModelMatrix(resultingModelMatrix);
+            meshShader.LoadLightPosition(staticLight.position);
+            meshShader.LoadLightColor(staticLight.color);
+            meshShader.LoadShineVariables(0.0f, 0.0f);
+            textLoader.UseTexture(textureId, meshShader.getProgramID(), "ourTexture");
+            objRenderer.Render(meshRawModel, wireFrameMode);
+            meshShader.Stop();
+        }
 
-	// Loading mesh
-	Mesh _mesh("..\\..\\external\\resources\\objects\\suzanne.obj");
-	//drawableList.push_back(_mesh);
+        displayManager.UpdateDisplay();
+    }
 
-	//Initialize physics engine
-	npDiscreteDynamicsWorld* world = new npDiscreteDynamicsWorld();
-	initialize(world, _mesh);
+    objLoader.CleanUp();
+    textLoader.CleanUp();
+    displayManager.CloseDisplay();
 
-
-	while (!glfwWindowShouldClose(mainWindow.getWindow()))
-	{
-		GLdouble currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-
-		// Check and call events
-		glfwPollEvents();
-		gameCamera.ProcessKeyboard(keys, deltaTime);
-
-		// Clear the colorbuffer
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		mainShader.Use();
-		// Transformation matrices
-		glm::mat4 view = gameCamera.GetViewMatrix();
-		glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "view"), 1, GL_FALSE, glm::value_ptr(view));
-
-		if (!pauseSimulation) {
-			world->stepSimulation(deltaTime);
-		}
-
-		for (int i = 0; i < 5; i++) {
-
-			auto rigidBdy = world->getParticle(i);
-
-			//Position model based on rigid body position
-			npTransform startPos;
-
-			if (!pauseSimulation) {
-				Log_DEBUG("main.cpp - 197", "Index", i);
-				Log_DEBUG("main.cpp - 197", "Body position:", rigidBdy.m_position);
-			}
-
-			startPos.setOrigin(rigidBdy.m_position.x, rigidBdy.m_position.y, rigidBdy.m_position.z);
-			startPos.setScale(0.5f, 0.5f, 0.5f);
-			npMotionState mState = npMotionState(startPos.getTransformMatrix());
-
-			glUniformMatrix4fv(glGetUniformLocation(mainShader.programId, "model"), 1, GL_FALSE, mState.GetStateMatrix4().transpose().m);
-
-			if (showBoundingVolumes)
-			{
-				drawableList.at(i).Draw(mainShader, wireFrameMode);
-			}
-
-		}
-
-		// Swap the buffers
-		glfwSwapBuffers(mainWindow.getWindow());
-	}
-
-	// Terminate GLFW, clearing any resources allocated by GLFW.
-	glfwTerminate();
-
-	for (auto& _drawable : drawableList)
-		_drawable.Clear();
-
-	drawableList.clear();
-
-	return 0;
+    return 1;
+    
 }

@@ -137,6 +137,15 @@ namespace NeptunePhysics
 		return m_rotation;
 	}
 
+	void npRigidBody::setTransformMatrix(const npMatrix3x4& _matrix)
+	{
+		m_transformMatrix = _matrix;
+	}
+
+	npMatrix3x4 npRigidBody::getTransformMatrix() const
+	{
+		return m_transformMatrix;
+	}
 	#pragma endregion
 
 	void npRigidBody::addForce(const npVector3& force)
@@ -191,20 +200,20 @@ namespace NeptunePhysics
 
 	void npRigidBody::integrate(npReal duration)
 	{
+		if (m_inverseMass <= 0.0f) return;
+
 		m_lastFrameAcceleration = m_acceleration;
 		m_lastFrameAcceleration.addScaledVector(m_forceAccum, m_inverseMass);
 
 		npVector3 angularAcceleration = m_inverseInertiaTensorWorld.transform(m_torqueAccum);
 
 		m_velocity.addScaledVector(m_lastFrameAcceleration, duration);
-
 		m_rotation.addScaledVector(angularAcceleration, duration);
 
-		m_velocity += powf(m_linearDamping, duration);
-		m_rotation += powf(m_angularDamping, duration);
+		m_velocity *= powf(m_linearDamping, duration);
+		m_rotation *= powf(m_angularDamping, duration);
 
 		m_position.addScaledVector(m_velocity, duration);
-
 		m_orientation.addScaledVector(m_rotation, duration);
 
 		calculateDerivedData();

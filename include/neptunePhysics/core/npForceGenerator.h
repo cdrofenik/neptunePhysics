@@ -3,6 +3,8 @@
 
 #include "npParticle.h"
 
+#include "../collision/npRigidBody.h"
+
 #include <vector>
 
 namespace NeptunePhysics {
@@ -117,7 +119,7 @@ namespace NeptunePhysics {
 		void updateForces(npReal duration);
 	};
 
-	/*class npForceGenerator
+	class npForceGenerator
 	{
 	public:
 		virtual void updateForce(npRigidBody *body, npReal duration) = 0;
@@ -127,12 +129,36 @@ namespace NeptunePhysics {
 	{
 		npVector3 m_gravity;
 	public:
-		npGravityForce(const npVector3 &_gravity);
-		virtual void updateForce(npRigidBody *body, npReal duration) = 0;
-	};*/
+		npGravityForce(const npVector3 &_gravity) : m_gravity(_gravity) {};
+		virtual void updateForce(npRigidBody *body, npReal duration);
+	};
 
+	class npForceRegistry
+	{
+	protected:
+		struct npForceRegistration
+		{
+			npForceRegistration(npForceGenerator *_fg, npRigidBody *_rigidBody) :
+				rigidBody(_rigidBody), fg(_fg) {};
 
+			npRigidBody *rigidBody;
+			npForceGenerator *fg;
+		};
+
+		typedef std::vector<npForceRegistration> _Registry;
+		_Registry registration;
+
+	public:
+		void add(npRigidBody* _rigidBody, npForceGenerator *_generator);
+
+		npRigidBody* getRigidBody(int _index);
+
+		void remove(npRigidBody* _rigidBody, npForceGenerator * _enerator);
+
+		void clear();
+
+		void updateForces(npReal duration);
+	};
 }
-
 
 #endif

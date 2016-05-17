@@ -1,5 +1,5 @@
-//#ifndef NEPTUNE_NPLOGGING_H
-//#define NEPTUNE_NPLOGGING_H
+#ifndef NEPTUNE_NPLOGGING_H
+#define NEPTUNE_NPLOGGING_H
 
 #include "math/npMatrix4.hpp"
 #include "math/npVector2.hpp"
@@ -11,22 +11,22 @@ namespace NeptunePhysics {
 #ifdef _DEBUG
 
 	//Logging for normal C++ types (char, int, float)
-	template<typename T> void Log_DEBUG(const char* _location, const char* _message, const T _value) {
+	//template<typename T> void Log_DEBUG(const char* _location, const char* _message, const T _value) {
 
-		if (std::is_same<int, T>::value) {
-			printf("DEBUG: [%s] %s: %d \n", _location, _message, _value);
-		}
-		else if (std::is_same<const char*, T>::value) {
-			printf("DEBUG: [%s] %s: %s \n", _location, _message, _value);
-		}
-		else if (std::is_same<float, T>::value) {
-			printf("DEBUG: [%s] %s: %f \n", _location, _message, _value);
-		}
-		else {
-			//Called twice - first for generic function
-			//printf("Typeid %s\n", typeid(_value).name());
-		}
-	}
+	//	if (std::is_same<int, T>::value) {
+	//		printf("DEBUG: [%s] %s: %d \n", _location, _message, _value);
+	//	}
+	//	else if (std::is_same<const char*, T>::value) {
+	//		printf("DEBUG: [%s] %s: %s \n", _location, _message, _value);
+	//	}
+	//	else if (std::is_same<float, T>::value) {
+	//		printf("DEBUG: [%s] %s: %f \n", _location, _message, _value);
+	//	}
+	//	else {
+	//		//Called twice - first for generic function
+	//		//printf("Typeid %s\n", typeid(_value).name());
+	//	}
+	//}
 
 	void Log_DEBUG(const char* _location, const char* _message, const npVector2<npReal>& _value) {
 		printf("DEBUG: [%s] %s: (%f, %f) \n", _location, _message, _value.x, _value.y);
@@ -50,4 +50,4 @@ namespace NeptunePhysics {
 	}
 #endif
 }
-//#endif
+#endif

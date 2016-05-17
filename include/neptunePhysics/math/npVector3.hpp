@@ -84,12 +84,6 @@ namespace NeptunePhysics {
 			z += v.z;
 		}
 
-		void operator+=(const npReal& v) {
-			x += v;
-			y += v;
-			z += v;
-		}
-
 		void operator-=(const npVector3& v) {
 			x -= v.x;
 			y -= v.y;

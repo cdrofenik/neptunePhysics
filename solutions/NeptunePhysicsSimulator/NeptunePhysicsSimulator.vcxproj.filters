@@ -13,56 +13,125 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Components">
+    <Filter Include="Header Files\Models">
+      <UniqueIdentifier>{8470ebf9-3df5-4677-8b2f-f288880a5805}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{53fa3a5c-8426-4e9b-9d50-78e33b280434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{7b0c8c8e-8932-4c43-b4db-5cb6270cd3df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RenderEngine">
+      <UniqueIdentifier>{32ad938f-1d9b-4734-bd82-17a8cd06a8a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Textures">
+      <UniqueIdentifier>{e176afdf-ab66-4171-a393-04d20432a8fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RenderEngine">
+      <UniqueIdentifier>{0fb0c13b-5c8c-4714-82cd-6c67ce388208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{48499bf7-535d-4788-b2be-bb50fe75f55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
       <UniqueIdentifier>{cf906c83-022b-438d-94f4-1c7809117203}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{aac65d99-3a8d-4b0e-b45e-5b36621f4b66}</UniqueIdentifier>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{23f7fa90-b84c-43de-a7f1-4ddc53be78a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{875d7aab-aad8-417a-9226-41e8fbc2ceca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shaders">
+      <UniqueIdentifier>{215bc687-ee62-4840-84b2-2acff206085c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{88fab590-bfc1-4234-8814-f7d3d0e6718d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Files\Models">
+      <UniqueIdentifier>{b9b25482-0210-4820-ba8c-04b708fcc4e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Files\DrawableBVs">
+      <UniqueIdentifier>{6b746cd3-d59b-46f5-8753-db093d28b282}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DrawableBV.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
-    <ClInclude Include="DrawableObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="DisplayManager.h">
+      <Filter>Header Files\RenderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="OpenGLComponent.h">
-      <Filter>Header Files\Components</Filter>
+    <ClInclude Include="ObjectLoader.h">
+      <Filter>Header Files\RenderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="CameraComponent.hpp">
-      <Filter>Header Files\Components</Filter>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\RenderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderComponent.hpp">
-      <Filter>Header Files\Components</Filter>
+    <ClInclude Include="ContainerHelper.hpp">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSimulator.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelShader.h">
+      <Filter>Header Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DrawableObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DrawableBV.cpp">
+      <Filter>Source Files\Models</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGLComponent.cpp">
-      <Filter>Source Files\Components</Filter>
+    <ClCompile Include="DisplayManager.cpp">
+      <Filter>Source Files\RenderEngine</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleSimulator.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ObjectLoader.cpp">
+      <Filter>Source Files\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelShader.cpp">
+      <Filter>Source Files\Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertexShader.vert">
-      <Filter>Shader Files</Filter>
+    <None Include="shaders\BVfragmentShader.frag">
+      <Filter>Shader Files\DrawableBVs</Filter>
     </None>
-    <None Include="fragmentShader.frag">
-      <Filter>Shader Files</Filter>
+    <None Include="shaders\vertexShader.vert">
+      <Filter>Shader Files\Models</Filter>
+    </None>
+    <None Include="shaders\fragmentShader.frag">
+      <Filter>Shader Files\Models</Filter>
+    </None>
+    <None Include="shaders\BVvertexShader.vert">
+      <Filter>Shader Files\DrawableBVs</Filter>
     </None>
   </ItemGroup>
 </Project>

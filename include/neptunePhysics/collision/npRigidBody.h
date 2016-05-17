@@ -71,7 +71,7 @@ namespace NeptunePhysics {
 		void setOrientation(const npReal& _r, const npReal& _i, const npReal& _j, const npReal& _k);
 		npQuarternion getOrientation() const;
 
-		void setTransformMatrix(const npMatrix3x4& _rot);
+		void setTransformMatrix(const npMatrix3x4& _matrix);
 		npMatrix3x4 getTransformMatrix() const;
 
 		#pragma endregion
