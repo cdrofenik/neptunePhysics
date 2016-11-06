@@ -6,8 +6,8 @@
 
 namespace NeptunePhysics {
 
-	struct npRigidBody {
+	/*struct npRigidBody {
 		int i = 1;
-	};
+	};*/
 }
 #endif

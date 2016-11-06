@@ -11,13 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npAabb.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npBVHNode.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionBody.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionShape.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npContact.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npDbvt.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npNarrowPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContact.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContactResolver.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npSortAndSweep.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npDiscreteDynamicsWorld.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npForceGenerator.h" />
@@ -32,19 +36,18 @@
     <ClInclude Include="..\..\include\neptunePhysics\math\npTransform.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector2.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector3.hpp" />
-    <ClInclude Include="npParticleContact.h" />
-    <ClInclude Include="npParticleContactResolver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\collision\npBroadPhase.cpp" />
-    <ClCompile Include="..\..\src\collision\npBVHNode.cpp" />
+    <ClCompile Include="..\..\src\collision\npDbvt.cpp" />
+    <ClCompile Include="..\..\src\collision\npForceGenerator.cpp" />
     <ClCompile Include="..\..\src\collision\npNarrowPhase.cpp" />
+    <ClCompile Include="..\..\src\collision\npParticleContact.cpp" />
+    <ClCompile Include="..\..\src\collision\npParticleContactResolver.cpp" />
     <ClCompile Include="..\..\src\collision\npRigidBody.cpp" />
+    <ClCompile Include="..\..\src\collision\npSortAndSweep.cpp" />
     <ClCompile Include="..\..\src\core\npDiscreteDynamicsWorld.cpp" />
     <ClCompile Include="..\..\src\core\npParticle.cpp" />
-    <ClCompile Include="npForceGenerator.cpp" />
-    <ClCompile Include="npParticleContact.cpp" />
-    <ClCompile Include="npParticleContactResolver.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD4E152F-8E0F-4261-8AE7-AD277D26AA98}</ProjectGuid>

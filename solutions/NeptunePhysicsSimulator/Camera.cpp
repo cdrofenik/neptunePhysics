@@ -61,7 +61,7 @@ void Camera::__UpdateCameraParameters()
 }
 
 Camera::Camera() :	
-	m_position(glm::vec3(0.0f, 0.0f, 3.0f)),
+	m_position(glm::vec3(0.0f, 3.0f, 6.0f)),
 	m_worldUp(glm::vec3(0.0f, 1.0f, 0.0f)),
 	m_front(glm::vec3(0.0f, 0.0f, -1.0f)),
 	m_yaw(YAW), m_pitch(PITCH)

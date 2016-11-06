@@ -9,9 +9,9 @@ public:
     ModelShader(const char * _vertShdrPath, const char * _fragShdrPath);
     ~ModelShader() {};
 
-    void LoadModelMatrix(glm::mat4 matrix_);
-    void LoadViewMatrix(glm::mat4 matrix_);
-    void LoadProjectionMatrix(glm::mat4 matrix_);
+	void LoadModelMatrix(const glm::mat4 &matrix_);
+	void LoadViewMatrix(const glm::mat4 &matrix_);
+	void LoadProjectionMatrix(const glm::mat4 &matrix_);
     void LoadLightPosition(glm::vec3 vector_);
     void LoadLightColor(glm::vec3 color_);
 

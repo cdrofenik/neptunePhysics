@@ -5,8 +5,7 @@
 #include "npParticle.h"
 
 #include "../collision/npRigidBody.h"
-
-#include "math/npVector3.hpp"
+#include "../collision/npDbvt.h"
 
 #include <vector>
 
@@ -20,17 +19,23 @@ namespace NeptunePhysics {
 
 		void stepSimulation(float _deltaTime);
 
-		void addRigidBody(npRigidBody _body);
+		void addRigidBody(npRigidBody _body, npAabb boundingVolume);
 		void addToForceRegistry();
 
 		npRigidBody getRigidBody(int _idx);
 
 	private:
-		npForceRegistry m_registry;
 		std::vector<npRigidBody> m_rigidBodyList = std::vector<npRigidBody>();
+		std::vector<npAabb> m_aabbList = std::vector<npAabb>();
+		int numRigidBodies;
+
+		npForceRegistry m_registry;
 
 		//Force Generators
-		npGravityForce* m_gravityForce;
+		npGravityForce* m_gravityForce; //not real gravity anymore
+
+		//All rigid body tree
+		npDbvt* m_dbvt;
 	};
 }
 #endif

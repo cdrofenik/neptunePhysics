@@ -95,7 +95,6 @@
     <ClCompile Include="npMatrix3x4_Test.cpp" />
     <ClCompile Include="npMatrix3_Test.cpp" />
     <ClCompile Include="npMatrix4_Test.cpp" />
-    <ClCompile Include="npNarrowSearch_Test.cpp" />
     <ClCompile Include="npQuaternion_Test.cpp" />
     <ClCompile Include="npRigidBody_Test.cpp" />
     <ClCompile Include="npVector_Test.cpp" />

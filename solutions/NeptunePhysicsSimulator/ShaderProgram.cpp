@@ -79,7 +79,7 @@ void ShaderProgram::LoadVector3f(GLuint location_, glm::vec3 value_)
     glUniform3fv(location_, 1, glm::value_ptr(value_));
 }
 
-void ShaderProgram::LoadMatrix4f(GLuint location_, glm::mat4 value_)
+void ShaderProgram::LoadMatrix4f(GLuint location_, const glm::mat4 & value_)
 {
     glUniformMatrix4fv(location_, 1, GL_FALSE, glm::value_ptr(value_));
 }

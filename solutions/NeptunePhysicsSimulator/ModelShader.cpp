@@ -17,17 +17,17 @@ void ModelShader::LoadShineVariables(float damper_, float reflectivity_)
     //LoadFloat(m_reflectivity, reflectivity_);
 }
 
-void ModelShader::LoadModelMatrix(glm::mat4 matrix_)
+void ModelShader::LoadModelMatrix(const glm::mat4 &matrix_)
 {
     LoadMatrix4f(m_modelLocation, matrix_);
 }
 
-void ModelShader::LoadViewMatrix(glm::mat4 matrix_)
+void ModelShader::LoadViewMatrix(const glm::mat4 &matrix_)
 {
     LoadMatrix4f(m_viewLocation, matrix_);
 }
 
-void ModelShader::LoadProjectionMatrix(glm::mat4 matrix_)
+void ModelShader::LoadProjectionMatrix(const glm::mat4 &matrix_)
 {
     LoadMatrix4f(m_projectionLocation, matrix_);
 }

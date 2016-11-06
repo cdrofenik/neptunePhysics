@@ -32,9 +32,6 @@
     <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npBVHNode.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionBody.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
@@ -86,23 +83,29 @@
     <ClInclude Include="..\..\include\neptunePhysics\core\npForceGenerator.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="npParticleContact.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="npParticleContactResolver.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3x4.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npQuaternion.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npAabb.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContact.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContactResolver.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npDbvt.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npSortAndSweep.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\collision\npBVHNode.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\collision\npNarrowPhase.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
@@ -118,13 +121,19 @@
     <ClCompile Include="..\..\src\core\npParticle.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="npForceGenerator.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="npParticleContact.cpp">
+    <ClCompile Include="..\..\src\collision\npParticleContact.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="npParticleContactResolver.cpp">
+    <ClCompile Include="..\..\src\collision\npParticleContactResolver.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\collision\npForceGenerator.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\collision\npDbvt.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\collision\npSortAndSweep.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>

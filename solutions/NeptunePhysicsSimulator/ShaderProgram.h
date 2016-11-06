@@ -29,7 +29,7 @@ protected:
 
     void LoadFloat(GLuint location_, float value_);
     void LoadVector3f(GLuint location_, glm::vec3 value_);
-    void LoadMatrix4f(GLuint location_, glm::mat4 value_);
+	void LoadMatrix4f(GLuint location_, const glm::mat4 &value_);
 
     void LoadMatrix4f(GLuint location_, NeptunePhysics::npMatrix4 value_);
 

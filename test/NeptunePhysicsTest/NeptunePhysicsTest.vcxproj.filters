@@ -25,9 +25,6 @@
     <ClCompile Include="npVector_Test.cpp">
       <Filter>Tests\Math</Filter>
     </ClCompile>
-    <ClCompile Include="npNarrowSearch_Test.cpp">
-      <Filter>Tests\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="npLogging_Test.cpp">
       <Filter>Tests\Logging</Filter>
     </ClCompile>

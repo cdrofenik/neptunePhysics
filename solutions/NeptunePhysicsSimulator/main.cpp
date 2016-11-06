@@ -75,30 +75,58 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void initializeObjects(npDiscreteDynamicsWorld* world, const glm::vec3& minValues, const glm::vec3& maxValues)
 {
-    unsigned int rigidBodyCount = 4;
+    unsigned int rigidBodyCount = 2;
 
     npVector3 Pos(0.0f, 2.75f, 0.0f);
     npVector3 veloPos(0, 0, 0);
     npVector3 accelPos(0, 0, 0);
 
     drawableModelList.clear();
-    for (size_t i = 0; i < rigidBodyCount; i++)
-    {
-        npVector3 startPos = Pos + npVector3(i * 1.5f, i * 2.75f, 0.0f);
+    //for (size_t i = 0; i < rigidBodyCount; i++)
+    //{
+    //    npVector3 startPos = Pos + npVector3(i * 1.5f, i * 2.75f, 0.0f);
 
-        npRigidBody tmpBody(5, startPos, veloPos, accelPos);
-        tmpBody.setAngularDamping(0.05f);
-        tmpBody.setLinearDamping(0.011f);
-        world->addRigidBody(tmpBody);
+    //    npRigidBody tmpBody(5, startPos, veloPos, accelPos);
+    //    tmpBody.setAngularDamping(0.05f);
+    //    tmpBody.setLinearDamping(0.011f);
+    //    world->addRigidBody(tmpBody);
 
-        //Adding drawable bounding volume
-        DrawableAABB drawnBody(minValues, maxValues);
-        drawableModelList.push_back(drawnBody);
-    }
+    //    //Adding drawable bounding volume
+    //    DrawableAABB drawnBody(minValues, maxValues);
+    //    drawableModelList.push_back(drawnBody);
+    //}
+    int indexCounter = 2;
+
+    npAabb bodyAabb = npAabb(
+        npVector3(minValues.x, minValues.y, minValues.z),
+        npVector3(maxValues.x, maxValues.y, maxValues.z)
+    );
+
+    npVector3 startPos1 = Pos + npVector3(-2.5f * indexCounter, 0.0f, 0.0f);
+    npRigidBody body1(5, startPos1, veloPos, accelPos);
+    body1.setAngularDamping(0.05f);
+    body1.setLinearDamping(0.011f);
+    body1.addForce(npVector3(0.5f, 0.0f, 0.0f));
+    world->addRigidBody(body1, bodyAabb);
+
+    indexCounter++;
+    npVector3 startPos2 = Pos + npVector3(+2.5f * indexCounter, 0.0f, 0.0f);
+    npRigidBody body2(5, startPos2, veloPos, accelPos);
+    body2.setAngularDamping(0.05f);
+    body2.setLinearDamping(0.011f);
+    body2.addForce(npVector3(-0.5f, 0.0f, 0.0f));
+    world->addRigidBody(body2, bodyAabb);
+
+    //Adding drawable bounding volume
+    DrawableAABB drawnBody1(minValues, maxValues);
+    drawableModelList.push_back(drawnBody1);
+
+    DrawableAABB drawnBody2(minValues, maxValues);
+    drawableModelList.push_back(drawnBody2);
 
     //Earth plane (approx.)
-    npRigidBody _tmpBody(0, npVector3(0.0f, 0.0f, 0.0f), veloPos, accelPos);
-    world->addRigidBody(_tmpBody);
+    /*npRigidBody _tmpBody(0, npVector3(0.0f, 0.0f, 0.0f), veloPos, accelPos);
+    world->addRigidBody(_tmpBody);*/
 
     DrawablePlane tmpPlane(glm::vec3(-50, 0, -50), 100, 100);
     drawableModelList.push_back(tmpPlane);
@@ -136,7 +164,7 @@ int main() {
 
     DisplayManager displayManager(WINDOW_WIDTH, WINDOW_HEIGHT, "Neptune Physics Simulator");
     displayManager.Enable(GL_DEPTH_TEST);
-    displayManager.Enable(GL_CULL_FACE);
+    //displayManager.Enable(GL_CULL_FACE);
     glCullFace(GL_BACK);
 
     //Input handling
@@ -158,7 +186,7 @@ int main() {
     GLuint textureId = textLoader.LoadTexture("..\\..\\external\\resources\\textures\\container.png");
 
     //Loading OBJ mesh
-    auto meshRawModel = objLoader.LoadMesh("..\\..\\external\\resources\\objects\\dragon.obj");
+    auto meshRawModel = objLoader.LoadMesh("..\\..\\external\\resources\\objects\\suzanne.obj");
 
     //Init physics system
     npDiscreteDynamicsWorld* world = new npDiscreteDynamicsWorld();
@@ -188,7 +216,7 @@ int main() {
         }
         
 
-        for (size_t i = 0; i < 5; i++)
+        for (size_t i = 0; i < 2; i++)
         {
             auto rigidBdy = world->getRigidBody(i);
 
