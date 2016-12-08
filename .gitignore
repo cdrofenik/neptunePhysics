@@ -1,13 +1,15 @@
-Generated folder
-===============
+# Generated folder
+##########################
+
 bin/
 external/
 solutions/NeptunePhysics/Debug
 solutions/NeptunePhysicsSimulator/Debug
+test/NeptunePhysicsTest/Debug
 
-=====================================
-Visual Studio generated
-=====================================
+##########################
+# Visual Studio generated
+##########################
 *.exe
 *.ilk
 *.pdb

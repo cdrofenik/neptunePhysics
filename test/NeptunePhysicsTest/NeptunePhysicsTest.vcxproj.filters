@@ -14,6 +14,9 @@
     <Filter Include="Tests\Logging">
       <UniqueIdentifier>{fef2c842-19e6-4d86-bbce-ff619cf2aed6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\Core">
+      <UniqueIdentifier>{95057668-301d-44ca-8810-cbf86b6eb106}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="npMatrix3_Test.cpp">
@@ -36,6 +39,9 @@
     </ClCompile>
     <ClCompile Include="npRigidBody_Test.cpp">
       <Filter>Tests\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="npAlignedArray_Test.cpp">
+      <Filter>Tests\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

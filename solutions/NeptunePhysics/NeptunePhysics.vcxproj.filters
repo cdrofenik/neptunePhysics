@@ -38,9 +38,6 @@
     <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionShape.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npContact.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\collision\npNarrowPhase.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
@@ -102,6 +99,12 @@
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\collision\npSortAndSweep.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\core\npAlignedArray.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npPairManager.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>

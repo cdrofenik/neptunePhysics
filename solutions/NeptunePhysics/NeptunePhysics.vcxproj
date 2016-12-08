@@ -15,13 +15,14 @@
     <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionBody.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionShape.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npContact.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npDbvt.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npNarrowPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npPairManager.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContact.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContactResolver.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npSortAndSweep.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\core\npAlignedArray.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npDiscreteDynamicsWorld.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npForceGenerator.h" />

@@ -6,6 +6,7 @@
 
 #include "../collision/npRigidBody.h"
 #include "../collision/npDbvt.h"
+#include "../collision/npSortAndSweep.h"
 
 #include <vector>
 
@@ -31,11 +32,15 @@ namespace NeptunePhysics {
 
 		npForceRegistry m_registry;
 
+		//Pair Manager
+		npPairManager* m_pairManager;
+
 		//Force Generators
 		npGravityForce* m_gravityForce; //not real gravity anymore
 
 		//All rigid body tree
 		npDbvt* m_dbvt;
+		npSortAndSweep* m_sas;
 	};
 }
 #endif

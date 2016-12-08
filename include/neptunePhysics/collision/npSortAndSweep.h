@@ -1,7 +1,10 @@
-#ifndef NEPTUNE_NPDISCRETEWORLD_H
-#define NEPTUNE_NPDISCRETEWORLD_H
+#ifndef NEPTUNE_NPSORTANDSWEEP_H
+#define NEPTUNE_NPSORTANDSWEEP_H
 
+#include "core/npAlignedArray.h"
 #include "math/npVector3.hpp"
+
+#include "npPairManager.h"
 
 #include "npAabb.h"
 #include "npContact.h"
@@ -10,28 +13,47 @@
 
 namespace NeptunePhysics
 {
-
-	struct SweepObject
+	struct npSweepObject
 	{
-		npVector3 min;
-		npVector3 max;
-		void* data;
+		int min[3];
+		int max[3];
+		int bodyIdx;
+	};
+
+	struct npEndPoint
+	{
+		unsigned int value;
+		int soIndex;
+		bool isMax;
 	};
 
 	class npSortAndSweep
 	{
 	public:
-		npSortAndSweep();
+		npSortAndSweep(npPairManager** _pairManager);
 		~npSortAndSweep();
 
-		//void insert(const npAabb& volume, void* data);
-		//void updateTree(std::vector<npAabbUpdateData> diffList);
-		//void getPotentialContacts(npPotentialContact* contacts);
+		void insert(const npAabb &_volume, const int &_bodyIdx);
+		void update(const npAabb &_volume, const int &_soIdx);
+		void remove(const int &_bodyIdx);
 
 	private:
-		std::vector<SweepObject> xAxisList;
-		std::vector<SweepObject> yAxisList;
-		std::vector<SweepObject> zAxisList;
+		int m_sObjectCounter;
+		int m_ePointCounter;
+		npEndPoint* m_endPoints[3];
+		npAlignedArray<npSweepObject> m_sObjects;
+		npPairManager** ref_pairManager;
+
+		unsigned int quantize(const npReal& _value);
+		bool isColliding(const int &_axis1, const npSweepObject & _so1,
+			const int &_axis2, const npSweepObject &_so2);
+		void checkIfColliding(const int &_axis, const npSweepObject &_activeSo,
+			const npSweepObject &_so, const bool &_adding, bool _updateOverlaps);
+		void sortMinDown(const int &_axis, const int &_startIndex, bool _updateOverlaps);
+		void sortMinUp(const int &_axis, const int &_startIndex, bool _updateOverlaps);
+		void sortMaxDown(const int &_axis, const int &_startIndex, bool _updateOverlaps);
+		void sortMaxUp(const int &_axis, const int &_startIndex, bool _updateOverlaps);
+		void printEndPoints(int axis, int limit);
 	};
 
 }

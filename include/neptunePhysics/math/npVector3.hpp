@@ -14,6 +14,16 @@ namespace NeptunePhysics {
 		npVector3() : x(0), y(0), z(0) {}
 		npVector3(const npReal xx, const  npReal yy, const  npReal zz) : x(xx), y(yy), z(zz) {}
 
+		npReal getValue(int axis) const
+		{
+			if (axis == 0)
+				return x;
+			else if (axis == 1)
+				return y;
+			else
+				return z;
+		}
+
 		/*!
 		Returns square length value without the sqrt
 		*/
@@ -126,7 +136,6 @@ namespace NeptunePhysics {
 				z*v.x - x*v.z,
 				x*v.y - y*v.x);
 		}
-
 	};
 }
 #endif // NEPTUNE_NPVECTOR3_H

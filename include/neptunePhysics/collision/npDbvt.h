@@ -1,8 +1,10 @@
 #ifndef NEPTUNE_NPBVT_H
 #define NEPTUNE_NPBVT_H
 
+#include "../core/npAlignedArray.h"
+
 #include "npAabb.h"
-#include "npContact.h"
+#include "npPairManager.h"
 
 #include <vector>
 
@@ -15,7 +17,7 @@ namespace NeptunePhysics {
 
 		union {
 			npDbvtNode* children[2];
-			void* data;
+			int bodyIdx;
 		};
 
 		bool isLeaf() const { return (children[1] == 0); }
@@ -28,9 +30,9 @@ namespace NeptunePhysics {
 		npDbvt();
 		~npDbvt();
 
-		void insert(const npAabb& volume, void* data);
-		void updateTree(std::vector<npAabbUpdateData> diffList);
-		void getPotentialContacts(npPotentialContact* contacts);
+		void insert(const npAabb &_volume, const int &_data);
+		void updateTree(npAlignedArray<npAabbUpdateData> _diffList);
+		void getPotentialContacts(npPairManager** _pairManager);
 
 		void DebugPrintTree();
 
@@ -39,7 +41,7 @@ namespace NeptunePhysics {
 
 	private:
 		void npDbvt::clean();
-		void recalculateBoundingVolumes(npDbvtNode* node);
+		void recalculateBoundingVolumes(npDbvtNode* _node);
 	};
 
 }

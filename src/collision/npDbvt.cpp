@@ -5,62 +5,65 @@
 namespace NeptunePhysics {
 
 
-	static int indexOf(const npDbvtNode* node)
+	static int indexOf(const npDbvtNode* _node)
 	{
-		return (node->parent->children[1] == node);
+		return (_node->parent->children[1] == _node);
 	}
 
-	static int selectLeaf(const npAabb& volume, const npAabb& leafVol1, const npAabb& leafVol2)
+	static int selectLeaf(const npAabb &_volume, const npAabb &_leafVol1, const npAabb &_leafVol2)
 	{
-		return npProximityAabbAabb(leafVol1, volume) < npProximityAabbAabb(leafVol2, volume) ? 0 : 1;
+		return npProximityAabbAabb(_leafVol1, _volume) < npProximityAabbAabb(_leafVol2, _volume) ? 0 : 1;
 	}
 
-	static npDbvtNode* createNode(npDbvtNode* parent, const npAabb& volume, void* data)
+	static npDbvtNode* createNode(npDbvtNode* _parent, const npAabb &_volume, const int &_bodyIdx)
 	{
 		npDbvtNode* node = new npDbvtNode();
-		node->parent = parent;
-		node->volume = volume;
-		node->data = data;
+		node->parent = _parent;
+		node->volume = _volume;
+		node->bodyIdx = _bodyIdx;
 		node->children[1] = 0;
 		return (node);
 	}
 
-	static npDbvtNode* createInternalNode(npDbvtNode* parent,
-		const npAabb& volume1,
-		const npAabb& volume2,
-		void* data)
+	static npDbvtNode* createInternalNode(npDbvtNode* _parent,
+		const npAabb &_volume1,
+		const npAabb &_volume2,
+		const int &_bodyIdx)
 	{
-		npDbvtNode* node = createNode(parent, volume1, data);
-		npMergeAabbAabb(volume1, volume2, node->volume);
+		npDbvtNode* node = createNode(_parent, _volume1, _bodyIdx);
+		npMergeAabbAabb(_volume1, _volume2, node->volume);
 		return node;
 	}
 
-	static void insertLeaf(npDbvt* pdbvt, npDbvtNode* root, npDbvtNode* leaf)
+	static void insertLeaf(npDbvt* _pdbvt, npDbvtNode* _root, npDbvtNode* _leaf)
 	{
 		//Is tree root set
-		if (!pdbvt->m_root) {
-			pdbvt->m_root = leaf;
-			leaf->parent = 0;
+		if (!_pdbvt->m_root) {
+			_pdbvt->m_root = _leaf;
+			_leaf->parent = 0;
 		}
 		else
 		{
 			//is root an internal node
-			if (!root->isLeaf())
+			if (!_root->isLeaf())
 			{
 				do {
-					root = root->children[selectLeaf(leaf->volume,
-						root->children[0]->volume,
-						root->children[1]->volume)];
-				} while (!root->isLeaf());
+					_root = _root->children[selectLeaf(_leaf->volume,
+						_root->children[0]->volume,
+						_root->children[1]->volume)];
+				} while (!_root->isLeaf());
 			}
-			npDbvtNode* previous = root->parent;
-			npDbvtNode* newInternalNode = createInternalNode(previous, leaf->volume, root->volume, 0);
+			npDbvtNode* previous = _root->parent;
+			npDbvtNode* newInternalNode = createInternalNode(previous,
+				_leaf->volume, _root->volume, 0);
 
 			//does parent exist
 			if (previous) {
-				previous->children[indexOf(root)] = newInternalNode;
-				newInternalNode->children[0] = root; root->parent = newInternalNode;
-				newInternalNode->children[1] = leaf; leaf->parent = newInternalNode;
+				previous->children[indexOf(_root)] = newInternalNode;
+				newInternalNode->children[0] = _root;
+				_root->parent = newInternalNode;
+				newInternalNode->children[1] = _leaf;
+				_leaf->parent = newInternalNode;
 				do {
 					if (!previous->volume.contains(newInternalNode->volume))
 						npMergeAabbAabb(previous->children[0]->volume, previous->children[1]->volume, previous->volume);
@@ -71,106 +74,106 @@ namespace NeptunePhysics {
 				} while (0 != (previous = newInternalNode->parent));
 			}
 			else{
-				newInternalNode->children[0] = root;
-				root->parent = newInternalNode;
-				newInternalNode->children[1] = leaf;
-				leaf->parent = newInternalNode;
-				pdbvt->m_root = newInternalNode;
+				newInternalNode->children[0] = _root;
+				_root->parent = newInternalNode;
+				newInternalNode->children[1] = _leaf;
+				_leaf->parent = newInternalNode;
+				_pdbvt->m_root = newInternalNode;
 			}
 		}
 	}
 
-	static void recursivlyDeleteNode(npDbvtNode* node)
+	static void recursivlyDeleteNode(npDbvtNode* _node)
 	{
-		if (node->isInternal()) {
-			recursivlyDeleteNode(node->children[0]);
-			recursivlyDeleteNode(node->children[1]);
+		if (_node->isInternal()) {
+			recursivlyDeleteNode(_node->children[0]);
+			recursivlyDeleteNode(_node->children[1]);
 		}
 		else {
-			delete node;
+			delete _node;
 		}
 	}
 
-	static npDbvtNode* fetchNode(npDbvt* pdbvt, npDbvtNode* node, npAabb& volume)
+	static npDbvtNode* fetchNode(npDbvt* _pdbvt, npDbvtNode* _node, npAabb& _volume)
 	{
-		npDbvtNode* currentParent = node;
+		npDbvtNode* currentParent = _node;
 		do {
-			auto val =  selectLeaf(volume,
+			auto val = selectLeaf(_volume,
 				currentParent->children[0]->volume,
 				currentParent->children[1]->volume);
 			currentParent = currentParent->children[val];
 		} while (!currentParent->isLeaf());
 
-		return (currentParent->volume.isEqual(volume)) ? currentParent : NP_NULL;
+		return (currentParent->volume.isEqual(_volume)) ? currentParent : NP_NULL;
 	}
 	
-	static void printLeafOrNode(npDbvtNode* node)
+	static void printLeafOrNode(npDbvtNode* _node)
 	{
-		if (node->isLeaf()) {
+		if (_node->isLeaf()) {
 			std::cout << "\\LEAF!" << std::endl;
 		}
 		else {
 			std::cout << "\\NODE - LEFT!" << std::endl;
-			printLeafOrNode(node->children[0]);
+			printLeafOrNode(_node->children[0]);
 
 
 			std::cout << "\\NODE - RIGHT" << std::endl;
-			printLeafOrNode(node->children[1]);
+			printLeafOrNode(_node->children[1]);
 		}
 	}
 
-	static void removeNodeFromTree(npDbvt* pdbvt, npDbvtNode* node)
+	static void removeNodeFromTree(npDbvt* _pdbvt, npDbvtNode* _node)
 	{
-		if (!pdbvt->m_root)
+		if (!_pdbvt->m_root)
 		{
 			return;
 		}
 
-		npDbvtNode* prnt = node->parent;
-		npDbvtNode* activeSibling = (prnt->children[0] == node) ?
+		npDbvtNode* prnt = _node->parent;
+		npDbvtNode* activeSibling = (prnt->children[0] == _node) ?
 			prnt->children[1] : prnt->children[0];
 
 		if (activeSibling)
 		{
 			npDbvtNode* pNode = createNode(prnt->parent,
-				activeSibling->volume, activeSibling->data);
+				activeSibling->volume, activeSibling->bodyIdx);
 			
-			if (pNode->parent == pdbvt->m_root->parent)
+			if (pNode->parent == _pdbvt->m_root->parent)
 			{
-				pdbvt->m_root = pNode;
+				_pdbvt->m_root = pNode;
 			}
 			else
 			{
 				//TODO test if works
 				prnt = pNode;
 				prnt->children[1] = 0;
-				prnt->data = activeSibling->data;
+				prnt->bodyIdx = activeSibling->bodyIdx;
 				prnt->volume = activeSibling->volume;
 				activeSibling->parent = prnt;
 			}
 		}
 	}
 
-	static void DbvtCollision(npPotentialContact* contacts, npDbvtNode* a, npDbvtNode* b)
+	static void DbvtCollision(npPairManager** _pairManager, npDbvtNode* a, npDbvtNode* b)
 	{
 		if (!npTestAabbAabb(a->volume, b->volume)) return;
 		if (a->isLeaf() && b->isLeaf())
 		{
 			//add leaves to potential contacts
-			contacts->bodyA = (npRigidBody*)a->data;
-			contacts->bodyB = (npRigidBody*)b->data;
+			npPairManager* ref = *_pairManager;
+			ref->addPair(a->bodyIdx, b->bodyIdx);
 		}
 		else
 		{
 			if (!a->isLeaf())
 			{
-				DbvtCollision(contacts, a->children[0], b);
-				DbvtCollision(contacts, a->children[1], b);
+				DbvtCollision(_pairManager, a->children[0], b);
+				DbvtCollision(_pairManager, a->children[1], b);
 			}
 			else
 			{
-				DbvtCollision(contacts, a, b->children[0]);
-				DbvtCollision(contacts, a, b->children[1]);
+				DbvtCollision(_pairManager, a, b->children[0]);
+				DbvtCollision(_pairManager, a, b->children[1]);
 			}
 
 		}
@@ -181,32 +184,33 @@ namespace NeptunePhysics {
 		m_root = 0;
 	}
 
-	void npDbvt::insert(const npAabb& volume, void* data)
+	void npDbvt::insert(const npAabb &_volume, const int &_data)
 	{
-		npDbvtNode* newNode = createNode(0, volume, data);
+		npDbvtNode* newNode = createNode(0, _volume, _data);
 		insertLeaf(this, m_root, newNode);
 		++m_leaves;
 	}
 
-	void npDbvt::updateTree(std::vector<npAabbUpdateData> diffList)
+	void npDbvt::updateTree(npAlignedArray<npAabbUpdateData> _diffList)
 	{
-		for (size_t i = 0; i < diffList.size(); i++)
+		for (int i = 0; i < _diffList.size(); i++)
 		{
-			auto node = fetchNode(this, m_root, diffList[i].originalAabb);
+			auto node = fetchNode(this, m_root, _diffList.at(i).originalAabb);
 			if (node) {
 				removeNodeFromTree(this, node);
 
-				npAabb aabb(diffList[i].originalAabb.m_minVec + diffList[i].directionDiff,
-					diffList[i].originalAabb.m_maxVec + diffList[i].directionDiff);
+				auto diffElement = _diffList.at(i);
+				npAabb aabb(diffElement.originalAabb.m_minVec + diffElement.directionDiff,
+					diffElement.originalAabb.m_maxVec + diffElement.directionDiff);
 
-				insert(aabb, node->data);
+				insert(aabb, node->bodyIdx);
 			}
 		}
 	}
 
-	void npDbvt::getPotentialContacts(npPotentialContact* contacts)
+	void npDbvt::getPotentialContacts(npPairManager** _pairManager)
 	{
-		DbvtCollision(contacts, m_root->children[0], m_root->children[1]);
+		DbvtCollision(_pairManager, m_root->children[0], m_root->children[1]);
 	}
 
 	void npDbvt::DebugPrintTree()

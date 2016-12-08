@@ -91,6 +91,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="npAlignedArray_Test.cpp" />
     <ClCompile Include="npLogging_Test.cpp" />
     <ClCompile Include="npMatrix3x4_Test.cpp" />
     <ClCompile Include="npMatrix3_Test.cpp" />
