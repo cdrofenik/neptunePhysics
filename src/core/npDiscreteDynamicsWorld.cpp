@@ -15,10 +15,11 @@ namespace NeptunePhysics
     npDiscreteDynamicsWorld::npDiscreteDynamicsWorld()
     {
         //not real gravity anymore
-        m_gravityForce = new npGravityForce(npVector3(0.0f, -0.0f, 0.0f)); // - 0.009f
+        m_gravityForce = new npGravityForce(npVector3r(0.0f, -0.0f, 0.0f)); // - 0.009f
         m_dbvt = new npDbvt();
         m_pairManager = new npPairManager();
         m_sas = new npSortAndSweep(&m_pairManager);
+        m_grid = new npUniformGrid();
 
         numRigidBodies = 0;
     }
@@ -38,41 +39,27 @@ namespace NeptunePhysics
         for (auto& body : m_rigidBodyList)
         {
             if (body.isAwake()) {
-                npVector3 oldPositiong = body.getPosition();
+                npVector3r oldPositiong = body.getPosition();
                 body.integrate(_deltaTime);
-                npVector3 moveVector = body.getPosition() - oldPositiong;
+                npVector3r moveVector = body.getPosition() - oldPositiong;
 
                 npAabb updatedAabb;
                 updatedAabb.m_minVec = m_aabbList.at(counter).m_minVec + moveVector;
                 updatedAabb.m_maxVec = m_aabbList.at(counter).m_maxVec + moveVector;
-                //m_sas->update(updatedAabb, counter);
+                //m_sas->update(npAabbUpdateData(m_aabbList.at(counter), moveVector), counter);
+                //m_dbvt->update(npAabbUpdateData(m_aabbList.at(counter), moveVector), counter);
+                m_grid->update(npAabbUpdateData(m_aabbList.at(counter), moveVector), counter);
 
-                //Update AABB in tree
+
                 changedAabbList.push_back(npAabbUpdateData(m_aabbList.at(counter), moveVector));
             }
             counter++;
         }
-
-        //changedXValues.bubbleSort(npSortAndSweep::compare);
-
-        //Update tree with list of changed in Aabb
-        m_dbvt->updateTree(changedAabbList);
-        
-        for (int i = 0; i < changedAabbList.size(); i++)
-        {
-            auto currentDiff = changedAabbList[i];
-
-            m_aabbList[i].m_maxVec = currentDiff.originalAabb.m_maxVec +
-                currentDiff.directionDiff;
-            m_aabbList[i].m_minVec = currentDiff.originalAabb.m_minVec +
-                currentDiff.directionDiff;
-        }
         //Update tree
 
         //Broad phase -> get collisions
-        m_dbvt->getPotentialContacts(&m_pairManager);
-
-        //Pair Manager has potential pairs
+        //m_dbvt->getPotentialContacts(&m_pairManager);
+        m_grid->getPotentialContacts(&m_pairManager);
         auto potentialPairs = m_pairManager->getPotentialPairs();
 
         //Narrow phase -> get actual colliding bodies
@@ -87,6 +74,16 @@ namespace NeptunePhysics
             //npPc[i].bodyB->addForce(npVector3(0.5f, 0.0f, 0.0f));
         }
 
+        for (int i = 0; i < changedAabbList.size(); i++)
+        {
+            auto currentDiff = changedAabbList[i];
+
+            m_aabbList[i].m_maxVec = currentDiff.originalAabb.m_maxVec +
+                currentDiff.directionDiff;
+            m_aabbList[i].m_minVec = currentDiff.originalAabb.m_minVec +
+                currentDiff.directionDiff;
+        }
+
         m_registry.updateForces(_deltaTime);
     }
 
@@ -99,7 +96,8 @@ namespace NeptunePhysics
 
         //Insert rigid body's aabb into tree
         //m_sas->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
-        m_dbvt->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
+        //m_dbvt->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
+        m_grid->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
         numRigidBodies++;
     }
 

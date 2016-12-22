@@ -63,7 +63,7 @@ TEST(npQuaternionTest, ROTATE_BY_VECTOR) {
 	EXPECT_FLOAT_EQ(a.j, 2);
 	EXPECT_FLOAT_EQ(a.k, 3);
 
-	npVector3 b(3, 2, 3);
+	npVector3r b(3, 2, 3);
 
 	EXPECT_FLOAT_EQ(b.x, 3);
 	EXPECT_FLOAT_EQ(b.y, 2);
@@ -89,7 +89,7 @@ TEST(npQuaternionTest, ADD_SCALED_VECTOR) {
 	EXPECT_FLOAT_EQ(a.j, 2);
 	EXPECT_FLOAT_EQ(a.k, 3);
 
-	npVector3 b(3, 2, 3);
+	npVector3r b(3, 2, 3);
 
 	EXPECT_FLOAT_EQ(b.x, 3);
 	EXPECT_FLOAT_EQ(b.y, 2);

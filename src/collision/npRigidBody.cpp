@@ -5,8 +5,8 @@
 namespace NeptunePhysics
 {
 
-	static inline void _calculateTransformMatrix(npMatrix3x4& _transformMatrix, const npVector3& _pos,
-		const npQuarternion& _orientation)
+	static inline void _calculateTransformMatrix(npMatrix3x4 &_transformMatrix, const npVector3r &_pos,
+		const npQuarternion &_orientation)
 	{
 		_transformMatrix.m[0] = 1 - (2 * _orientation.j * _orientation.j + 2 * _orientation.k * _orientation.k);
 		_transformMatrix.m[1] = 2 * _orientation.i * _orientation.j + 2 * _orientation.k * _orientation.r;
@@ -24,8 +24,8 @@ namespace NeptunePhysics
 		_transformMatrix.m[11] = _pos.z;
 	}
 
-	static inline void _transformIntertiaTensor(npMatrix3& iitWorld, const npQuarternion& _q,
-		const npMatrix3& iitBody, const npMatrix3x4& _rotMatrix)
+	static inline void _transformIntertiaTensor(npMatrix3 &iitWorld, const npQuarternion &_q,
+		const npMatrix3 &iitBody, const npMatrix3x4 &_rotMatrix)
 	{
 		npReal t4 = _rotMatrix.m[0] * iitBody.m[0] + _rotMatrix.m[1] * iitBody.m[3] +
 			_rotMatrix.m[2] * iitBody.m[6];
@@ -67,7 +67,7 @@ namespace NeptunePhysics
 
 	#pragma region Setters/Getters
 	
-	void npRigidBody::setInverseMass(const npReal& _imass)
+	void npRigidBody::setInverseMass(const npReal &_imass)
 	{
 		m_inverseMass = _imass;
 	}
@@ -77,7 +77,7 @@ namespace NeptunePhysics
 		return m_inverseMass;
 	}
 
-	void npRigidBody::setLinearDamping(const npReal& _linDamp)
+	void npRigidBody::setLinearDamping(const npReal &_linDamp)
 	{
 		m_linearDamping = _linDamp;
 	}
@@ -87,7 +87,7 @@ namespace NeptunePhysics
 		return m_linearDamping;
 	}
 
-	void npRigidBody::setAngularDamping(const npReal& _angDamp)
+	void npRigidBody::setAngularDamping(const npReal &_angDamp)
 	{
 		m_angularDamping = _angDamp;
 	}
@@ -97,47 +97,47 @@ namespace NeptunePhysics
 		return m_angularDamping;
 	}
 
-	void npRigidBody::setPosition(const npVector3& _pos)
+	void npRigidBody::setPosition(const npVector3r &_pos)
 	{
 		m_position = _pos;
 	}
 
-	npVector3 npRigidBody::getPosition() const
+	npVector3r npRigidBody::getPosition() const
 	{
 		return m_position;
 	}
 
-	void npRigidBody::setVelocity(const npVector3& _vel)
+	void npRigidBody::setVelocity(const npVector3r &_vel)
 	{
 		m_velocity = _vel;
 	}
 
-	npVector3 npRigidBody::getVelocity() const
+	npVector3r npRigidBody::getVelocity() const
 	{
 		return m_velocity;
 	}
 
-	void npRigidBody::setAcceleration(const npVector3& _acc)
+	void npRigidBody::setAcceleration(const npVector3r &_acc)
 	{
 		m_acceleration = _acc;
 	}
 
-	npVector3 npRigidBody::getAcceleration() const
+	npVector3r npRigidBody::getAcceleration() const
 	{
 		return m_acceleration;
 	}
 
-	void npRigidBody::setRotation(const npVector3& _rot)
+	void npRigidBody::setRotation(const npVector3r &_rot)
 	{
 		m_rotation = _rot;
 	}
 
-	npVector3 npRigidBody::getRotation() const
+	npVector3r npRigidBody::getRotation() const
 	{
 		return m_rotation;
 	}
 
-	void npRigidBody::setTransformMatrix(const npMatrix3x4& _matrix)
+	void npRigidBody::setTransformMatrix(const npMatrix3x4 &_matrix)
 	{
 		m_transformMatrix = _matrix;
 	}
@@ -148,15 +148,15 @@ namespace NeptunePhysics
 	}
 	#pragma endregion
 
-	void npRigidBody::addForce(const npVector3& force)
+	void npRigidBody::addForce(const npVector3r &force)
 	{
 		m_forceAccum += force;
 		m_isAwake = true;
 	}
 
-	void npRigidBody::addForceAtPoint(const npVector3& force, const npVector3& point)
+	void npRigidBody::addForceAtPoint(const npVector3r &force, const npVector3r &point)
 	{
-		npVector3 pt = point;
+		npVector3r pt = point;
 		pt -= m_position;
 
 		m_forceAccum += force;
@@ -165,15 +165,15 @@ namespace NeptunePhysics
 		m_isAwake = true;
 	}
 
-	void npRigidBody::addForceAtBodyPoint(const npVector3& force, const npVector3& point)
+	void npRigidBody::addForceAtBodyPoint(const npVector3r &force, const npVector3r &point)
 	{
-		npVector3 pt = getPointInWorldSpace(point);
+		npVector3r pt = getPointInWorldSpace(point);
 		addForceAtPoint(force, pt);
 
 		m_isAwake = true;
 	}
 
-	void npRigidBody::setIntertiaTensor(const npMatrix3& inertiaTensor)
+	void npRigidBody::setIntertiaTensor(const npMatrix3 &inertiaTensor)
 	{
 		m_inverseInertiaTensor.setInverse(inertiaTensor);
 	}
@@ -188,12 +188,12 @@ namespace NeptunePhysics
 			m_transformMatrix);
 	}
 
-	npVector3 npRigidBody::getPointInLocalSpace(const npVector3 &point) const
+	npVector3r npRigidBody::getPointInLocalSpace(const npVector3r &point) const
 	{
 		return m_transformMatrix.transformInverse(point);
 	}
 
-	npVector3 npRigidBody::getPointInWorldSpace(const npVector3 &point) const
+	npVector3r npRigidBody::getPointInWorldSpace(const npVector3r &point) const
 	{
 		return m_transformMatrix.transform(point);
 	}
@@ -205,7 +205,7 @@ namespace NeptunePhysics
 		m_lastFrameAcceleration = m_acceleration;
 		m_lastFrameAcceleration.addScaledVector(m_forceAccum, m_inverseMass);
 
-		npVector3 angularAcceleration = m_inverseInertiaTensorWorld.transform(m_torqueAccum);
+		npVector3r angularAcceleration = m_inverseInertiaTensorWorld.transform(m_torqueAccum);
 
 		m_velocity.addScaledVector(m_lastFrameAcceleration, duration);
 		m_rotation.addScaledVector(angularAcceleration, duration);

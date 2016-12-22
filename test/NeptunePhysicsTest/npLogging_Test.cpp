@@ -14,7 +14,7 @@ TEST(npLogging, LoggingTest) {
 
 	//Log_DEBUG("LoggingTest", "float value", 4.3f);
 
-	npVector3 b(1, 2, 3);
+	npVector3r b(1, 2, 3);
 	Log_DEBUG("LoggingTest", "npVector3 b", b);
 
 	npMatrix3 a;

@@ -7,9 +7,9 @@ using namespace NeptunePhysics;
 
 TEST(npVector3Test, ADDITION) {
 
-	npVector3 a(1, 1, 1);
-	npVector3 b(2, 2, 2);
-	npVector3 c = a + b;
+	npVector3r a(1, 1, 1);
+	npVector3r b(2, 2, 2);
+	npVector3r c = a + b;
 
 	EXPECT_FLOAT_EQ(a.x, 1);
 	EXPECT_FLOAT_EQ(a.y, 1);
@@ -36,9 +36,9 @@ TEST(npVector3Test, ADDITION) {
 
 TEST(npVector3Test, SUBTRACTION) {
 
-	npVector3 a(5, 5, 5);
-	npVector3 b(2, 2, 2);
-	npVector3 c = a - b;
+	npVector3r a(5, 5, 5);
+	npVector3r b(2, 2, 2);
+	npVector3r c = a - b;
 
 	EXPECT_FLOAT_EQ(a.x, 5);
 	EXPECT_FLOAT_EQ(a.y, 5);
@@ -66,8 +66,8 @@ TEST(npVector3Test, SUBTRACTION) {
 TEST(npVector3Test, SCALAR_MULTIPLICATION) {
 
 	npReal sc = 0.25f;
-	npVector3 a(5, 5, 5);
-	npVector3 c = a * sc;
+	npVector3r a(5, 5, 5);
+	npVector3r c = a * sc;
 
 	EXPECT_FLOAT_EQ(a.x, 5);
 	EXPECT_FLOAT_EQ(a.y, 5);
@@ -87,13 +87,13 @@ TEST(npVector3Test, SCALAR_MULTIPLICATION) {
 	EXPECT_FLOAT_EQ(c.y, 0.3125f);
 	EXPECT_FLOAT_EQ(c.z, 0.3125f);
 
-	npVector3 t1;
+	npVector3r t1;
 	EXPECT_FLOAT_EQ(t1.x, 0.0f);
 	EXPECT_FLOAT_EQ(t1.y, 0.0f);
 	EXPECT_FLOAT_EQ(t1.z, 0.0f);
 
-	npVector3 t2(0.0, 1.0, 0.0);
-	t2 = (npVector3)(t2 * 0.023f) * 0.01f;
+	npVector3r t2(0.0, 1.0, 0.0);
+	t2 = (npVector3r)(t2 * 0.023f) * 0.01f;
 	EXPECT_FLOAT_EQ(t2.x, 0.0f);
 	EXPECT_FLOAT_EQ(t2.y, 0.00023f);
 	EXPECT_FLOAT_EQ(t2.z, 0.0f);
@@ -102,9 +102,9 @@ TEST(npVector3Test, SCALAR_MULTIPLICATION) {
 
 TEST(npVector3Test, VECTOR_MULTIPLICATION) {
 
-	npVector3 a(5, 4, 3);
-	npVector3 b(2, 1, 8);
-	npVector3 c = a % b;
+	npVector3r a(5, 4, 3);
+	npVector3r b(2, 1, 8);
+	npVector3r c = a % b;
 
 	EXPECT_FLOAT_EQ(a.x, 5);
 	EXPECT_FLOAT_EQ(a.y, 4);
@@ -131,8 +131,8 @@ TEST(npVector3Test, VECTOR_MULTIPLICATION) {
 
 TEST(npVector3Test, VECTOR_VECTOR_TO_SCALAR) {
 
-	npVector3 a(5, 4, 3);
-	npVector3 b(2, 1, 8);
+	npVector3r a(5, 4, 3);
+	npVector3r b(2, 1, 8);
 	npReal c = a * b;
 
 	EXPECT_FLOAT_EQ(a.x, 5);
@@ -148,8 +148,8 @@ TEST(npVector3Test, VECTOR_VECTOR_TO_SCALAR) {
 
 TEST(npVector3Test, COMPONENT_UPDATE) {
 
-	npVector3 a(5, 4, 3);
-	npVector3 b(2, 1, 8);
+	npVector3r a(5, 4, 3);
+	npVector3r b(2, 1, 8);
 	a.componentProductUpdate(b);
 
 	EXPECT_FLOAT_EQ(a.x, 10);
@@ -163,8 +163,8 @@ TEST(npVector3Test, COMPONENT_UPDATE) {
 
 TEST(npVector3Test, ADD_SCALER_VECTOR) {
 
-	npVector3 a(5, 4, 3);
-	npVector3 b(2, 1, 8);
+	npVector3r a(5, 4, 3);
+	npVector3r b(2, 1, 8);
 	npReal c = 2;
 	a.addScaledVector(b, c);
 
@@ -181,7 +181,7 @@ TEST(npVector3Test, ADD_SCALER_VECTOR) {
 
 TEST(npVector3Test, SQUARE_LENGTH) {
 
-	npVector3 a(5, 4, 3);
+	npVector3r a(5, 4, 3);
 	npReal r = a.squareLength();
 
 	EXPECT_FLOAT_EQ(a.x, 5);
@@ -193,7 +193,7 @@ TEST(npVector3Test, SQUARE_LENGTH) {
 
 TEST(npVector3Test, LENGTH) {
 
-	npVector3 a(5, 4, 3);
+	npVector3r a(5, 4, 3);
 	npReal r = a.length();
 
 	EXPECT_FLOAT_EQ(a.x, 5);
@@ -205,7 +205,7 @@ TEST(npVector3Test, LENGTH) {
 
 TEST(npVector3Test, INVERT) {
 
-	npVector3 a(5, 4, 3);
+	npVector3r a(5, 4, 3);
 	a.invert();
 
 	EXPECT_FLOAT_EQ(a.x, -5);
@@ -215,7 +215,7 @@ TEST(npVector3Test, INVERT) {
 
 TEST(npVector3Test, NORMALIZE) {
 
-	npVector3 a(5, 4, 3);
+	npVector3r a(5, 4, 3);
 	a.normalize();
 
 	EXPECT_FLOAT_EQ(a.x, 0.70710677f);
@@ -225,9 +225,9 @@ TEST(npVector3Test, NORMALIZE) {
 
 TEST(npVector3Test, GET_ANGLE_FROM_TWO_VECTORS) {
 
-	npVector3 a1(1, 0, 0);
-	npVector3 a2(1, 1, 0);
-	npVector3 a3(0, 1, 0);
+	npVector3r a1(1, 0, 0);
+	npVector3r a2(1, 1, 0);
+	npVector3r a3(0, 1, 0);
 	npReal r = a1.angle(a3);
 
 	EXPECT_FLOAT_EQ(a1.x, 1.0f);

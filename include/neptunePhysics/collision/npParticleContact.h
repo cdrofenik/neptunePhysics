@@ -9,7 +9,7 @@ namespace NeptunePhysics {
 	{
 	public:
 		npParticle* particle[2];
-		npVector3 contactNormal;
+		npVector3r contactNormal;
 		npReal restitution;
 		npReal penetration;
 

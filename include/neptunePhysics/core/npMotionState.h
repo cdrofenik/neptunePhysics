@@ -13,9 +13,9 @@ namespace NeptunePhysics
 
 		npMatrix4 GetStateMatrix4() { return m_stateMarix; }
 
-		npVector3 GetPosition() { return npVector3(m_stateMarix.m[3], m_stateMarix.m[7], m_stateMarix.m[11]); }
+		npVector3r GetPosition() { return npVector3r(m_stateMarix.m[3], m_stateMarix.m[7], m_stateMarix.m[11]); }
 
-		void ChangePosition(npVector3 _newPosition)
+		void ChangePosition(npVector3r _newPosition)
 		{
 			m_stateMarix.m[3] = _newPosition.x;
 			m_stateMarix.m[7] = _newPosition.y;

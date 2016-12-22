@@ -76,10 +76,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void initializeObjects(npDiscreteDynamicsWorld* world, const glm::vec3& minValues, const glm::vec3& maxValues)
 {
     unsigned int rigidBodyCount = 2;
-
-    npVector3 Pos(0.0f, 2.75f, 0.0f);
-    npVector3 veloPos(0, 0, 0);
-    npVector3 accelPos(0, 0, 0);
+    
+    npVector3r Pos(0.0f, 2.75f, 0.0f);
+    npVector3r veloPos(0, 0, 0);
+    npVector3r accelPos(0, 0, 0);
 
     drawableModelList.clear();
     //for (size_t i = 0; i < rigidBodyCount; i++)
@@ -98,23 +98,23 @@ void initializeObjects(npDiscreteDynamicsWorld* world, const glm::vec3& minValue
     int indexCounter = 2;
 
     npAabb bodyAabb = npAabb(
-        npVector3(minValues.x, minValues.y, minValues.z),
-        npVector3(maxValues.x, maxValues.y, maxValues.z)
+        npVector3r(minValues.x, minValues.y, minValues.z),
+        npVector3r(maxValues.x, maxValues.y, maxValues.z)
     );
 
-    npVector3 startPos1 = Pos + npVector3(-2.5f * indexCounter, 0.0f, 0.0f);
+    npVector3r startPos1 = Pos + npVector3r(-2.5f * indexCounter, 0.0f, 0.0f);
     npRigidBody body1(5, startPos1, veloPos, accelPos);
     body1.setAngularDamping(0.05f);
     body1.setLinearDamping(0.011f);
-    body1.addForce(npVector3(0.5f, 0.0f, 0.0f));
+    body1.addForce(npVector3r(0.5f, 0.0f, 0.0f));
     world->addRigidBody(body1, bodyAabb);
 
     indexCounter++;
-    npVector3 startPos2 = Pos + npVector3(+2.5f * indexCounter, 0.0f, 0.0f);
+    npVector3r startPos2 = Pos + npVector3r(+2.5f * indexCounter, 0.0f, 0.0f);
     npRigidBody body2(5, startPos2, veloPos, accelPos);
     body2.setAngularDamping(0.05f);
     body2.setLinearDamping(0.011f);
-    body2.addForce(npVector3(-0.5f, 0.0f, 0.0f));
+    body2.addForce(npVector3r(-0.5f, 0.0f, 0.0f));
     world->addRigidBody(body2, bodyAabb);
 
     //Adding drawable bounding volume

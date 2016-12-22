@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContactResolver.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npSortAndSweep.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\collision\npUniformGrid.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npAlignedArray.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npDiscreteDynamicsWorld.h" />
@@ -47,6 +48,7 @@
     <ClCompile Include="..\..\src\collision\npParticleContactResolver.cpp" />
     <ClCompile Include="..\..\src\collision\npRigidBody.cpp" />
     <ClCompile Include="..\..\src\collision\npSortAndSweep.cpp" />
+    <ClCompile Include="..\..\src\collision\npUniformGrid.cpp" />
     <ClCompile Include="..\..\src\core\npDiscreteDynamicsWorld.cpp" />
     <ClCompile Include="..\..\src\core\npParticle.cpp" />
   </ItemGroup>

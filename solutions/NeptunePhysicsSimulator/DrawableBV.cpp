@@ -120,7 +120,7 @@ void DrawableSphere::__GenerateSphere(float radius, unsigned int rings, unsigned
 {
 	float const R = 1.0f / (float)(rings - 1.0f);
 	float const S = 1.0f / (float)(sectors - 1.0f);
-	int r, s;
+	unsigned int r, s;
 
 	//m_vertices.resize(rings * sectors * 3 * 3 * 2);
 	for (r = 0; r < rings; r++)

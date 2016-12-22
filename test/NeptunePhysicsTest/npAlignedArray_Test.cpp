@@ -62,3 +62,31 @@ TEST(npAlignedArray, FILL_AND_SORT) {
 		EXPECT_GT(a[i], a[i - 1]);
 	}
 }
+
+TEST(npAlignedArray, CHANGE_VALUES_WITH_POINTER) {
+
+	struct testStruct
+	{
+		testStruct(int val) : value(val) {}
+		int value;
+	};
+
+	npAlignedArray<testStruct> a;
+	a.reserve(20);
+
+	for (size_t i = 0; i < 20; i++)
+	{
+		int value = i;
+		testStruct ts = testStruct(value);
+		a.push_back(ts);
+	}
+
+	testStruct* ref = &a.at(19);
+	ref->value = 21;
+
+	for (size_t i = 1; i < 18; i++)
+	{
+		EXPECT_EQ(a[i].value, i);
+	}
+	EXPECT_EQ(a[19].value, 21);
+}

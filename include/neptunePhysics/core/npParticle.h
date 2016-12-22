@@ -8,8 +8,8 @@ namespace NeptunePhysics {
 	class npParticle
 	{
 	public:
-		npParticle(npVector3 pos, npVector3 velocity,
-			npVector3 acc, npReal damp, npReal inMass) :
+		npParticle(npVector3r pos, npVector3r velocity,
+			npVector3r acc, npReal damp, npReal inMass) :
 			m_position(pos),
 			m_velocity(velocity),
 			m_acceleration(acc),
@@ -20,18 +20,18 @@ namespace NeptunePhysics {
 
 		void integrate(npReal duration);
 
-		void addForce(const npVector3& force);
+		void addForce(const npVector3r& force);
 		void clearAccum();
 
 	//private:
-		npVector3 m_position;
-		npVector3 m_velocity;
-		npVector3 m_acceleration;
+		npVector3r m_position;
+		npVector3r m_velocity;
+		npVector3r m_acceleration;
 
 		npReal m_dampening;
 		npReal m_inverseMass;
 
-		npVector3 m_forceAccum;
+		npVector3r m_forceAccum;
 	};
 }
 

@@ -32,7 +32,7 @@ namespace NeptunePhysics {
 		printf("DEBUG: [%s] %s: (%f, %f) \n", _location, _message, _value.x, _value.y);
 	}
 
-	void Log_DEBUG(const char* _location, const char* _message, const npVector3& _value) {
+	void Log_DEBUG(const char* _location, const char* _message, const npVector3r& _value) {
 		printf("DEBUG: [%s] %s: (%f, %f, %f) \n", _location, _message, _value.x, _value.y, _value.z);
 	}
 

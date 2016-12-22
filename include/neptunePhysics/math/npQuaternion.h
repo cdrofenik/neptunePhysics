@@ -30,8 +30,8 @@ namespace NeptunePhysics {
 			npReal data[4];
 		};
 
-		npQuarternion(const npReal& _r = 0, const npReal& _i = 0,
-			const npReal& _j = 0, const npReal& _k = 0) :
+		npQuarternion(const npReal &_r = 0, const npReal &_i = 0,
+			const npReal &_j = 0, const npReal &_k = 0) :
 			r(_r), i(_i), j(_j), k(_k) {}
 
 		void normalize()
@@ -50,7 +50,7 @@ namespace NeptunePhysics {
 			k *= d;
 		}
 
-		void operator*=(const npQuarternion& _multiplier)
+		void operator*=(const npQuarternion &_multiplier)
 		{
 			npQuarternion result, q  = *this;
 			result.r = q.r * _multiplier.r - q.i * _multiplier.i - q.j * _multiplier.j - q.k * _multiplier.k;
@@ -61,13 +61,13 @@ namespace NeptunePhysics {
 			*this = result;
 		}
 
-		void rotateByVector(const npVector3& _vector)
+		void rotateByVector(const npVector3r &_vector)
 		{
 			npQuarternion q(0, _vector.x, _vector.y, _vector.z);
 			(*this) *= q;
 		}
 
-		void addScaledVector(const npVector3& _vector, const npReal& _scale)
+		void addScaledVector(const npVector3r &_vector, const npReal& _scale)
 		{
 			npQuarternion q(0, _vector.x * _scale, _vector.y * _scale, _vector.z * _scale);
 			q *= *this;

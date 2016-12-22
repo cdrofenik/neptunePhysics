@@ -18,13 +18,13 @@ namespace NeptunePhysics {
 	class npParticleGravity : public npParticleForceGenerator
 	{
 	public:
-		npParticleGravity(npVector3 _gravity) : m_gravity(_gravity) {};
+		npParticleGravity(npVector3r _gravity) : m_gravity(_gravity) {};
 		~npParticleGravity() {};
 		
 		virtual void updateForce(npParticle* particle, npReal duration);
 
 	private:
-		npVector3 m_gravity;
+		npVector3r m_gravity;
 	};
 
 	class npParticleSpring : public npParticleForceGenerator
@@ -46,14 +46,14 @@ namespace NeptunePhysics {
 	class npParticleAnchoredSpring : public npParticleForceGenerator
 	{
 	public:
-		npParticleAnchoredSpring(npVector3 _anchor, npReal _springContant, npReal _length) :
+		npParticleAnchoredSpring(npVector3r _anchor, npReal _springContant, npReal _length) :
 			m_anchor(_anchor), m_springConstant(_springContant), m_restLength(_length) {};
 		~npParticleAnchoredSpring() {};
 
 		virtual void updateForce(npParticle* particle, npReal duration);
 
 	private:
-		npVector3 m_anchor;
+		npVector3r m_anchor;
 		npReal m_springConstant;
 		npReal m_restLength;
 	};
@@ -127,9 +127,9 @@ namespace NeptunePhysics {
 
 	class npGravityForce : public npForceGenerator
 	{
-		npVector3 m_gravity;
+		npVector3r m_gravity;
 	public:
-		npGravityForce(const npVector3 &_gravity) : m_gravity(_gravity) {};
+		npGravityForce(const npVector3r &_gravity) : m_gravity(_gravity) {};
 		virtual void updateForce(npRigidBody *body, npReal duration);
 	};
 

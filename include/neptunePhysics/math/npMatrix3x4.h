@@ -36,9 +36,9 @@ namespace NeptunePhysics {
 			m[8] = a8; m[9] = a9; m[10] = a10; m[11] = a11;
 		}
 
-		npVector3 operator*(const npVector3& _vector) const
+		npVector3r operator*(const npVector3r& _vector) const
 		{
-			return npVector3(
+			return npVector3r(
 				_vector.x * m[0] + _vector.y * m[1] + _vector.z * m[2] + m[3],
 				_vector.x * m[4] + _vector.y * m[5] + _vector.z * m[6] + m[7],
 				_vector.x * m[8] + _vector.y * m[9] + _vector.z * m[10] + m[11]
@@ -96,7 +96,7 @@ namespace NeptunePhysics {
 			m[11] = v4;
 		}
 
-		npVector3 transform(const npVector3& _vector) const
+		npVector3r transform(const npVector3r& _vector) const
 		{
 			return (*this) * _vector;
 		}
@@ -120,31 +120,31 @@ namespace NeptunePhysics {
 			*this = result;
 		}
 
-		void setOrientation(const npQuarternion& q, const npVector3& pos)
+		void setOrientation(const npQuarternion &_q, const npVector3r &_pos)
 		{
-			m[0] = 1 - (2 * q.j * q.j + 2 * q.k * q.k);
-			m[1] = 2 * q.i * q.j + 2 * q.k * q.r;
-			m[2] = 2 * q.i * q.k - 2 * q.j * q.r;
-			m[3] = pos.x;
+			m[0] = 1 - (2 * _q.j * _q.j + 2 * _q.k * _q.k);
+			m[1] = 2 * _q.i * _q.j + 2 * _q.k * _q.r;
+			m[2] = 2 * _q.i * _q.k - 2 * _q.j * _q.r;
+			m[3] = _pos.x;
 
-			m[4] = 2 * q.i * q.j - 2 * q.k * q.r;
-			m[5] = 1 - (2 * q.i * q.i + 2 * q.k * q.k);
-			m[6] = 2 * q.j * q.k + 2 * q.i * q.r;
-			m[7] = pos.y;
+			m[4] = 2 * _q.i * _q.j - 2 * _q.k * _q.r;
+			m[5] = 1 - (2 * _q.i * _q.i + 2 * _q.k * _q.k);
+			m[6] = 2 * _q.j * _q.k + 2 * _q.i * _q.r;
+			m[7] = _pos.y;
 
-			m[8] = 2 * q.i * q.k + 2 * q.j * q.r;
-			m[9] = 2 * q.j * q.k - 2 * q.i * q.r;
-			m[10] = 1 - (2 * q.i * q.i + 2 * q.j * q.j);
-			m[11] = pos.z;
+			m[8] = 2 * _q.i * _q.k + 2 * _q.j * _q.r;
+			m[9] = 2 * _q.j * _q.k - 2 * _q.i * _q.r;
+			m[10] = 1 - (2 * _q.i * _q.i + 2 * _q.j * _q.j);
+			m[11] = _pos.z;
 		}
 
-		npVector3 transformInverse(const npVector3& _vector) const
+		npVector3r transformInverse(const npVector3r &_vector) const
 		{
-			npVector3 tmp = _vector;
+			npVector3r tmp = _vector;
 			tmp.x -= m[3];
 			tmp.x -= m[7];
 			tmp.x -= m[11];
-			return npVector3(
+			return npVector3r(
 				tmp.x * m[0] + tmp.y * m[4] + tmp.z * m[8],
 				tmp.x * m[1] + tmp.y * m[5] + tmp.z * m[9],
 				tmp.x * m[2] + tmp.y * m[6] + tmp.z * m[10]
@@ -152,7 +152,7 @@ namespace NeptunePhysics {
 		}
 	
 	private:
-		npReal getDeterminant(const npMatrix3x4& _rmat) const
+		npReal getDeterminant(const npMatrix3x4 &_rmat) const
 		{
 			npReal v1 = _rmat.m[0] * _rmat.m[5] * _rmat.m[10];
 			npReal v2 = _rmat.m[8] * _rmat.m[1] * _rmat.m[6];
@@ -165,7 +165,7 @@ namespace NeptunePhysics {
 			return v1 + v2 + v3 - v4 - v5 - v6;
 		}
 
-		void setInverse(const npMatrix3x4& _rmat)
+		void setInverse(const npMatrix3x4 &_rmat)
 		{
 			npReal det = getDeterminant(_rmat);
 

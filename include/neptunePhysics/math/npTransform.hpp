@@ -19,13 +19,13 @@ namespace NeptunePhysics {
 	class npTransform
 	{
 	public:
-		npTransform() { m_scale = npVector3(1.0f, 1.0f, 1.0f); m_origin = npVector3(0.0f, 0.0f, 0.0f); m_translation = npVector3(0.0f, 0.0f, 0.0f); }
+		npTransform() { m_scale = npVector3r(1.0f, 1.0f, 1.0f); m_origin = npVector3r(0.0f, 0.0f, 0.0f); m_translation = npVector3r(0.0f, 0.0f, 0.0f); }
 		~npTransform() { }
 
-		void setScale(const npReal& _x, const npReal& _y, const npReal& _z)  { m_scale = npVector3(_x, _y, _z); m_wasChanged = true; }
-		void setOrigin(const npReal& _x, const npReal& _y, const npReal& _z) { m_origin = npVector3(_x, _y, _z); m_wasChanged = true; }
-		void setRotation(const npReal& _alfaX, const npReal& _alfaY, const npReal& _alfaZ) { m_rotation = npVector3(_alfaX, _alfaY, _alfaZ); m_wasChanged = true; }
-		void setTranslation(const npReal& _x, const npReal& _y, const npReal& _z) { m_translation = npVector3(_x, _y, _z); m_wasChanged = true; }
+		void setScale(const npReal& _x, const npReal& _y, const npReal& _z)  { m_scale = npVector3r(_x, _y, _z); m_wasChanged = true; }
+		void setOrigin(const npReal& _x, const npReal& _y, const npReal& _z) { m_origin = npVector3r(_x, _y, _z); m_wasChanged = true; }
+		void setRotation(const npReal& _alfaX, const npReal& _alfaY, const npReal& _alfaZ) { m_rotation = npVector3r(_alfaX, _alfaY, _alfaZ); m_wasChanged = true; }
+		void setTranslation(const npReal& _x, const npReal& _y, const npReal& _z) { m_translation = npVector3r(_x, _y, _z); m_wasChanged = true; }
 
 		/*
 		Returns Model matrix which can be manipulated through setScale, setOrigin and setRotation
@@ -41,10 +41,10 @@ namespace NeptunePhysics {
 
 	private:
 		bool m_wasChanged = false;
-		npVector3 m_scale;
-		npVector3 m_rotation;
-		npVector3 m_origin;
-		npVector3 m_translation;
+		npVector3r m_scale;
+		npVector3r m_rotation;
+		npVector3r m_origin;
+		npVector3r m_translation;
 		npMatrix4 m_finalTransformation;
 
 		npMatrix4 getTranslationMatrix() {

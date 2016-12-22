@@ -10,7 +10,7 @@ namespace NeptunePhysics {
 
 	npReal npParticleContact::calculateSeparatingVelocity() const
 	{
-		npVector3 relativeVelocity = particle[0]->m_velocity;
+		npVector3r relativeVelocity = particle[0]->m_velocity;
 		if (particle[1]) relativeVelocity -= particle[1]->m_velocity;
 		return contactNormal * relativeVelocity;
 	}
@@ -26,7 +26,7 @@ namespace NeptunePhysics {
 
 		npReal newSepVelocity = -separatingVelocity * restitution;
 
-		npVector3 accCausedVelocity = particle[0]->m_acceleration;
+		npVector3r accCausedVelocity = particle[0]->m_acceleration;
 		if (particle[1]) accCausedVelocity -= particle[1]->m_acceleration;
 		npReal accCausedSepVelocity = accCausedVelocity * contactNormal * duration;
 		if (accCausedSepVelocity < 0)
@@ -44,7 +44,7 @@ namespace NeptunePhysics {
 
 		npReal impulse = deltaVelocity / totalInverseMass;
 
-		npVector3 impulsePerMass = contactNormal * impulse;
+		npVector3r impulsePerMass = contactNormal * impulse;
 
 		particle[0]->m_velocity = particle[0]->m_velocity + impulsePerMass * particle[0]->m_inverseMass;
 		if (particle[1])
@@ -62,13 +62,13 @@ namespace NeptunePhysics {
 
 		if (totalInverseMass <= 0) return;
 
-		npVector3 movePerIMass = contactNormal * (penetration / totalInverseMass);
+		npVector3r movePerIMass = contactNormal * (penetration / totalInverseMass);
 
-		npVector3 particleMovement0 = movePerIMass *  particle[0]->m_inverseMass;
-		npVector3 particleMovement1;
+		npVector3r particleMovement0 = movePerIMass *  particle[0]->m_inverseMass;
+		npVector3r particleMovement1;
 		if (particle[1])
 		{
-			npVector3 particleMovement1 = movePerIMass *  -particle[1]->m_inverseMass;
+			npVector3r particleMovement1 = movePerIMass *  -particle[1]->m_inverseMass;
 		}
 
 		particle[0]->m_position = particle[0]->m_position + particleMovement0;

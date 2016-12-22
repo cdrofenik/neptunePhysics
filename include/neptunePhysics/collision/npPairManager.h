@@ -4,6 +4,7 @@
 #include "core/npAlignedArray.h"
 
 namespace NeptunePhysics {
+
 	struct npPotentialPair {
 		/*!
 		Holds the bodies that might be in contact
@@ -15,10 +16,7 @@ namespace NeptunePhysics {
 	class npPairManager
 	{
 	public:
-		npPairManager::npPairManager()
-		{
-			m_potentialPairs = npAlignedArray<npPotentialPair>();
-		}
+		npPairManager::npPairManager() {}
 
 		npPairManager::~npPairManager()
 		{
@@ -51,7 +49,7 @@ namespace NeptunePhysics {
 		}
 
 	private:
-		npAlignedArray<npPotentialPair> m_potentialPairs;
+		npAlignedArray<npPotentialPair> m_potentialPairs = npAlignedArray<npPotentialPair>();
 
 	};
 

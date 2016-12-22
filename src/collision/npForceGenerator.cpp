@@ -10,7 +10,7 @@ namespace NeptunePhysics {
 	{
 		if (particle->m_inverseMass == 0) return;
 
-		npVector3 val = m_gravity * particle->m_inverseMass;
+		npVector3r val = m_gravity * particle->m_inverseMass;
 
 		particle->addForce(val);
 	}
@@ -19,7 +19,7 @@ namespace NeptunePhysics {
 
 	void npParticleSpring::updateForce(npParticle* particle, npReal duration)
 	{
-		npVector3 force;
+		npVector3r force;
 		force = particle->m_position;
 		force -= m_other->m_position;
 
@@ -37,7 +37,7 @@ namespace NeptunePhysics {
 
 	void npParticleAnchoredSpring::updateForce(npParticle* particle, npReal duration)
 	{
-		npVector3 force;
+		npVector3r force;
 		force = particle->m_position;
 		force -= m_anchor;
 
@@ -54,7 +54,7 @@ namespace NeptunePhysics {
 
 	void npParticleBungee::updateForce(npParticle* particle, npReal duration)
 	{
-		npVector3 force;
+		npVector3r force;
 		force = particle->m_position;
 		force -= m_other->m_position;
 
@@ -77,7 +77,7 @@ namespace NeptunePhysics {
 
 		if (depth >= m_waterHeight + m_maxDepth) return;
 
-		npVector3 force;
+		npVector3r force;
 
 		if (depth <= m_waterHeight - m_maxDepth)
 		{
@@ -128,7 +128,7 @@ namespace NeptunePhysics {
 	{
 		if (_body->getInverseMass() == 0) return;
 
-		npVector3 val = m_gravity * _body->getInverseMass();
+		npVector3r val = m_gravity * _body->getInverseMass();
 
 		_body->addForce(val);
 	}

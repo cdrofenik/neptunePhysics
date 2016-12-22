@@ -94,7 +94,7 @@ namespace NeptunePhysics {
 		}
 	}
 
-	static npDbvtNode* fetchNode(npDbvt* _pdbvt, npDbvtNode* _node, npAabb& _volume)
+	static npDbvtNode* fetchNode(npDbvt* _pdbvt, npDbvtNode* _node, const npAabb &_volume)
 	{
 		npDbvtNode* currentParent = _node;
 		do {
@@ -184,28 +184,29 @@ namespace NeptunePhysics {
 		m_root = 0;
 	}
 
-	void npDbvt::insert(const npAabb &_volume, const int &_data)
+	void npDbvt::insert(const npAabb &_volume, const int &_bodyIdx)
 	{
-		npDbvtNode* newNode = createNode(0, _volume, _data);
+		npDbvtNode* newNode = createNode(0, _volume, _bodyIdx);
 		insertLeaf(this, m_root, newNode);
 		++m_leaves;
 	}
 
-	void npDbvt::updateTree(npAlignedArray<npAabbUpdateData> _diffList)
+	void npDbvt::update(const npAabbUpdateData &_volumeData, const int &_bodyIdx)
 	{
-		for (int i = 0; i < _diffList.size(); i++)
-		{
-			auto node = fetchNode(this, m_root, _diffList.at(i).originalAabb);
-			if (node) {
-				removeNodeFromTree(this, node);
+		auto node = fetchNode(this, m_root, _volumeData.originalAabb);
+		if (node) {
+			removeNodeFromTree(this, node);
 
-				auto diffElement = _diffList.at(i);
-				npAabb aabb(diffElement.originalAabb.m_minVec + diffElement.directionDiff,
-					diffElement.originalAabb.m_maxVec + diffElement.directionDiff);
+			npAabb aabb(_volumeData.originalAabb.m_minVec + _volumeData.directionDiff,
+				_volumeData.originalAabb.m_maxVec + _volumeData.directionDiff);
 
-				insert(aabb, node->bodyIdx);
-			}
+			insert(aabb, node->bodyIdx);
 		}
+	}
+
+	void npDbvt::remove(const npAabb &_volume, const int &_bodyIdx)
+	{
+		//TODO: implement
 	}
 
 	void npDbvt::getPotentialContacts(npPairManager** _pairManager)

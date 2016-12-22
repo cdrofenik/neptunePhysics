@@ -13,7 +13,7 @@ namespace NeptunePhysics {
 		m_position.addScaledVector(m_velocity, duration);
 
 		//Update acceleration
-		npVector3 resultingAcc = m_acceleration;
+		npVector3r resultingAcc = m_acceleration;
 		resultingAcc.addScaledVector(m_forceAccum, duration);
 
 		//Update velocity
@@ -25,11 +25,11 @@ namespace NeptunePhysics {
 		clearAccum();
 	}
 
-	void npParticle::addForce(const npVector3& force) {
+	void npParticle::addForce(const npVector3r &force) {
 		m_forceAccum += force;
 	}
 
 	void npParticle::clearAccum() {
-		m_forceAccum = npVector3(0, 0, 0);
+		m_forceAccum = npVector3r(0, 0, 0);
 	}
 }

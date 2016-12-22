@@ -1,6 +1,8 @@
 #ifndef NEPTUNE_NPALIGNEDARRAY_H
 #define NEPTUNE_NPALIGNEDARRAY_H
 
+#include <malloc.h>
+
 namespace NeptunePhysics
 {
 	template<typename T>
@@ -22,8 +24,11 @@ namespace NeptunePhysics
 		void copy(int _start, int _end, T* destination) const
 		{
 			int i;
-			for (i = _start; i<_end; ++i)
-				new (&destination[i]) T(m_data[i]);
+			for (i = _start; i < _end; ++i)
+			{
+				destination[i] = T(m_data[i]);
+			}
+				
 		}
 
 		void destroy(int _first, int _last)
@@ -32,7 +37,6 @@ namespace NeptunePhysics
 			{
 				m_data[i].~T();
 			}
-		
 		}
 		
 		void* allocate(int _size)
@@ -135,7 +139,7 @@ namespace NeptunePhysics
 				reserve(getAllocationSize(size()));
 			}
 
-			new (&m_data[m_size]) T(_value);
+			m_data[m_size] = T(_value);
 			m_size++;
 		}
 
@@ -169,7 +173,6 @@ namespace NeptunePhysics
 			init();
 		}
 
-		//Sorting algorithms
 		void bubbleSort(bool(*compareFunc)(T, T))
 		{
 			int sz = size();

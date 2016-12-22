@@ -7,14 +7,15 @@
 
 namespace NeptunePhysics {
 
+	template<typename T>
 	class npVector3 {
 
 	public:
-		npReal x, y, z;
+		T x, y, z;
 		npVector3() : x(0), y(0), z(0) {}
-		npVector3(const npReal xx, const  npReal yy, const  npReal zz) : x(xx), y(yy), z(zz) {}
+		npVector3(const T &xx, const T &yy, const T &zz) : x(xx), y(yy), z(zz) {}
 
-		npReal getValue(int axis) const
+		T getValue(int axis) const
 		{
 			if (axis == 0)
 				return x;
@@ -27,21 +28,24 @@ namespace NeptunePhysics {
 		/*!
 		Returns square length value without the sqrt
 		*/
-		npReal squareLength() {
+		T squareLength()
+		{
 			return (x * x) + (y * y) + (z * z);
 		}
 
 		/*!
 		Returns the length of this vector.
 		*/
-		npReal length() const {
+		T length() const
+		{
 			return sqrt((x * x) + (y * y) + (z * z));
 		}
 
 		/*!
 		Inverts the vector values.
 		*/
-		void invert() {
+		void invert()
+		{
 			x = -x;
 			y = -y;
 			z = -z;
@@ -50,7 +54,8 @@ namespace NeptunePhysics {
 		/*!
 		Normalizes the vector = vector / length
 		*/
-		npVector3& normalize() {
+		npVector3<T>& normalize()
+		{
 			const float l = sqrt(x * x + y * y + z * z);
 
 			x /= l;
@@ -64,7 +69,8 @@ namespace NeptunePhysics {
 		\param vector a referenced Vector3.
 		\param scale a scale with a real value.
 		*/
-		void addScaledVector(const npVector3& v, const npReal& scale) {
+		void addScaledVector(const npVector3<T> &v, const T &scale)
+		{
 			x += v.x * scale;
 			y += v.y * scale;
 			z += v.z * scale;
@@ -73,7 +79,8 @@ namespace NeptunePhysics {
 		/*!
 		\param vector a referenced Vector3.
 		*/
-		void componentProductUpdate(const npVector3& v) {
+		void componentProductUpdate(const npVector3<T> &v)
+		{
 			x *= v.x;
 			y *= v.y;
 			z *= v.z;
@@ -82,60 +89,69 @@ namespace NeptunePhysics {
 		/*!
 		Angle between two vectors in degrees
 		*/
-		npReal angle(const npVector3& v) {
+		T angle(const npVector3<T> &v)
+		{
 			auto top = (x * v.x) + (y * v.y) + (z * v.z);
 			auto bottom = this->length() * v.length();
-			return (npReal)(acos(top / bottom) * (180 / NP_PI));
+			return (T)(acos(top / bottom) * (180 / NP_PI));
 		}
 
-		void operator+=(const npVector3& v) {
+		void operator+=(const npVector3<T> &v) {
 			x += v.x;
 			y += v.y;
 			z += v.z;
 		}
 
-		void operator-=(const npVector3& v) {
+		void operator-=(const npVector3<T> &v) {
 			x -= v.x;
 			y -= v.y;
 			z -= v.z;
 		}
 
-		void operator*=(const npReal& v) {
+		void operator*=(const T &v) {
 			x *= v;
 			y *= v;
 			z *= v;
 		}
 
-		void operator%=(const npVector3& v) {
-			npVector3 r(y*v.z - z*v.y, z*v.x - x*v.z, x*v.y - y*v.x);
+		bool operator!=(const npVector3<T> &v) {
+			return x != v.x || y != v.y || z != v.z;
+		}
+
+		void operator%=(const npVector3<T> &v) {
+			npVector3<T> r(y*v.z - z*v.y, z*v.x - x*v.z, x*v.y - y*v.x);
 			(*this) = r;
 		}
 
-		npVector3 operator+(const npVector3& v) const {
+		npVector3<T> operator+(const npVector3<T> &v) const {
 			return npVector3(x + v.x, y + v.y, z + v.z);
 		}
 
-		npVector3 operator-(const npVector3& v) const {
+		npVector3<T> operator-(const npVector3<T> &v) const {
 			return npVector3(x - v.x, y - v.y, z - v.z);
 		}
 
-		npVector3 operator*(const npReal& v) const {
+		npVector3<T> operator*(const T &v) const {
 			return npVector3(x * v, y * v, z * v);
 		}
 
-		npReal operator*(npVector3& v) const {
+		npReal operator*(npVector3<T> &v) const {
 			return (x * v.x) + (y * v.y) + (z * v.z);
 		}
 
 		/*!
 		Returns cross product between two vectors
 		*/
-		npVector3 operator%(const npVector3& v) const {
-			return npVector3(
+		npVector3<T> operator%(const npVector3<T> &v) const {
+			return npVector3<T>(
 				y*v.z - z*v.y,
 				z*v.x - x*v.z,
 				x*v.y - y*v.x);
 		}
 	};
+
+	typedef npVector3<npReal> npVector3r;
+	typedef npVector3<int> npVector3i;
+	typedef npVector3<unsigned int> npVector3ui;
 }
 #endif // NEPTUNE_NPVECTOR3_H

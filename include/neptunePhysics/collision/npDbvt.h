@@ -3,10 +3,7 @@
 
 #include "../core/npAlignedArray.h"
 
-#include "npAabb.h"
-#include "npPairManager.h"
-
-#include <vector>
+#include "npBroadPhase.h"
 
 namespace NeptunePhysics {
 
@@ -24,15 +21,16 @@ namespace NeptunePhysics {
 		bool isInternal() const { return (!isLeaf()); }
 	};
 
-	class npDbvt
+	class npDbvt : public npIBroadPhase
 	{
 	public:
 		npDbvt();
 		~npDbvt();
 
-		void insert(const npAabb &_volume, const int &_data);
-		void updateTree(npAlignedArray<npAabbUpdateData> _diffList);
-		void getPotentialContacts(npPairManager** _pairManager);
+		virtual void insert(const npAabb &_volume, const int &_bodyIdx);
+		virtual void update(const npAabbUpdateData &_volumeData, const int &_bodyIdx);
+		virtual void remove(const npAabb &_volume, const int &_bodyIdx);
+		virtual void getPotentialContacts(npPairManager** _pairManager);
 
 		void DebugPrintTree();
 

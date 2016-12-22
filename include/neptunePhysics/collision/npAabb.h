@@ -9,17 +9,17 @@ namespace NeptunePhysics {
 
 	public:
 		//float m_min[3];
-		npVector3 m_minVec;
+		npVector3r m_minVec;
 
 		//float m_max[3];
-		npVector3 m_maxVec;
+		npVector3r m_maxVec;
 
 		npAabb() {
-			m_minVec = npVector3(0, 0, 0);
-			m_maxVec = npVector3(0, 0, 0);
+			m_minVec = npVector3r(0, 0, 0);
+			m_maxVec = npVector3r(0, 0, 0);
 		}
 
-		npAabb(const npVector3 &minValues, const npVector3 &maxValues) : m_minVec(minValues),
+		npAabb(const npVector3r &minValues, const npVector3r &maxValues) : m_minVec(minValues),
 			m_maxVec(maxValues) {}
 
 		npReal getSize() const {
@@ -43,14 +43,27 @@ namespace NeptunePhysics {
 				m_maxVec.y == volume.m_maxVec.y &&
 				m_maxVec.z == volume.m_maxVec.z);
 		}
+
+		npVector3r getCenter() const {
+			return npVector3r((m_minVec.x + m_maxVec.x) / 2, (m_minVec.y + m_maxVec.y) / 2,
+				(m_minVec.y + m_maxVec.y) / 2);
+		}
+
+		npVector3r getTopLeft() const {
+			return npVector3r(m_minVec.x, m_maxVec.y, m_minVec.z);
+		}
+
+		npVector3r getAabbSize() const {
+			return m_maxVec - m_minVec;
+		}
 	};
 
 	struct npAabbUpdateData
 	{
 		npAabb originalAabb;
-		npVector3 directionDiff;
+		npVector3r directionDiff;
 
-		npAabbUpdateData(npAabb a, npVector3 b) :
+		npAabbUpdateData(npAabb a, npVector3r b) :
 			originalAabb(a),
 			directionDiff(b) {}
 	};
@@ -85,7 +98,7 @@ namespace NeptunePhysics {
 
 	__forceinline npReal npProximityAabbAabb(const npAabb& a, const npAabb& b)
 	{
-		npVector3 d = (a.m_minVec + a.m_maxVec) - (b.m_minVec + b.m_maxVec);
+		npVector3r d = (a.m_minVec + a.m_maxVec) - (b.m_minVec + b.m_maxVec);
 		return fabsf(d.x) + fabsf(d.y) + fabsf(d.z);
 	}
 }

@@ -131,7 +131,7 @@ TEST(npMatrix3x4Test, MULTIPLICATION) {
 
 TEST(npMatrix3x4Test, VECTOR_MULTIPLICATION) {
 
-	npVector3 c, b(1, 2, 3);
+	npVector3r c, b(1, 2, 3);
 	npMatrix3x4 a(1, 1, 2, 3, 1, 1, 1, 11, 1, 3, 1, 3);
 	c = a * b;
 
@@ -241,7 +241,7 @@ TEST(npMatrix3x4Test, INVERSE) {
 TEST(npMatrix3x4Test, SET_ORIENTATION) {
 	npMatrix3x4 a(1, 0, 9, -4, 2, -1, -2, 7, 0, 1, 3, -3);
 	npQuarternion q(4, 0.5f, 1, 0.7f);
-	npVector3 translation(1, 2, 3);
+	npVector3r translation(1, 2, 3);
 
 	EXPECT_FLOAT_EQ(a.m[0], 1);
 	EXPECT_FLOAT_EQ(a.m[1], 0);
@@ -293,7 +293,7 @@ TEST(npMatrix3x4Test, TRANSFORM_INVERSE) {
 
 	//za 3x3 matriko uporabi realna stevila za rotacijske vrednosti
 	npMatrix3x4 a(1, 0, 9, -4, 2, -1, -2, 7, 0, 1, 3, -3);
-	npVector3 translation(1, 2, 3);
+	npVector3r translation(1, 2, 3);
 
 	EXPECT_FLOAT_EQ(a.m[0], 1);
 	EXPECT_FLOAT_EQ(a.m[1], 0);
@@ -314,7 +314,7 @@ TEST(npMatrix3x4Test, TRANSFORM_INVERSE) {
 	EXPECT_FLOAT_EQ(translation.y, 2);
 	EXPECT_FLOAT_EQ(translation.z, 3);
 
-	npVector3 c = a.transformInverse(translation);
+	npVector3r c = a.transformInverse(translation);
 
 	EXPECT_FLOAT_EQ(a.m[0], 1);
 	EXPECT_FLOAT_EQ(a.m[1], 0);

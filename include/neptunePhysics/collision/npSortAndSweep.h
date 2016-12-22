@@ -2,14 +2,8 @@
 #define NEPTUNE_NPSORTANDSWEEP_H
 
 #include "core/npAlignedArray.h"
-#include "math/npVector3.hpp"
 
-#include "npPairManager.h"
-
-#include "npAabb.h"
-#include "npContact.h"
-
-#include <vector>
+#include "npBroadPhase.h"
 
 namespace NeptunePhysics
 {
@@ -27,15 +21,16 @@ namespace NeptunePhysics
 		bool isMax;
 	};
 
-	class npSortAndSweep
+	class npSortAndSweep : public npIBroadPhase
 	{
 	public:
 		npSortAndSweep(npPairManager** _pairManager);
 		~npSortAndSweep();
 
-		void insert(const npAabb &_volume, const int &_bodyIdx);
-		void update(const npAabb &_volume, const int &_soIdx);
-		void remove(const int &_bodyIdx);
+		virtual void insert(const npAabb &_volume, const int &_bodyIdx);
+		virtual void update(const npAabbUpdateData &_volumeData, const int &_bodyIdx);
+		virtual void remove(const npAabb &_volume, const int &_bodyIdx);
+		virtual void getPotentialContacts(npPairManager** _pairManager) {}
 
 	private:
 		int m_sObjectCounter;

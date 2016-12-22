@@ -281,7 +281,7 @@ TEST(npMatrix3Test, VECTOR_MULTIPLICATION) {
 	EXPECT_FLOAT_EQ(a.m[7], 1);
 	EXPECT_FLOAT_EQ(a.m[8], 1);
 
-	npVector3 b(3.0f, 2.0f, 5.0f);
+	npVector3r b(3.0f, 2.0f, 5.0f);
 
 	EXPECT_FLOAT_EQ(b.x, 3);
 	EXPECT_FLOAT_EQ(b.y, 2);
@@ -309,7 +309,7 @@ TEST(npMatrix3Test, VECTOR_TRANSFORM) {
 	EXPECT_FLOAT_EQ(a.m[7], 0);
 	EXPECT_FLOAT_EQ(a.m[8], 2);
 
-	npVector3 b(3.0f, 2.0f, 5.0f);
+	npVector3r b(3.0f, 2.0f, 5.0f);
 
 	EXPECT_FLOAT_EQ(b.x, 3);
 	EXPECT_FLOAT_EQ(b.y, 2);
