@@ -2,7 +2,7 @@
 #define NEPTUNE_NPMATRIX4_H
 
 #include "npMatrix3.hpp"
-#include "npMatrix3x4.h"
+#include "npMatrix3x4.hpp"
 
 #ifdef NO_NeptunePhysics_DLL
 #define NEPTUNE_PHYSICS_API

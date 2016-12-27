@@ -1,149 +1,126 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Math">
-      <UniqueIdentifier>{a211293e-e15e-4553-ac47-99993a3a44f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Collision">
+    <Filter Include="Collision">
       <UniqueIdentifier>{e4c437c2-21a8-436c-8fc0-dc3f3612fb2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Collision">
-      <UniqueIdentifier>{f9301944-a2d0-45e4-b9ef-23273c319189}</UniqueIdentifier>
+    <Filter Include="Collision\BroadPhase">
+      <UniqueIdentifier>{0c25b09a-358f-4875-92e8-2d478d24236f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Logging">
-      <UniqueIdentifier>{6a4804c9-768b-455a-9de1-fe3dfcc7faf0}</UniqueIdentifier>
+    <Filter Include="Collision\NarrowPhase">
+      <UniqueIdentifier>{dad407b8-909e-40f3-9e45-7fcd2dc028c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core">
+    <Filter Include="Collision\CollisionShapes">
+      <UniqueIdentifier>{437ec132-6074-4657-be14-c2cef951045d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
       <UniqueIdentifier>{5b2a63d0-0d2f-4dec-9319-9a3efd61482d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{c8515d16-fe96-489e-8602-926c73d754f4}</UniqueIdentifier>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{6a4804c9-768b-455a-9de1-fe3dfcc7faf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{a211293e-e15e-4553-ac47-99993a3a44f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dynamics">
+      <UniqueIdentifier>{9353a8d0-1c37-4819-8783-1dc4428052b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npBroadPhase.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionBody.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npCollisionShape.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npNarrowPhase.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npRigidBody.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3.hpp">
-      <Filter>Header Files\Math</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix4.hpp">
-      <Filter>Header Files\Math</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npPrecision.hpp">
-      <Filter>Header Files\Math</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npTransform.hpp">
-      <Filter>Header Files\Math</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector2.hpp">
-      <Filter>Header Files\Math</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\math\npVector3.hpp">
-      <Filter>Header Files\Math</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\logging\npLogging.hpp">
-      <Filter>Header Files\Logging</Filter>
+      <Filter>Logging</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\core\npDiscreteDynamicsWorld.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\core\npMotionState.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\core\npParticle.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\core\npForceGenerator.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3x4.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\math\npQuaternion.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npAabb.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContact.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npParticleContactResolver.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npDbvt.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npSortAndSweep.h">
-      <Filter>Header Files\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\core\npAlignedArray.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\collision\npPairManager.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\collision\npUniformGrid.h">
-      <Filter>Header Files\Collision</Filter>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npBroadPhase.h">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npDbvt.h">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npSortAndSweep.h">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npUniformGrid.h">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\NarrowPhase\npNarrowPhase.h">
+      <Filter>Collision\NarrowPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Dynamics\npParticle.h">
+      <Filter>Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Dynamics\npRigidBody.h">
+      <Filter>Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npAabb.h">
+      <Filter>Collision\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npCollisionShape.h">
+      <Filter>Collision\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Math\npMatrix3x4.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Math\npQuaternion.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Core\npAlignedArray.hpp">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\collision\npNarrowPhase.cpp">
-      <Filter>Source Files\Collision</Filter>
+    <ClCompile Include="..\..\src\Collision\BroadPhase\npDbvt.cpp">
+      <Filter>Collision\BroadPhase</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\collision\npBroadPhase.cpp">
-      <Filter>Source Files\Collision</Filter>
+    <ClCompile Include="..\..\src\Collision\BroadPhase\npSortAndSweep.cpp">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Collision\BroadPhase\npUniformGrid.cpp">
+      <Filter>Collision\BroadPhase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\npDiscreteDynamicsWorld.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\collision\npRigidBody.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\npParticle.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\collision\npParticleContact.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\collision\npParticleContactResolver.cpp">
-      <Filter>Source Files\Collision</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\collision\npForceGenerator.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\collision\npDbvt.cpp">
-      <Filter>Source Files\Collision</Filter>
+    <ClCompile Include="..\..\src\Dynamics\npParticle.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\collision\npSortAndSweep.cpp">
-      <Filter>Source Files\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\collision\npUniformGrid.cpp">
-      <Filter>Source Files\Collision</Filter>
+    <ClCompile Include="..\..\src\Dynamics\npRigidBody.cpp">
+      <Filter>Dynamics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

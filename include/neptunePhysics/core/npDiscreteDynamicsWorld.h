@@ -2,12 +2,13 @@
 #define NEPTUNE_NPDISCRETEWORLD_H
 
 #include "npForceGenerator.h"
-#include "npParticle.h"
 
-#include "../collision/npRigidBody.h"
-#include "../collision/npDbvt.h"
-#include "../collision/npSortAndSweep.h"
-#include "../collision/npUniformGrid.h"
+#include "../Collision/CollisionShapes/npAabb.h"
+#include "../Dynamics/npParticle.h"
+#include "../Dynamics/npRigidBody.h"
+#include "../Collision/BroadPhase/npDbvt.h"
+#include "../Collision/BroadPhase/npSortAndSweep.h"
+#include "../Collision/BroadPhase/npUniformGrid.h"
 
 #include <vector>
 

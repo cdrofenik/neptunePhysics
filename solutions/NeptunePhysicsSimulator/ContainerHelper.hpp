@@ -1,7 +1,7 @@
 #ifndef CONTAINERHELPER_HPP
 #define CONTAINERHELPER_HPP
 
-#include "math/npMatrix3x4.h"
+#include "math/npMatrix3x4.hpp"
 #include "math/npMatrix4.hpp"
 
 #include <GL\glew.h>

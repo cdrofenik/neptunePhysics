@@ -1,7 +1,7 @@
 #include "gtest\gtest.h"
 
 #include "neptunePhysics/math/npVector3.hpp"
-#include "neptunePhysics/math/npMatrix3x4.h"
+#include "neptunePhysics/math/npMatrix3x4.hpp"
 
 using namespace NeptunePhysics;
 

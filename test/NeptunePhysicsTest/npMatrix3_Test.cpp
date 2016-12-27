@@ -2,7 +2,7 @@
 
 #include "neptunePhysics/math/npPrecision.hpp"
 #include "neptunePhysics/math/npMatrix3.hpp"
-#include "neptunePhysics/math/npQuaternion.h"
+#include "neptunePhysics/math/npQuaternion.hpp"
 
 using namespace NeptunePhysics;
 

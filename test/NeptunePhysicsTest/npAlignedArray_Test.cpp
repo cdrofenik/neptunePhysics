@@ -1,6 +1,6 @@
 #include "gtest\gtest.h"
 
-#include "neptunePhysics/core/npAlignedArray.h"
+#include "neptunePhysics/core/npAlignedArray.hpp"
 
 #include <iostream>
 

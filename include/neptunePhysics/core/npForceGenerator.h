@@ -1,9 +1,8 @@
 #ifndef NEPTUNE_NPFORCEGENERATOR_H
 #define NEPTUNE_NPFORCEGENERATOR_H
 
-#include "npParticle.h"
-
-#include "../collision/npRigidBody.h"
+#include "../Dynamics/npParticle.h"
+#include "../Dynamics/npRigidBody.h"
 
 #include <vector>
 

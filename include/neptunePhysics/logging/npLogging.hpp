@@ -1,9 +1,9 @@
 #ifndef NEPTUNE_NPLOGGING_H
 #define NEPTUNE_NPLOGGING_H
 
-#include "math/npMatrix4.hpp"
-#include "math/npVector2.hpp"
-#include "math/npVector3.hpp"
+#include "Math/npMatrix4.hpp"
+#include "Math/npVector2.hpp"
+#include "Math/npVector3.hpp"
 
 #include <iostream>
 

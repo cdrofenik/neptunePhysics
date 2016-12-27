@@ -1,10 +1,10 @@
 #include "main.h"
 
 // Neptune Physics
-#include "neptunePhysics/math/npTransform.hpp"
-#include "neptunePhysics/collision/npCollisionShape.h"
-#include "neptunePhysics/core/npDiscreteDynamicsWorld.h"
-#include "neptunePhysics/collision/npRigidBody.h"
+#include "neptunePhysics/Math/npTransform.hpp"
+#include "neptunePhysics/Collision/CollisionShapes/npCollisionShape.h"
+#include "neptunePhysics/Core/npDiscreteDynamicsWorld.h"
+#include "neptunePhysics/Dynamics/npRigidBody.h"
 
 // Logging
 #include "logging\npLogging.hpp"

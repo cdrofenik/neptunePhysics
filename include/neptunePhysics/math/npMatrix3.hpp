@@ -3,7 +3,7 @@
 
 #include "npPrecision.hpp"
 #include "npVector3.hpp"
-#include "npQuaternion.h"
+#include "npQuaternion.hpp"
 
 #ifdef NO_NeptunePhysics_DLL
 #define NEPTUNE_PHYSICS_API

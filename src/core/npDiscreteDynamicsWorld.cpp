@@ -1,13 +1,10 @@
-#include "core/npDiscreteDynamicsWorld.h"
-//#include "core/npForceGenerator.h"
+#include "Core/npDiscreteDynamicsWorld.h"
+#include "Core/npAlignedArray.hpp"
 
 #include "math/npVector3.hpp"
 #include "math/npTransform.hpp"
 
-#include "collision/npAabb.h"
-#include "collision/npContact.h"
-
-#include "core/npAlignedArray.h"
+#include "Collision/CollisionShapes/npAabb.h"
 
 namespace NeptunePhysics
 {

@@ -1,7 +1,7 @@
 #ifndef NEPTUNE_NPPAIRMANAGER_H
 #define NEPTUNE_NPPAIRMANAGER_H
 
-#include "core/npAlignedArray.h"
+#include "Core/npAlignedArray.hpp"
 
 namespace NeptunePhysics {
 

@@ -1,6 +1,6 @@
 #include "gtest\gtest.h"
 
-#include "neptunePhysics/math/npQuaternion.h"
+#include "neptunePhysics/math/npQuaternion.hpp"
 
 using namespace NeptunePhysics;
 
