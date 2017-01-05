@@ -9,6 +9,7 @@
 #include "../Collision/BroadPhase/npDbvt.h"
 #include "../Collision/BroadPhase/npSortAndSweep.h"
 #include "../Collision/BroadPhase/npUniformGrid.h"
+#include "../Collision/NarrowPhase/npNarrowPhase.h"
 
 #include <vector>
 
@@ -22,8 +23,9 @@ namespace NeptunePhysics {
 
 		void stepSimulation(float _deltaTime);
 
-		void addRigidBody(npRigidBody _body, npAabb boundingVolume);
-		void addToForceRegistry();
+		void addRigidBody(const npRigidBody &_body, npAabb boundingVolume);
+		void addConstantForce(const unsigned int &_index, npForceGenerator* _generator);
+		void setupForceRegistry();
 
 		npRigidBody getRigidBody(int _idx);
 
@@ -33,17 +35,15 @@ namespace NeptunePhysics {
 		int numRigidBodies;
 
 		npForceRegistry m_registry;
+		npAlignedArray<npIndexForces> m_registeredForces = npAlignedArray<npIndexForces>();
+
 
 		//Pair Manager
 		npPairManager* m_pairManager;
 
-		//Force Generators
-		npGravityForce* m_gravityForce; //not real gravity anymore
+		npIBroadPhase* m_broadphase;
 
-		//All broad phase algorithms
-		npDbvt* m_dbvt;
-		npSortAndSweep* m_sas;
-		npUniformGrid* m_grid;
+		void checkNarrowPhase();
 	};
 }
 #endif

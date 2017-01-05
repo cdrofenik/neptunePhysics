@@ -6,12 +6,12 @@
 // DrawableBV
 
 
-glm::vec3 DrawableBV::__GenerateRandomColor()
+glm::vec3 DrawableShape::__GenerateRandomColor()
 {
 	return glm::vec3(0.5f, 0.5f, 0.0f);
 }
 
-void DrawableBV::__Init()
+void DrawableShape::__Init()
 {
 	glGenVertexArrays(1, &this->m_vao);
 
@@ -36,7 +36,7 @@ void DrawableBV::__Init()
 	glBindVertexArray(0);
 }
 
-void DrawableBV::Clear()
+void DrawableShape::Clear()
 {
 	m_vertices.clear();
 	m_indices.clear();
@@ -49,7 +49,7 @@ void DrawableBV::Clear()
 ///////////////////////////////////////////////////////////////////////////
 // DrawableAABB
 
-void DrawableAABB::__GenerateBoundingAABB(const glm::vec3& minValues, const glm::vec3& maxValues)
+void Box::__GenerateBoundingAABB(const glm::vec3& minValues, const glm::vec3& maxValues)
 {
 	float vertex_data[] = {
 		minValues.x, minValues.y, minValues.z, // bottom front left
@@ -106,17 +106,23 @@ void DrawableAABB::__GenerateBoundingAABB(const glm::vec3& minValues, const glm:
 	}
 }
 
-DrawableAABB::DrawableAABB(const glm::vec3& minValues, const glm::vec3& maxValues)
+Box::Box(const NeptunePhysics::npVector3r &minValues, const NeptunePhysics::npVector3r &maxValues)
+{
+	__GenerateBoundingAABB(glm::vec3(minValues.x, minValues.y, minValues.z),
+		glm::vec3(maxValues.x, maxValues.y, maxValues.z));
+	__Init();
+}
+
+Box::Box(const glm::vec3 &minValues, const glm::vec3 &maxValues)
 {
 	__GenerateBoundingAABB(minValues, maxValues);
 	__Init();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////
 // DrawableSphere
 
-void DrawableSphere::__GenerateSphere(float radius, unsigned int rings, unsigned int sectors)
+void Sphere::__GenerateSphere(NeptunePhysics::npReal radius, unsigned int rings, unsigned int sectors)
 {
 	float const R = 1.0f / (float)(rings - 1.0f);
 	float const S = 1.0f / (float)(sectors - 1.0f);
@@ -157,7 +163,7 @@ void DrawableSphere::__GenerateSphere(float radius, unsigned int rings, unsigned
 		}
 }
 
-DrawableSphere::DrawableSphere(const glm::vec3& minValues, const glm::vec3& maxValues)
+Sphere::Sphere(const glm::vec3 &minValues, const glm::vec3 &maxValues)
 {
 	auto distX = maxValues.x - minValues.x;
 	auto distY = maxValues.y - minValues.y;
@@ -170,10 +176,16 @@ DrawableSphere::DrawableSphere(const glm::vec3& minValues, const glm::vec3& maxV
 	__Init();
 }
 
+Sphere::Sphere(const NeptunePhysics::npVector3r &center, const NeptunePhysics::npReal &radius)
+{
+	__GenerateSphere(radius, 12, 32);
+	__Init();
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // DrawableSphere
 
-void DrawablePlane::__GeneratePlane(const glm::vec3& startPoint, const float& width, const float& length)
+void Plane::__GeneratePlane(const glm::vec3& startPoint, const float& width, const float& length)
 {
 	float vertex_data[] = {
 		startPoint.x, startPoint.y, startPoint.z,
@@ -212,8 +224,34 @@ void DrawablePlane::__GeneratePlane(const glm::vec3& startPoint, const float& wi
 	}
 }
 
-DrawablePlane::DrawablePlane(const glm::vec3& minValues, const float& width, const float& length)
+Plane::Plane(const glm::vec3& minValues, const float& width, const float& length)
 {
 	__GeneratePlane(minValues, width, length);
 	__Init();
+}
+
+DrawableShape GetDrawableShape(NeptunePhysics::npCollisionShape* _shape)
+{
+	switch (_shape->getType())
+	{
+	case 1:
+	{
+		//box
+		NeptunePhysics::npVector3r minValues = NeptunePhysics::npVector3r();
+		NeptunePhysics::npVector3r maxValues = NeptunePhysics::npVector3r();
+		_shape->getAabb(minValues, maxValues);
+		return Box(minValues, maxValues);
+	}
+	case 2:
+	{
+		//sphere
+		NeptunePhysics::npVector3r center = NeptunePhysics::npVector3r();
+		NeptunePhysics::npReal radius = 0.0;
+		_shape->getBoundingSphere(center, radius);
+		return Sphere(center, radius);
+	}
+		
+	default:
+		return DrawableShape();
+	};
 }

@@ -2,6 +2,7 @@
 #define NEPTUNE_NPPAIRMANAGER_H
 
 #include "Core/npAlignedArray.hpp"
+#include "NarrowPhase\npCollisionAlgorithm.h"
 
 namespace NeptunePhysics {
 
@@ -48,8 +49,23 @@ namespace NeptunePhysics {
 			return m_potentialPairs;
 		}
 
+		void npPairManager::addCollisionPairInfo(const npCollisionInfo &_info)
+		{
+			m_collidingPairInfos.push_back(_info);
+		}
+
+		void npPairManager::removeCollisionPairInfo(const npCollisionInfo &_info)
+		{
+			//TODO
+		}
+
+		npAlignedArray<npCollisionInfo> getCollidingPairInfos() {
+			return m_collidingPairInfos;
+		}
+
 	private:
 		npAlignedArray<npPotentialPair> m_potentialPairs = npAlignedArray<npPotentialPair>();
+		npAlignedArray<npCollisionInfo> m_collidingPairInfos = npAlignedArray<npCollisionInfo>();
 
 	};
 

@@ -13,7 +13,7 @@ public:
 	void PrepareForRendering();
 	void Render(RawModel model_);
 	void Render(MeshModel model_, bool wireFrameMode_);
-	void Render(DrawableBV model_);
+	void Render(DrawableShape model_);
 	void RenderArrays(RawModel model_);
 	void Render(GLuint vaoId_, int length_);
 

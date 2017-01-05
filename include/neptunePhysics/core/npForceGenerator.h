@@ -129,7 +129,30 @@ namespace NeptunePhysics {
 		npVector3r m_gravity;
 	public:
 		npGravityForce(const npVector3r &_gravity) : m_gravity(_gravity) {};
+		~npGravityForce() {};
 		virtual void updateForce(npRigidBody *body, npReal duration);
+	};
+
+	class npLinearPendulumForce : public npForceGenerator
+	{
+	public:
+		npLinearPendulumForce(const npVector3r &_startPos,
+			const npVector3r &_endPos,
+			const npReal &_time);
+		~npLinearPendulumForce() {};
+		virtual void updateForce(npRigidBody *body, npReal duration);
+	private:
+		npVector3r m_startPos;
+		npVector3r m_endPos;
+		npVector3r m_pendulumForce;
+		npReal m_maxTime;
+		bool m_isReturning;
+	};
+
+	struct npIndexForces
+	{
+		unsigned int index;
+		npForceGenerator* force;
 	};
 
 	class npForceRegistry

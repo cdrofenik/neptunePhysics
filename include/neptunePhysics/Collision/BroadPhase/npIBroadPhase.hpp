@@ -11,8 +11,8 @@ namespace NeptunePhysics {
 	public:
 		virtual void insert(const npAabb &_volume, const int &_bodyIdx) = 0;
 		virtual void update(const npAabbUpdateData &_volumeData, const int &_bodyIdx) = 0;
-		virtual void remove(const npAabb &_volume, const int &_bodyIdx) = 0;
-		virtual void getPotentialContacts(npPairManager** _pairManager) = 0;
+		virtual bool remove(const npAabb &_volume, const int &_bodyIdx) = 0;
+		virtual void getPotentialContacts(npPairManager* _pairManager) = 0;
 	};
 }
 

@@ -1,53 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Shader Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Models">
-      <UniqueIdentifier>{8470ebf9-3df5-4677-8b2f-f288880a5805}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Models">
-      <UniqueIdentifier>{53fa3a5c-8426-4e9b-9d50-78e33b280434}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Utils">
-      <UniqueIdentifier>{7b0c8c8e-8932-4c43-b4db-5cb6270cd3df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\RenderEngine">
-      <UniqueIdentifier>{32ad938f-1d9b-4734-bd82-17a8cd06a8a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Textures">
-      <UniqueIdentifier>{e176afdf-ab66-4171-a393-04d20432a8fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RenderEngine">
-      <UniqueIdentifier>{0fb0c13b-5c8c-4714-82cd-6c67ce388208}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Textures">
-      <UniqueIdentifier>{48499bf7-535d-4788-b2be-bb50fe75f55b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Entities">
-      <UniqueIdentifier>{cf906c83-022b-438d-94f4-1c7809117203}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utils">
-      <UniqueIdentifier>{23f7fa90-b84c-43de-a7f1-4ddc53be78a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities">
-      <UniqueIdentifier>{875d7aab-aad8-417a-9226-41e8fbc2ceca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Shaders">
-      <UniqueIdentifier>{215bc687-ee62-4840-84b2-2acff206085c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Shaders">
-      <UniqueIdentifier>{88fab590-bfc1-4234-8814-f7d3d0e6718d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader Files\Models">
       <UniqueIdentifier>{b9b25482-0210-4820-ba8c-04b708fcc4e0}</UniqueIdentifier>
@@ -55,70 +11,84 @@
     <Filter Include="Shader Files\DrawableBVs">
       <UniqueIdentifier>{6b746cd3-d59b-46f5-8753-db093d28b282}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{7b0c8c8e-8932-4c43-b4db-5cb6270cd3df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{8470ebf9-3df5-4677-8b2f-f288880a5805}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderEngine">
+      <UniqueIdentifier>{32ad938f-1d9b-4734-bd82-17a8cd06a8a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{215bc687-ee62-4840-84b2-2acff206085c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Textures">
+      <UniqueIdentifier>{e176afdf-ab66-4171-a393-04d20432a8fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{cf906c83-022b-438d-94f4-1c7809117203}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DrawableBV.h">
-      <Filter>Header Files\Models</Filter>
+      <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="DisplayManager.h">
-      <Filter>Header Files\RenderEngine</Filter>
+      <Filter>RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="ObjectLoader.h">
-      <Filter>Header Files\RenderEngine</Filter>
+      <Filter>RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Header Files\RenderEngine</Filter>
+      <Filter>RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="ContainerHelper.hpp">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="TextureLoader.h">
-      <Filter>Header Files\Textures</Filter>
+      <Filter>Textures</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files\Entities</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="ModelShader.h">
-      <Filter>Header Files\Shaders</Filter>
+      <Filter>Shaders</Filter>
     </ClInclude>
     <ClInclude Include="FileManager.h">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
-      <Filter>Header Files\Shaders</Filter>
+      <Filter>Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="DrawableBV.cpp">
-      <Filter>Source Files\Models</Filter>
+      <Filter>Models</Filter>
     </ClCompile>
     <ClCompile Include="DisplayManager.cpp">
-      <Filter>Source Files\RenderEngine</Filter>
+      <Filter>RenderEngine</Filter>
     </ClCompile>
     <ClCompile Include="ObjectLoader.cpp">
-      <Filter>Source Files\RenderEngine</Filter>
+      <Filter>RenderEngine</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files\RenderEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureLoader.cpp">
-      <Filter>Source Files\Textures</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>RenderEngine</Filter>
     </ClCompile>
     <ClCompile Include="ModelShader.cpp">
-      <Filter>Source Files\Shaders</Filter>
+      <Filter>Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\BVfragmentShader.frag">

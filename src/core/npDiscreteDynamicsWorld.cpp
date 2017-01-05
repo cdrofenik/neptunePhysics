@@ -5,28 +5,54 @@
 #include "math/npTransform.hpp"
 
 #include "Collision/CollisionShapes/npAabb.h"
+#include "Collision/CollisionShapes/npBoxShape.h"
+#include "Collision/NarrowPhase/npCollisionAlgorithm.h"
 
 namespace NeptunePhysics
 {
 
     npDiscreteDynamicsWorld::npDiscreteDynamicsWorld()
     {
-        //not real gravity anymore
-        m_gravityForce = new npGravityForce(npVector3r(0.0f, -0.0f, 0.0f)); // - 0.009f
-        m_dbvt = new npDbvt();
         m_pairManager = new npPairManager();
-        m_sas = new npSortAndSweep(&m_pairManager);
-        m_grid = new npUniformGrid();
+		m_broadphase = new npSortAndSweep(m_pairManager); //npDbvt, npUniformGrid, npSortAndSweep(m_pairManager)
 
         numRigidBodies = 0;
     }
 
     npDiscreteDynamicsWorld::~npDiscreteDynamicsWorld()
     {
-        delete m_gravityForce;
-        delete m_dbvt;
+        delete m_broadphase;
+        delete m_pairManager;
         m_registry.clear();
         m_rigidBodyList.clear();
+
+        numRigidBodies = 0;
+    }
+
+    //Check if colliding return - collision pair info to pair manager if really colliding
+    //Narrow phase + Generating Collisions
+    void npDiscreteDynamicsWorld::checkNarrowPhase()
+    {
+        unsigned int size = m_pairManager->getPotentialPairs().size();
+        if (size > 0)
+        {
+            npAlignedArray<npPotentialPair> pairs = m_pairManager->getPotentialPairs();
+            for (unsigned int i = 0; i < size; i++)
+            {
+                //Get pair
+                npCollisionObject* obj0 = &m_rigidBodyList.at(pairs.at(i).bodyIdA);
+                npCollisionObject* obj1 = &m_rigidBodyList.at(pairs.at(i).bodyIdB);
+
+                //Process pair - Narrow phase
+                npCollisionInfo info;
+                info.setCollisionObjects(obj0, obj1);
+                if (npCollisionAlgorithm::processCollision(obj0, obj1, info))
+                    m_pairManager->addCollisionPairInfo(info);
+                else
+                    m_pairManager->removeCollisionPairInfo(info);
+            }
+        }
+        
     }
 
     void npDiscreteDynamicsWorld::stepSimulation(float _deltaTime)
@@ -35,7 +61,7 @@ namespace NeptunePhysics
         npAlignedArray<npAabbUpdateData> changedAabbList = npAlignedArray<npAabbUpdateData>();
         for (auto& body : m_rigidBodyList)
         {
-            if (body.isAwake()) {
+            if (body.isAwake() && body.getInverseMass() > 0) {
                 npVector3r oldPositiong = body.getPosition();
                 body.integrate(_deltaTime);
                 npVector3r moveVector = body.getPosition() - oldPositiong;
@@ -43,34 +69,23 @@ namespace NeptunePhysics
                 npAabb updatedAabb;
                 updatedAabb.m_minVec = m_aabbList.at(counter).m_minVec + moveVector;
                 updatedAabb.m_maxVec = m_aabbList.at(counter).m_maxVec + moveVector;
-                //m_sas->update(npAabbUpdateData(m_aabbList.at(counter), moveVector), counter);
-                //m_dbvt->update(npAabbUpdateData(m_aabbList.at(counter), moveVector), counter);
-                m_grid->update(npAabbUpdateData(m_aabbList.at(counter), moveVector), counter);
-
+                m_broadphase->update(npAabbUpdateData(m_aabbList.at(counter), moveVector), counter);
 
                 changedAabbList.push_back(npAabbUpdateData(m_aabbList.at(counter), moveVector));
             }
             counter++;
         }
-        //Update tree
 
-        //Broad phase -> get collisions
-        //m_dbvt->getPotentialContacts(&m_pairManager);
-        m_grid->getPotentialContacts(&m_pairManager);
-        auto potentialPairs = m_pairManager->getPotentialPairs();
+        //BROAD PHASE
+        m_broadphase->getPotentialContacts(m_pairManager);
 
-        //Narrow phase -> get actual colliding bodies
-        //TODO: implement narrrow phase algorithims
+        //NARROW PHASE
+        checkNarrowPhase();
 
-        //Resolve coliding bodies
-        for (int i = 0; i < potentialPairs.size(); i++)
-        {
-            i += 1;
-            //Resolve collision
-            //npPc[i].bodyA->addForce(npVector3(-0.5f, 0.0f, 0.0f));
-            //npPc[i].bodyB->addForce(npVector3(0.5f, 0.0f, 0.0f));
-        }
+        //Collision Resolve?
 
+
+        //Updated aabb list
         for (int i = 0; i < changedAabbList.size(); i++)
         {
             auto currentDiff = changedAabbList[i];
@@ -80,31 +95,38 @@ namespace NeptunePhysics
             m_aabbList[i].m_minVec = currentDiff.originalAabb.m_minVec +
                 currentDiff.directionDiff;
         }
-
         m_registry.updateForces(_deltaTime);
     }
 
-    void npDiscreteDynamicsWorld::addRigidBody(npRigidBody body, npAabb boundingVolume)
+    void npDiscreteDynamicsWorld::addRigidBody(const npRigidBody &body, npAabb boundingVolume)
     {
         //Add rigid body to list
         m_rigidBodyList.push_back(body);
         m_aabbList.push_back(npAabb(body.getPosition() + boundingVolume.m_minVec,
             body.getPosition() + boundingVolume.m_maxVec));
 
-        //Insert rigid body's aabb into tree
-        //m_sas->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
-        //m_dbvt->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
-        m_grid->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
+        //Add aabb to broadPhase algorithm
+        m_broadphase->insert(m_aabbList.at(numRigidBodies), numRigidBodies);
+
         numRigidBodies++;
     }
 
-    void npDiscreteDynamicsWorld::addToForceRegistry()
+    void npDiscreteDynamicsWorld::addConstantForce(const unsigned int &_index, npForceGenerator* _generator)
+    {
+        npIndexForces idxFrc;
+        idxFrc.index = _index;
+        idxFrc.force = _generator;
+        m_registeredForces.push_back(idxFrc);
+    }
+
+    void npDiscreteDynamicsWorld::setupForceRegistry()
     {
         std::vector<npRigidBody>::iterator iter;
         int counter = 0;
-        for (iter = m_rigidBodyList.begin(); iter != m_rigidBodyList.end(); iter++) {
-            m_registry.add(&(*iter), m_gravityForce);
-            counter++;
+        for (int i = 0; i < m_registeredForces.size(); i++)
+        {
+            npRigidBody* rb = &m_rigidBodyList.at(m_registeredForces.at(i).index);
+            m_registry.add(rb, m_registeredForces.at(i).force);
         }
     }
 

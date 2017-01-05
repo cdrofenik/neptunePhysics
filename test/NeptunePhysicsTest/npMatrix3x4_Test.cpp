@@ -340,8 +340,8 @@ TEST(npMatrix3x4Test, TRANSFORM_INVERSE) {
 	EXPECT_FLOAT_EQ(translation.y, 2);
 	EXPECT_FLOAT_EQ(translation.z, 3);
 
-	EXPECT_FLOAT_EQ(c.x, 5);
-	EXPECT_FLOAT_EQ(c.y, 1);
-	EXPECT_FLOAT_EQ(c.z, 14);
+	EXPECT_FLOAT_EQ(c.x, -5);
+	EXPECT_FLOAT_EQ(c.y, 11);
+	EXPECT_FLOAT_EQ(c.z, 73);
 
 }

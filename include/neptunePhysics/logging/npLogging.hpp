@@ -27,7 +27,7 @@ namespace NeptunePhysics {
 	//		//printf("Typeid %s\n", typeid(_value).name());
 	//	}
 	//}
-
+#endif
 	void Log_DEBUG(const char* _location, const char* _message, const npVector2<npReal>& _value) {
 		printf("DEBUG: [%s] %s: (%f, %f) \n", _location, _message, _value.x, _value.y);
 	}
@@ -48,6 +48,5 @@ namespace NeptunePhysics {
 			_value.m[8], _value.m[9], _value.m[10], _value.m[11],
 			_value.m[12], _value.m[13], _value.m[14], _value.m[15]);
 	}
-#endif
 }
 #endif

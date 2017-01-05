@@ -35,6 +35,15 @@ namespace NeptunePhysics {
 		return _origin + (_size * _index) + _size / 2;
 	}
 
+	static void copyObjectEntity(npObjectEntity* _source,
+		npObjectEntity* _destination)
+	{
+		_destination->previous = _source->previous;
+		_destination->next = _source->next;
+		_destination->bbox = _source->bbox;
+		_destination->id = _source->id;
+	}
+
 	void npUniformGrid::printGrid()
 	{
 		for (size_t x = 0; x < m_xExtent; x++)
@@ -124,16 +133,20 @@ namespace NeptunePhysics {
 			{
 				if (oePntr->id == _data) {
 					if (cellEntryCount > 1) {
-						oePntr->previous->next = oePntr->next;
+						oePntr->bbox = oePntr->next->bbox;
+						oePntr->id = oePntr->next->id;
+						oePntr->next = oePntr->next->next;
+
 						oePntr = NP_NULL;
 					}
 					else {
 						oePntr = NP_NULL;
 					}
-					cellEntryCount--;
+					currCell->entity--;
 					return;
-				} 
+				}
 				oePntr = oePntr->next;
+				cellEntryCount--;
 			}
 		}
 		else
@@ -193,15 +206,15 @@ namespace NeptunePhysics {
 		m_activeCellIds.push_back(newCellIdx);
 	}
 
-	void npUniformGrid::remove(const npAabb &_volume, const int &_bodyIdx)
+	bool npUniformGrid::remove(const npAabb &_volume, const int &_bodyIdx)
 	{
 		npVector3ui cellPos = getLocationIndex(_volume.getTopLeft());
 		removeEntryFromCell(cellPos, _bodyIdx);
+		return true;
 	}
 
-	void npUniformGrid::getPotentialContacts(npPairManager** _pairManager)
+	void npUniformGrid::getPotentialContacts(npPairManager* _pairManager)
 	{
-		npPairManager* pM = *_pairManager;
 		for (int i = 0; i < m_activeCellIds.size(); i++)
 		{
 			npVector3ui cellIdx = m_activeCellIds.at(i);
@@ -212,31 +225,31 @@ namespace NeptunePhysics {
 			while (entityCount > 0)
 			{
 				//Check own cell
-				processCellOwnCell(activeCell, activeOE, pM);
+				processCellOwnCell(activeCell, activeOE, _pairManager);
 
 				//check neighbours
 				while (true) {
 					//SW - same z axis
-					processCell(&m_cells[cellIdx.x - 1][cellIdx.y + 1][cellIdx.z], activeOE, pM);
+					processCell(&m_cells[cellIdx.x - 1][cellIdx.y + 1][cellIdx.z], activeOE, _pairManager);
 
 					//E border
 					if (activeOE->bbox.m_maxVec.x > getCellBorder(m_origin.x, m_cellSize.x, cellIdx.x))
-						processCell(&m_cells[cellIdx.x + 1][cellIdx.y][cellIdx.z], activeOE, pM);
+						processCell(&m_cells[cellIdx.x + 1][cellIdx.y][cellIdx.z], activeOE, _pairManager);
 
 					//S border
 					if (activeOE->bbox.m_minVec.y < getCellBorder(m_origin.y, m_cellSize.y, cellIdx.y))
 					{
-						processCell(&m_cells[cellIdx.x][cellIdx.y + 1][cellIdx.z], activeOE, pM);
+						processCell(&m_cells[cellIdx.x][cellIdx.y + 1][cellIdx.z], activeOE, _pairManager);
 						//SE border
 						if (activeOE->bbox.m_maxVec.x > getCellBorder(m_origin.x, m_cellSize.x, cellIdx.x))
-							processCell(&m_cells[cellIdx.x + 1][cellIdx.y + 1][cellIdx.z], activeOE, pM);
+							processCell(&m_cells[cellIdx.x + 1][cellIdx.y + 1][cellIdx.z], activeOE, _pairManager);
 					}
 
 					//Back border
 					if (activeOE->bbox.m_maxVec.z > getCellBorder(m_origin.z, m_cellSize.z, cellIdx.z))
 					{
 						cellIdx.z++;
-						processCell(&m_cells[cellIdx.x][cellIdx.y][cellIdx.z], activeOE, pM);
+						processCell(&m_cells[cellIdx.x][cellIdx.y][cellIdx.z], activeOE, _pairManager);
 					}
 					else
 						break;
@@ -254,9 +267,9 @@ namespace NeptunePhysics {
 	void npUniformGrid::init(const int &_gridSize, const npVector3r &_cellSize)
 	{
 		//Init
-		m_xExtent = _gridSize;
-		m_yExtent = _gridSize;
-		m_zExtent = _gridSize;
+		m_xExtent = 100;
+		m_yExtent = 100;
+		m_zExtent = 100;
 
 		m_cellSize = _cellSize;
 

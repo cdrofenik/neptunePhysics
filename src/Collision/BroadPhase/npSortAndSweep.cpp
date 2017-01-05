@@ -53,11 +53,10 @@ namespace NeptunePhysics
         const int axis2 = (1 << axis1) & 3;
         if (_updateOverlaps && isColliding(axis1, _activeSo, axis2, _soOther)) {
             //Add to or remove from pair manager
-            npPairManager* ref = *ref_pairManager;
             if (_adding)
-                ref->addPair(_activeSo.bodyIdx, _soOther.bodyIdx);
+                ref_pairManager->addPair(_activeSo.bodyIdx, _soOther.bodyIdx);
             else
-                ref->removePair(_activeSo.bodyIdx, _soOther.bodyIdx);
+                ref_pairManager->removePair(_activeSo.bodyIdx, _soOther.bodyIdx);
 
         }
     }
@@ -256,12 +255,13 @@ namespace NeptunePhysics
         }
     }
 
-    void npSortAndSweep::remove(const npAabb &_volume, const int &_bodyIdx)
+    bool npSortAndSweep::remove(const npAabb &_volume, const int &_bodyIdx)
     {
         //TODO: implement remove function
+        return false;
     }
 
-    npSortAndSweep::npSortAndSweep(npPairManager** _pairManager)
+    npSortAndSweep::npSortAndSweep(npPairManager* _pairManager)
     {
         m_sObjects = npAlignedArray<npSweepObject>();
         m_sObjectCounter = 0;

@@ -94,17 +94,32 @@ namespace NeptunePhysics {
 		}
 	}
 
-	static npDbvtNode* fetchNode(npDbvt* _pdbvt, npDbvtNode* _node, const npAabb &_volume)
+	static bool removeNode(npDbvt* _pdbvt, npDbvtNode* _node, const npAabb &_volume, const int &_id)
 	{
-		npDbvtNode* currentParent = _node;
-		do {
-			auto val = selectLeaf(_volume,
-				currentParent->children[0]->volume,
-				currentParent->children[1]->volume);
-			currentParent = currentParent->children[val];
-		} while (!currentParent->isLeaf());
+		npDbvtNode* currentNode = _node;
+		int childIndex = -1;
 
-		return (currentParent->volume.isEqual(_volume)) ? currentParent : NP_NULL;
+		do {
+			childIndex = selectLeaf(_volume,
+				currentNode->children[0]->volume,
+				currentNode->children[1]->volume);
+			currentNode = currentNode->children[childIndex];
+		} while (!currentNode->isLeaf());
+		
+		if (currentNode->bodyIdx == _id) {
+			npDbvtNode* parent = currentNode->parent;
+			auto vol = parent->children[!childIndex]->volume;
+			auto idx = parent->children[!childIndex]->bodyIdx;
+			parent->volume = parent->children[!childIndex]->volume;
+			parent->bodyIdx = parent->children[!childIndex]->bodyIdx;
+			parent->children[0] = parent->children[!childIndex]->children[0];
+			parent->children[1] = parent->children[!childIndex]->children[1];
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	static void printLeafOrNode(npDbvtNode* _node)
@@ -122,58 +137,38 @@ namespace NeptunePhysics {
 		}
 	}
 
-	static void removeNodeFromTree(npDbvt* _pdbvt, npDbvtNode* _node)
+	static void checkCollision(npPairManager* _pairManager, npDbvtNode* a, npDbvtNode* b, const int &limit)
 	{
-		if (!_pdbvt->m_root)
+		if (!npTestAabbAabb(a->volume, b->volume))
 		{
-			return;
-		}
+			if (limit == 0)
+				return;
+			else {
+				if (a->isInternal())
+					checkCollision(_pairManager, a->children[0], a->children[1], limit - 1);
 
-		npDbvtNode* prnt = _node->parent;
-		npDbvtNode* activeSibling = (prnt->children[0] == _node) ?
-			prnt->children[1] : prnt->children[0];
+				if (b->isInternal())
+					checkCollision(_pairManager, b->children[0], b->children[1], limit - 1);
 
-		if (activeSibling)
-		{
-			npDbvtNode* pNode = createNode(prnt->parent,
-				activeSibling->volume, activeSibling->bodyIdx);
-			
-			if (pNode->parent == _pdbvt->m_root->parent)
-			{
-				_pdbvt->m_root = pNode;
-			}
-			else
-			{
-				//TODO test if works
-				prnt = pNode;
-				prnt->children[1] = 0;
-				prnt->bodyIdx = activeSibling->bodyIdx;
-				prnt->volume = activeSibling->volume;
-				activeSibling->parent = prnt;
+				return;
 			}
 		}
-	}
-
-	static void DbvtCollision(npPairManager** _pairManager, npDbvtNode* a, npDbvtNode* b)
-	{
-		if (!npTestAabbAabb(a->volume, b->volume)) return;
 		if (a->isLeaf() && b->isLeaf())
 		{
 			//add leaves to potential contacts
-			npPairManager* ref = *_pairManager;
-			ref->addPair(a->bodyIdx, b->bodyIdx);
+			_pairManager->addPair(a->bodyIdx, b->bodyIdx);
 		}
 		else
 		{
 			if (!a->isLeaf())
 			{
-				DbvtCollision(_pairManager, a->children[0], b);
-				DbvtCollision(_pairManager, a->children[1], b);
+				checkCollision(_pairManager, a->children[0], b, limit - 1);
+				checkCollision(_pairManager, a->children[1], b, limit - 1);
 			}
 			else
 			{
-				DbvtCollision(_pairManager, a, b->children[0]);
-				DbvtCollision(_pairManager, a, b->children[1]);
+				checkCollision(_pairManager, a, b->children[0], limit - 1);
+				checkCollision(_pairManager, a, b->children[1], limit - 1);
 			}
 
 		}
@@ -193,25 +188,27 @@ namespace NeptunePhysics {
 
 	void npDbvt::update(const npAabbUpdateData &_volumeData, const int &_bodyIdx)
 	{
-		auto node = fetchNode(this, m_root, _volumeData.originalAabb);
-		if (node) {
-			removeNodeFromTree(this, node);
-
+		if (remove(_volumeData.originalAabb, _bodyIdx)) {
 			npAabb aabb(_volumeData.originalAabb.m_minVec + _volumeData.directionDiff,
 				_volumeData.originalAabb.m_maxVec + _volumeData.directionDiff);
 
-			insert(aabb, node->bodyIdx);
+			insert(aabb, _bodyIdx);
 		}
 	}
 
-	void npDbvt::remove(const npAabb &_volume, const int &_bodyIdx)
+	bool npDbvt::remove(const npAabb &_volume, const int &_bodyIdx)
 	{
-		//TODO: implement
+		bool result = removeNode(this, m_root, _volume, _bodyIdx);
+		if (result)
+			m_leaves--;
+
+		return result;
 	}
 
-	void npDbvt::getPotentialContacts(npPairManager** _pairManager)
+	void npDbvt::getPotentialContacts(npPairManager* _pairManager)
 	{
-		DbvtCollision(_pairManager, m_root->children[0], m_root->children[1]);
+		int limit = 3;
+		checkCollision(_pairManager, m_root->children[0], m_root->children[1], limit);
 	}
 
 	void npDbvt::DebugPrintTree()

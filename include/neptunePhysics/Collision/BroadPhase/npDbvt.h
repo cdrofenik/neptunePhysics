@@ -3,7 +3,7 @@
 
 #include "../../Core/npAlignedArray.hpp"
 
-#include "npBroadPhase.h"
+#include "npIBroadPhase.hpp"
 
 namespace NeptunePhysics {
 
@@ -29,8 +29,8 @@ namespace NeptunePhysics {
 
 		virtual void insert(const npAabb &_volume, const int &_bodyIdx);
 		virtual void update(const npAabbUpdateData &_volumeData, const int &_bodyIdx);
-		virtual void remove(const npAabb &_volume, const int &_bodyIdx);
-		virtual void getPotentialContacts(npPairManager** _pairManager);
+		virtual bool remove(const npAabb &_volume, const int &_bodyIdx);
+		virtual void getPotentialContacts(npPairManager* _pairManager);
 
 		void DebugPrintTree();
 

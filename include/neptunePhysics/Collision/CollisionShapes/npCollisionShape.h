@@ -6,55 +6,36 @@
 
 namespace NeptunePhysics {
 
-	enum npBVType
+	enum npCollisionShapeType
 	{
-		AABB,
-		bSphere
-		//Particle
+		BOX_SHAPE,
+		SPHERE_SHAPE,
+		CONVEX_SHAPE,
+		PLANE_SHAPE
 	};
 
-	//class npBVInterface {
+	class npCollisionShape
+	{
+	public:
+		npCollisionShape() : m_margin(0.0), m_scale(1.0), m_type(1) {}
+		~npCollisionShape() {}
 
-	//public:
-	//	virtual npBVType getBvType() = 0;
-	//};
+		void setMargin(const npReal &margin) { m_margin = margin; }
+		npReal getMargin() const { return m_margin; }
 
-	//class npBV : public npBVInterface {
+		void setScale(const npReal &scale) { m_scale = scale; }
+		npReal getScale() const { return m_scale; }
 
-	//public:
-	//	npBV() {}
-	//	~npBV() {}
+		void setType(const int &type) { m_type = type; }
+		int getType() const { return m_type; }
 
-	//	npBVType getBvType() { return type; }
+		virtual void getAabb(npVector3r &aabbMin, npVector3r &aabbMax) const = 0;
+		virtual void getBoundingSphere(npVector3r &center, npReal &radius) const {}
 
-	//private:
-	//	npBVType type;
-	//};
-
-	//class npAABB : public npBV {
-
-	//public:
-	//	npVector3 c; // Center point
-	//	npReal halfX, halfY, halfZ; // Halfway extents of AABB along each axis
-	//	npBVType type = npBVType::AABB;
-	//	npAABB() : c(0.0, 0, 0), halfX(0), halfY(0), halfZ(0) {}
-	//	npAABB(npVector3& centerPoint, npReal half_x, npReal half_y, npReal half_z) : c(centerPoint),
-	//		halfX(half_x), halfY(half_y), halfZ(half_z) {}
-	//	~npAABB() {}
-	//};
-
-	//class npSphere : public npBV {
-
-	//public:
-	//	npVector3 c; // Center point
-	//	npReal r; // Radius
-	//	npBVType type = npBVType::bSphere;
-	//	npSphere() : c(0.0, 0, 0), r(0) {}
-	//	npSphere(npVector3& centerPoint, npReal radius) : c(centerPoint), r(radius) {}
-	//	~npSphere() {}
-	//};
-
+	protected:
+		npReal m_margin;
+		npReal m_scale;
+		int m_type;
+	};
 }
-
-
 #endif

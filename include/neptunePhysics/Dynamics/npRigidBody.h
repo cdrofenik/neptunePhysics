@@ -5,9 +5,11 @@
 
 #include "Core/npMotionState.h"
 
+#include "Collision/npCollisionObject.h"
+
 namespace NeptunePhysics {
 
-	class npRigidBody
+	class npRigidBody : public npCollisionObject
 	{
 	public:
 		npRigidBody(const float& _mass, const npVector3r& _position,
@@ -30,7 +32,6 @@ namespace NeptunePhysics {
 
 		npVector3r m_rotation;
 		npQuarternion m_orientation;
-		npMatrix3x4 m_transformMatrix;
 
 		npMatrix3 m_inverseInertiaTensor;
 		npMatrix3 m_inverseInertiaTensorWorld;
@@ -70,9 +71,6 @@ namespace NeptunePhysics {
 		void setOrientation(const npQuarternion &_q);
 		void setOrientation(const npReal & _r, const npReal &_i, const npReal &_j, const npReal &_k);
 		npQuarternion getOrientation() const;
-
-		void setTransformMatrix(const npMatrix3x4 &_matrix);
-		npMatrix3x4 getTransformMatrix() const;
 
 		#pragma endregion
 

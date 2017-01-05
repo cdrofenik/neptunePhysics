@@ -33,7 +33,7 @@ void Renderer::Render(MeshModel model_, bool wireFrameMode_)
     glBindVertexArray(0);
 }
 
-void Renderer::Render(DrawableBV model_)
+void Renderer::Render(DrawableShape model_)
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

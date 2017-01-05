@@ -136,16 +136,6 @@ namespace NeptunePhysics
 	{
 		return m_rotation;
 	}
-
-	void npRigidBody::setTransformMatrix(const npMatrix3x4 &_matrix)
-	{
-		m_transformMatrix = _matrix;
-	}
-
-	npMatrix3x4 npRigidBody::getTransformMatrix() const
-	{
-		return m_transformMatrix;
-	}
 	#pragma endregion
 
 	void npRigidBody::addForce(const npVector3r &force)
@@ -223,6 +213,8 @@ namespace NeptunePhysics
 
 	void npRigidBody::clearAccum()
 	{
+		m_forceAccum = npVector3r();
+		m_torqueAccum = npVector3r();
 		//m_forceAccum;
 		//m_torqueAccum;
 	}

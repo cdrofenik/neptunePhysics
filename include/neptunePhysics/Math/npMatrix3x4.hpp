@@ -142,13 +142,18 @@ namespace NeptunePhysics {
 		{
 			npVector3r tmp = _vector;
 			tmp.x -= m[3];
-			tmp.x -= m[7];
-			tmp.x -= m[11];
+			tmp.y -= m[7];
+			tmp.z -= m[11];
 			return npVector3r(
 				tmp.x * m[0] + tmp.y * m[4] + tmp.z * m[8],
 				tmp.x * m[1] + tmp.y * m[5] + tmp.z * m[9],
 				tmp.x * m[2] + tmp.y * m[6] + tmp.z * m[10]
 				);
+		}
+
+		npVector3r getAxisValues(const unsigned int &_axis) const
+		{
+			return npVector3r(m[_axis], m[_axis + 4], m[_axis + 8]);
 		}
 	
 	private:

@@ -4,8 +4,11 @@
 bin/
 external/
 solutions/NeptunePhysics/Debug
+solutions/NeptunePhysics/Release
 solutions/NeptunePhysicsSimulator/Debug
+solutions/NeptunePhysicsSimulator/Release
 test/NeptunePhysicsTest/Debug
+test/NeptunePhysicsTest/Release
 
 ##########################
 # Visual Studio generated

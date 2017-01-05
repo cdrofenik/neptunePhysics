@@ -133,6 +133,45 @@ namespace NeptunePhysics {
 		_body->addForce(val);
 	}
 
+	//----- npPendulumForce
+	npLinearPendulumForce::npLinearPendulumForce(const npVector3r &_startPos,
+		const npVector3r &_endPos,
+		const npReal &_time)
+	{
+		if (_endPos <= _startPos) {
+			m_startPos = _endPos;
+			m_endPos = _startPos;
+		}
+		else {
+			m_startPos = _startPos;
+			m_endPos = _endPos;
+		}
+		m_pendulumForce = (_endPos - _startPos) * (1.0f / _time);
+		m_isReturning = _endPos <= _startPos;
+		m_maxTime = _time;
+	}
+
+	void npLinearPendulumForce::updateForce(npRigidBody *_body, npReal duration)
+	{
+		if (_body->getInverseMass() == 0) return;
+
+		if (_body->getWorldPosition() >= m_endPos) {
+			if (!m_isReturning) {
+				npVector3r directonalVector = m_startPos - m_endPos;
+				m_pendulumForce = directonalVector * (1.0f / m_maxTime);
+				m_isReturning = true;
+			}
+		} else if (_body->getWorldPosition() <= m_startPos) {
+			if (m_isReturning) {
+				npVector3r directonalVector = m_endPos - m_startPos;
+				m_pendulumForce = directonalVector * (1.0f / m_maxTime);
+				m_isReturning = false;
+			}
+		}
+		npVector3r finalValue = m_pendulumForce * 0.1f;
+		_body->addForce(finalValue);
+	}
+
 	//----- npForceRegistry
 
 	void npForceRegistry::add(npRigidBody* _rigidBody, npForceGenerator *_generator)

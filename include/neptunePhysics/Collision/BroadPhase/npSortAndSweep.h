@@ -3,7 +3,7 @@
 
 #include "Core/npAlignedArray.hpp"
 
-#include "npBroadPhase.h"
+#include "npIBroadPhase.hpp"
 
 namespace NeptunePhysics
 {
@@ -24,20 +24,20 @@ namespace NeptunePhysics
 	class npSortAndSweep : public npIBroadPhase
 	{
 	public:
-		npSortAndSweep(npPairManager** _pairManager);
+		npSortAndSweep(npPairManager* _pairManager);
 		~npSortAndSweep();
 
 		virtual void insert(const npAabb &_volume, const int &_bodyIdx);
 		virtual void update(const npAabbUpdateData &_volumeData, const int &_bodyIdx);
-		virtual void remove(const npAabb &_volume, const int &_bodyIdx);
-		virtual void getPotentialContacts(npPairManager** _pairManager) {}
+		virtual bool remove(const npAabb &_volume, const int &_bodyIdx);
+		virtual void getPotentialContacts(npPairManager* _pairManager) {}
 
 	private:
 		int m_sObjectCounter;
 		int m_ePointCounter;
 		npEndPoint* m_endPoints[3];
 		npAlignedArray<npSweepObject> m_sObjects;
-		npPairManager** ref_pairManager;
+		npPairManager* ref_pairManager;
 
 		unsigned int quantize(const npReal& _value);
 		bool isColliding(const int &_axis1, const npSweepObject & _so1,

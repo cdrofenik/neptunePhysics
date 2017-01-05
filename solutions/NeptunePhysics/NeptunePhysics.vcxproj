@@ -11,13 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npBroadPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npIBroadPhase.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npDbvt.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npSortAndSweep.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npUniformGrid.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npAabb.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npBoxShape.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npCollisionShape.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\Collision\NarrowPhase\npNarrowPhase.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npSphereShape.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\NarrowPhase\npCollisionAlgorithm.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\npCollisionObject.h" />
     <ClInclude Include="..\..\include\neptunePhysics\collision\npPairManager.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Core\npAlignedArray.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\core\npConstants.h" />
@@ -40,6 +43,8 @@
     <ClCompile Include="..\..\src\Collision\BroadPhase\npDbvt.cpp" />
     <ClCompile Include="..\..\src\Collision\BroadPhase\npSortAndSweep.cpp" />
     <ClCompile Include="..\..\src\Collision\BroadPhase\npUniformGrid.cpp" />
+    <ClCompile Include="..\..\src\Collision\NarrowPhase\npCollisionAlgorithm.cpp" />
+    <ClCompile Include="..\..\src\Collision\npCollisionObject.cpp" />
     <ClCompile Include="..\..\src\collision\npForceGenerator.cpp" />
     <ClCompile Include="..\..\src\core\npDiscreteDynamicsWorld.cpp" />
     <ClCompile Include="..\..\src\Dynamics\npParticle.cpp" />

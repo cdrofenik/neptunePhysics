@@ -56,6 +56,13 @@ namespace NeptunePhysics {
 		npVector3r getAabbSize() const {
 			return m_maxVec - m_minVec;
 		}
+
+		npVector3r getAabbHalfSize() const {
+			return npVector3r(
+				(m_maxVec.x - m_minVec.x) / 2,
+				(m_maxVec.y - m_minVec.y) / 2,
+				(m_maxVec.z - m_minVec.z) / 2);
+		}
 	};
 
 	struct npAabbUpdateData

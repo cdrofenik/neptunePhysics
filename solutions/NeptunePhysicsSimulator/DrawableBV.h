@@ -1,6 +1,10 @@
 #ifndef DRAWABLEBV_H
 #define DRAWABLEBV_H
 
+#include "Collision\CollisionShapes\npCollisionShape.h"
+#include "Collision\CollisionShapes\npBoxShape.h"
+#include "Collision\CollisionShapes\npSphereShape.h"
+
 #include "ContainerHelper.hpp"
 
 #include <GL\glew.h>
@@ -8,11 +12,11 @@
 
 #include <vector>
 
-class DrawableBV
+class DrawableShape
 {
 public:
-	DrawableBV() {}
-	~DrawableBV() {}
+	DrawableShape() {}
+	~DrawableShape() {}
 
 	void Clear();
 
@@ -29,36 +33,40 @@ protected:
 	void __Init();
 };
 
-class DrawableAABB : public DrawableBV
+class Box : public DrawableShape
 {
 public:
-	DrawableAABB(const glm::vec3& minValues, const glm::vec3& maxValues);
-	~DrawableAABB() { }
+	Box(const NeptunePhysics::npVector3r &minValues, const NeptunePhysics::npVector3r &maxValues);
+	Box(const glm::vec3 &minValues, const glm::vec3 &maxValues);
+	~Box() { }
 
 private:
 	void __GenerateBoundingAABB(const glm::vec3& minValues, const glm::vec3& maxValues);
 };
 
-class DrawableSphere : public DrawableBV
+class Sphere : public DrawableShape
 {
 public:
-	DrawableSphere(const glm::vec3& minValues, const glm::vec3& maxValues);
-	~DrawableSphere() {}
+	Sphere(const glm::vec3 &minValues, const glm::vec3 &maxValues);
+	Sphere(const NeptunePhysics::npVector3r &center, const NeptunePhysics::npReal &radius);
+	~Sphere() {}
 
 private:
-	void __GenerateSphere(float radius, unsigned int rings, unsigned int sectors);
+	void __GenerateSphere(NeptunePhysics::npReal radius, unsigned int rings, unsigned int sectors);
 
 };
 
-class DrawablePlane : public DrawableBV
+class Plane : public DrawableShape
 {
 public:
-	DrawablePlane(const glm::vec3& minValues, const float& width, const float& length);
-	~DrawablePlane() {}
+	Plane(const glm::vec3& minValues, const float& width, const float& length);
+	~Plane() {}
 
 private:
 	void __GeneratePlane(const glm::vec3& startPoint, const float& width, const float& length);
 
 };
+
+DrawableShape GetDrawableShape(NeptunePhysics::npCollisionShape* _shape);
 
 #endif

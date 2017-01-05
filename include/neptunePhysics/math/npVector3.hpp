@@ -25,10 +25,20 @@ namespace NeptunePhysics {
 				return z;
 		}
 
+		void setValue(int axis, T value)
+		{
+			if (axis == 0)
+				x = value;
+			else if (axis == 1)
+				y = value;
+			else
+				z = value;
+		}
+
 		/*!
 		Returns square length value without the sqrt
 		*/
-		T squareLength()
+		T squareLength() const
 		{
 			return (x * x) + (y * y) + (z * z);
 		}
@@ -135,7 +145,7 @@ namespace NeptunePhysics {
 			return npVector3(x * v, y * v, z * v);
 		}
 
-		npReal operator*(npVector3<T> &v) const {
+		npReal operator*(const npVector3<T> &v) const {
 			return (x * v.x) + (y * v.y) + (z * v.z);
 		}
 
@@ -147,6 +157,14 @@ namespace NeptunePhysics {
 				y*v.z - z*v.y,
 				z*v.x - x*v.z,
 				x*v.y - y*v.x);
+		}
+
+		bool operator>=(const npVector3<T> &v) const {
+			return x >= v.x && y >= v.y && z >= v.z;
+		}
+
+		bool operator<=(const npVector3<T> &v) const {
+			return x <= v.x && y <= v.y && z <= v.z;
 		}
 	};
 

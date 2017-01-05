@@ -41,7 +41,7 @@ double lastX;
 double lastY;
 
 //TODO: Create Manager struct as container for data
-std::vector<DrawableBV> drawableModelList;
+std::vector<DrawableShape> drawableModelList;
 
 // Keyboard input callback
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -73,28 +73,43 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         keys[key] = false;
 }
 
+npRigidBody generateRigidBody(
+    npDiscreteDynamicsWorld* world,
+    const npAabb &bodyAabb,
+    const npVector3r &startPosition,
+    npForceGenerator* forceGenerator,
+    const npCollisionShapeType &type,
+    unsigned int &count)
+{
+    npRigidBody rBody(10,
+        startPosition,
+        npVector3r(0.0, 0.0, 0.0),
+        npVector3r(0.0, 0.0, 0.0));
+    
+    npCollisionShape* shape = new npBoxShape(rBody.getPosition(), bodyAabb.getAabbHalfSize());
+    if (type == npCollisionShapeType::SPHERE_SHAPE)
+        shape = new npSphereShape(rBody.getPosition(), bodyAabb.getAabbHalfSize());
+
+    rBody.setAngularDamping(0.05f);
+    rBody.setLinearDamping(0.011f);
+    rBody.setCollisionShape(shape);
+
+    world->addRigidBody(rBody, bodyAabb);
+    world->addConstantForce(count, forceGenerator);
+    count++;
+
+    return rBody;
+}
+
 void initializeObjects(npDiscreteDynamicsWorld* world, const glm::vec3& minValues, const glm::vec3& maxValues)
 {
     unsigned int rigidBodyCount = 2;
     
-    npVector3r Pos(0.0f, 2.75f, 0.0f);
+    npVector3r Pos(0.0f, 0.0f, 0.0f);
     npVector3r veloPos(0, 0, 0);
     npVector3r accelPos(0, 0, 0);
 
     drawableModelList.clear();
-    //for (size_t i = 0; i < rigidBodyCount; i++)
-    //{
-    //    npVector3 startPos = Pos + npVector3(i * 1.5f, i * 2.75f, 0.0f);
-
-    //    npRigidBody tmpBody(5, startPos, veloPos, accelPos);
-    //    tmpBody.setAngularDamping(0.05f);
-    //    tmpBody.setLinearDamping(0.011f);
-    //    world->addRigidBody(tmpBody);
-
-    //    //Adding drawable bounding volume
-    //    DrawableAABB drawnBody(minValues, maxValues);
-    //    drawableModelList.push_back(drawnBody);
-    //}
     int indexCounter = 2;
 
     npAabb bodyAabb = npAabb(
@@ -102,37 +117,49 @@ void initializeObjects(npDiscreteDynamicsWorld* world, const glm::vec3& minValue
         npVector3r(maxValues.x, maxValues.y, maxValues.z)
     );
 
-    npVector3r startPos1 = Pos + npVector3r(-2.5f * indexCounter, 0.0f, 0.0f);
-    npRigidBody body1(5, startPos1, veloPos, accelPos);
-    body1.setAngularDamping(0.05f);
-    body1.setLinearDamping(0.011f);
-    body1.addForce(npVector3r(0.5f, 0.0f, 0.0f));
-    world->addRigidBody(body1, bodyAabb);
+    npVector3r startPos1 = npVector3r(-0.9, 0.0f, 0.0f);
+    unsigned int counter = 0;
+    npLinearPendulumForce* pForce = new
+        npLinearPendulumForce(startPos1, startPos1 +
+            npVector3r(1.1f, 0.0f, 0.0f), 3);
+    auto body = generateRigidBody(world,
+        bodyAabb,
+        startPos1,
+        pForce,
+        npCollisionShapeType::BOX_SHAPE,
+        counter);
+
+    DrawableShape bodyShape;
+    if (body.getCollisionShape()->getType() == npCollisionShapeType::BOX_SHAPE) {
+        bodyShape = Box(minValues, maxValues);
+    }
+    else if (body.getCollisionShape()->getType() == npCollisionShapeType::SPHERE_SHAPE) {
+        bodyShape = Sphere(minValues, maxValues);
+    }
+    drawableModelList.push_back(bodyShape);
 
     indexCounter++;
-    npVector3r startPos2 = Pos + npVector3r(+2.5f * indexCounter, 0.0f, 0.0f);
-    npRigidBody body2(5, startPos2, veloPos, accelPos);
-    body2.setAngularDamping(0.05f);
-    body2.setLinearDamping(0.011f);
-    body2.addForce(npVector3r(-0.5f, 0.0f, 0.0f));
-    world->addRigidBody(body2, bodyAabb);
+    npVector3r startPos2 = npVector3r(0.9, 0.0f, 0.0f);
+    npLinearPendulumForce* pForce2 = new
+        npLinearPendulumForce(startPos2, startPos2 +
+            npVector3r(-1.1f, 0.0f, 0.0f), 3);
+    body = generateRigidBody(world,
+        bodyAabb,
+        startPos2,
+        pForce2,
+        npCollisionShapeType::SPHERE_SHAPE,
+        counter);
 
-    //Adding drawable bounding volume
-    DrawableAABB drawnBody1(minValues, maxValues);
-    drawableModelList.push_back(drawnBody1);
-
-    DrawableAABB drawnBody2(minValues, maxValues);
-    drawableModelList.push_back(drawnBody2);
-
-    //Earth plane (approx.)
-    /*npRigidBody _tmpBody(0, npVector3(0.0f, 0.0f, 0.0f), veloPos, accelPos);
-    world->addRigidBody(_tmpBody);*/
-
-    DrawablePlane tmpPlane(glm::vec3(-50, 0, -50), 100, 100);
-    drawableModelList.push_back(tmpPlane);
+    if (body.getCollisionShape()->getType() == npCollisionShapeType::BOX_SHAPE) {
+        bodyShape = Box(minValues, maxValues);
+    }
+    else if (body.getCollisionShape()->getType() == npCollisionShapeType::SPHERE_SHAPE) {
+        bodyShape = Sphere(minValues, maxValues);
+    }
+    drawableModelList.push_back(bodyShape);
 
     //Adding force generators
-    world->addToForceRegistry();
+    world->setupForceRegistry();
 }
 
 //TODO refactor this
@@ -186,7 +213,7 @@ int main() {
     GLuint textureId = textLoader.LoadTexture("..\\..\\external\\resources\\textures\\container.png");
 
     //Loading OBJ mesh
-    auto meshRawModel = objLoader.LoadMesh("..\\..\\external\\resources\\objects\\suzanne.obj");
+    auto meshRawModel = objLoader.LoadMesh("..\\..\\external\\resources\\objects\\suzanneSmall.obj");
 
     //Init physics system
     npDiscreteDynamicsWorld* world = new npDiscreteDynamicsWorld();
@@ -215,14 +242,15 @@ int main() {
             world->stepSimulation(deltaTime);
         }
         
-
         for (size_t i = 0; i < 2; i++)
         {
             auto rigidBdy = world->getRigidBody(i);
 
+            #ifdef _DEBUG
             if (!pauseSimulation) {
                 Log_DEBUG("main.cpp - 197", "Body position:", rigidBdy.getPosition());
             }
+            #endif
 
             npMatrix4 resultingModelMatrix = create4x4Matrix(rigidBdy.getTransformMatrix()).transpose();
 
@@ -233,7 +261,6 @@ int main() {
             BVShader.LoadModelMatrix(resultingModelMatrix);
             objRenderer.Render(drawableModelList.at(i));
             BVShader.Stop();
-
 
             //meshRawModel has other VBOs (vertex, normal, texCoords)
             meshShader.Use();

@@ -73,7 +73,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\external\3rdParty\gtest-1.7.0\include;..\..\external\3rdParty\glm-0.9.6.3\glm;..\..\include\neptunePhysics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\external\3rdParty\gtest-1.7.0\include;..\..\external\3rdParty\glm-0.9.6.3\glm;..\..\include;..\..\include\neptunePhysics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_UNICODE;UNICODE;_VARIADIC_MAX=10;NO_NEPTUNEPHYSICS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
