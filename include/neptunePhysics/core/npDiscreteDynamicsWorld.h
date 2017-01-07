@@ -9,7 +9,6 @@
 #include "../Collision/BroadPhase/npDbvt.h"
 #include "../Collision/BroadPhase/npSortAndSweep.h"
 #include "../Collision/BroadPhase/npUniformGrid.h"
-#include "../Collision/NarrowPhase/npNarrowPhase.h"
 
 #include <vector>
 

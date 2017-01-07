@@ -31,7 +31,7 @@ namespace NeptunePhysics
 		//Calculates closest point on AABB box
 		void closestPoint(const npVector3r &_point, npVector3r &_closestPoint) const
 		{
-			for (size_t i = 0; i < 3; i++)
+			for (unsigned int i = 0; i < 3; i++)
 			{
 				npReal value = _point.getValue(i);
 				if (value < -halfSize.getValue(i))

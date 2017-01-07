@@ -78,9 +78,9 @@ namespace NeptunePhysics
 	{
 		const npBoxShape* box = (npBoxShape*)cObject->getCollisionShape();
 
-		return box->halfSize.x * fabs(axis * cObject->getTransformMatrix().getAxisValues(0)) +
-			box->halfSize.y * fabs(axis * cObject->getTransformMatrix().getAxisValues(1)) +
-			box->halfSize.z * fabs(axis * cObject->getTransformMatrix().getAxisValues(2));
+		return box->halfSize.x * fabsf(axis * cObject->getTransformMatrix().getAxisValues(0)) +
+			box->halfSize.y * fabsf(axis * cObject->getTransformMatrix().getAxisValues(1)) +
+			box->halfSize.z * fabsf(axis * cObject->getTransformMatrix().getAxisValues(2));
 	}
 
 	static int processEdgeEdge(const npCollisionObject* obj0,
@@ -174,7 +174,7 @@ namespace NeptunePhysics
 		unsigned int &result)
 	{
 		// Project this onto the axis
-		npReal distance = fabs(toCenter * axis);
+		npReal distance = fabsf(toCenter * axis);
 
 		// Check projection distance
 		npReal projectionDistance = transformToAxis(obj0, axis) + transformToAxis(obj1, axis) - distance;

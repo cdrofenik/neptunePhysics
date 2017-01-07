@@ -3,10 +3,13 @@
 
 bin/
 external/
+solutions/NeptunePhysics/x64
 solutions/NeptunePhysics/Debug
 solutions/NeptunePhysics/Release
+solutions/NeptunePhysicsSimulator/x64
 solutions/NeptunePhysicsSimulator/Debug
 solutions/NeptunePhysicsSimulator/Release
+test/NeptunePhysicsTest/x64
 test/NeptunePhysicsTest/Debug
 test/NeptunePhysicsTest/Release
 
@@ -22,3 +25,5 @@ test/NeptunePhysicsTest/Release
 *.suo
 *.sdf
 *.opensdf
+*.opendb
+*.db

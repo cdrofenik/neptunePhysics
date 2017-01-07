@@ -43,7 +43,7 @@ namespace NeptunePhysics {
 				return;
 			}
 
-			d = 1.0f / sqrt(d);
+			d = 1.0f / (npReal)sqrt(d);
 			r *= d;
 			i *= d;
 			j *= d;

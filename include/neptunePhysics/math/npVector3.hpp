@@ -48,7 +48,7 @@ namespace NeptunePhysics {
 		*/
 		T length() const
 		{
-			return sqrt((x * x) + (y * y) + (z * z));
+			return (npReal)sqrt((x * x) + (y * y) + (z * z));
 		}
 
 		/*!
@@ -66,7 +66,7 @@ namespace NeptunePhysics {
 		*/
 		npVector3<T>& normalize()
 		{
-			const float l = sqrt(x * x + y * y + z * z);
+			const npReal l = (npReal)sqrt(x * x + y * y + z * z);
 
 			x /= l;
 			y /= l;
