@@ -1,8 +1,19 @@
-# Generated folder
-##########################
+#############################################
+# Folder with built executionals and dlls
+#############################################
 
 bin/
+
+#############################################
+# External resources
+#############################################
+
 external/
+
+#############################################
+# Visual Studio generated folders
+#############################################
+
 solutions/NeptunePhysics/x64
 solutions/NeptunePhysics/Debug
 solutions/NeptunePhysics/Release
@@ -13,9 +24,9 @@ test/NeptunePhysicsTest/x64
 test/NeptunePhysicsTest/Debug
 test/NeptunePhysicsTest/Release
 
-##########################
-# Visual Studio generated
-##########################
+#############################################
+# Visual Studio generated files
+#############################################
 *.exe
 *.ilk
 *.pdb
@@ -27,3 +38,12 @@ test/NeptunePhysicsTest/Release
 *.opensdf
 *.opendb
 *.db
+
+#############################################
+# Unreal Engine generated folders/files
+#############################################
+solutions/UnrealGameExample/Build
+solutions/UnrealGameExample/Binaries
+solutions/UnrealGameExample/Intermediate
+solutions/UnrealGameExample/Saved
+solutions/UnrealGameExample/Content/StarterContent
