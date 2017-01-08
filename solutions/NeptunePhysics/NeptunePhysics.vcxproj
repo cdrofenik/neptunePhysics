@@ -58,6 +58,9 @@
     <ClCompile Include="..\..\src\Dynamics\npParticle.cpp" />
     <ClCompile Include="..\..\src\Dynamics\npRigidBody.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\..\include\neptunePhysics\Collision\CUDA\cuTest.cu" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD4E152F-8E0F-4261-8AE7-AD277D26AA98}</ProjectGuid>
     <RootNamespace>NeptunePhysics</RootNamespace>

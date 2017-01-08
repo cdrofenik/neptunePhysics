@@ -25,6 +25,9 @@
     <Filter Include="Dynamics">
       <UniqueIdentifier>{9353a8d0-1c37-4819-8783-1dc4428052b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision\CUDA">
+      <UniqueIdentifier>{758e18dc-105a-4738-9571-48a0b3826f0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\neptunePhysics\math\npMatrix3.hpp">
@@ -137,5 +140,10 @@
     <ClCompile Include="..\..\src\Collision\npCollisionObject.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\..\include\neptunePhysics\Collision\CUDA\cuTest.cu">
+      <Filter>Collision\CUDA</Filter>
+    </CudaCompile>
   </ItemGroup>
 </Project>
