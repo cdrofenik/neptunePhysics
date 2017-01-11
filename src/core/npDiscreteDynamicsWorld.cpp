@@ -14,7 +14,7 @@ namespace NeptunePhysics
     npDiscreteDynamicsWorld::npDiscreteDynamicsWorld()
     {
         m_pairManager = new npPairManager();
-		m_broadphase = new npSortAndSweep(m_pairManager); //npDbvt, npUniformGrid, npSortAndSweep(m_pairManager)
+		m_broadphase = new npSweepAndPrune(m_pairManager); //npDbvt, npUniformGrid, npSortAndSweep(m_pairManager)
 
         numRigidBodies = 0;
     }

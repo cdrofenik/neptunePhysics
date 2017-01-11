@@ -21,11 +21,11 @@ namespace NeptunePhysics
 		bool isMax;
 	};
 
-	class npSortAndSweep : public npIBroadPhase
+	class npSweepAndPrune : public npIBroadPhase
 	{
 	public:
-		npSortAndSweep(npPairManager* _pairManager);
-		~npSortAndSweep();
+		npSweepAndPrune(npPairManager* _pairManager);
+		~npSweepAndPrune();
 
 		virtual void insert(const npAabb &_volume, const int &_bodyIdx);
 		virtual void update(const npAabbUpdateData &_volumeData, const int &_bodyIdx);
@@ -44,11 +44,11 @@ namespace NeptunePhysics
 			const int &_axis2, const npSweepObject &_so2);
 		void checkIfColliding(const int &_axis, const npSweepObject &_activeSo,
 			const npSweepObject &_so, const bool &_adding, bool _updateOverlaps);
-		void sortMinDown(const int &_axis, const int &_startIndex, bool _updateOverlaps);
-		void sortMinUp(const int &_axis, const int &_startIndex, bool _updateOverlaps);
-		void sortMaxDown(const int &_axis, const int &_startIndex, bool _updateOverlaps);
-		void sortMaxUp(const int &_axis, const int &_startIndex, bool _updateOverlaps);
 		void printEndPoints(int axis, int limit);
+		void sortMin(const int &_axis, const int &_startIndex,
+			const bool &_updateOverlaps, const bool &_ascending);
+		void sortMax(const int &_axis, const int &_startIndex,
+			const bool &_updateOverlaps, const bool &_ascending);
 	};
 }
 #endif

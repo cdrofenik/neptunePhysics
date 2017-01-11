@@ -7,7 +7,7 @@
 #include "../Dynamics/npParticle.h"
 #include "../Dynamics/npRigidBody.h"
 #include "../Collision/BroadPhase/npDbvt.h"
-#include "../Collision/BroadPhase/npSortAndSweep.h"
+#include "../Collision/BroadPhase/npSweepAndPrune.h"
 #include "../Collision/BroadPhase/npUniformGrid.h"
 
 #include <vector>

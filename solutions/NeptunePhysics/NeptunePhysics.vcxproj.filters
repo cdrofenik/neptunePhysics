@@ -69,9 +69,6 @@
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npDbvt.h">
       <Filter>Collision\BroadPhase</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npSortAndSweep.h">
-      <Filter>Collision\BroadPhase</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npUniformGrid.h">
       <Filter>Collision\BroadPhase</Filter>
     </ClInclude>
@@ -111,12 +108,15 @@
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npIBroadPhase.hpp">
       <Filter>Collision\BroadPhase</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npSweepAndPrune.h">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npPUniformGrid.h">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Collision\BroadPhase\npDbvt.cpp">
-      <Filter>Collision\BroadPhase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Collision\BroadPhase\npSortAndSweep.cpp">
       <Filter>Collision\BroadPhase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Collision\BroadPhase\npUniformGrid.cpp">
@@ -139,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Collision\npCollisionObject.cpp">
       <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Collision\BroadPhase\npSweepAndPrune.cpp">
+      <Filter>Collision\BroadPhase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Collision\BroadPhase\npPUniformGrid.cpp">
+      <Filter>Collision\BroadPhase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

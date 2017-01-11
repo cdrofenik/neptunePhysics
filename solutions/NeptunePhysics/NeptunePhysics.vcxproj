@@ -21,7 +21,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npIBroadPhase.hpp" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npDbvt.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npSortAndSweep.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npPUniformGrid.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npSweepAndPrune.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npUniformGrid.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npAabb.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npBoxShape.h" />
@@ -49,7 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Collision\BroadPhase\npDbvt.cpp" />
-    <ClCompile Include="..\..\src\Collision\BroadPhase\npSortAndSweep.cpp" />
+    <ClCompile Include="..\..\src\Collision\BroadPhase\npPUniformGrid.cpp" />
+    <ClCompile Include="..\..\src\Collision\BroadPhase\npSweepAndPrune.cpp" />
     <ClCompile Include="..\..\src\Collision\BroadPhase\npUniformGrid.cpp" />
     <ClCompile Include="..\..\src\Collision\NarrowPhase\npCollisionAlgorithm.cpp" />
     <ClCompile Include="..\..\src\Collision\npCollisionObject.cpp" />
