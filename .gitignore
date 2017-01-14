@@ -14,6 +14,7 @@ external/
 # Visual Studio generated folders
 #############################################
 
+solutions/NeptunePhysics/include
 solutions/NeptunePhysics/x64
 solutions/NeptunePhysics/Debug
 solutions/NeptunePhysics/Release

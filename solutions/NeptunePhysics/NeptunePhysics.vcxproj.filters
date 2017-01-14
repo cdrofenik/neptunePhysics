@@ -148,7 +148,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="..\..\include\neptunePhysics\Collision\CUDA\cuTest.cu">
+    <CudaCompile Include="..\..\include\neptunePhysics\Collision\CUDA\gridKernel.cu">
       <Filter>Collision\CUDA</Filter>
     </CudaCompile>
   </ItemGroup>

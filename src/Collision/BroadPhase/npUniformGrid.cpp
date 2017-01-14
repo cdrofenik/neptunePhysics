@@ -93,7 +93,7 @@ namespace NeptunePhysics {
 		return npVector3ui(xCellIdx, yCellIdx, zCellIdx);
 	}
 
-	void npUniformGrid::addEntryToCell(const npVector3ui &_cellPos, npObjectEntity* _oEntity)
+	void npUniformGrid::addEntityToCell(const npVector3ui &_cellPos, npObjectEntity* _oEntity)
 	{
 		npCell* currCell = &m_cells[_cellPos.x][_cellPos.y][_cellPos.z];
 		if (currCell->entityCount > 0)
@@ -122,7 +122,7 @@ namespace NeptunePhysics {
 		}
 	}
 
-	void npUniformGrid::removeEntryFromCell(const npVector3ui &_cellPos, const int &_data)
+	void npUniformGrid::removeEntityFromCell(const npVector3ui &_cellPos, const int &_data)
 	{
 		npCell* currCell = &m_cells[_cellPos.x][_cellPos.y][_cellPos.z];
 		if (currCell->entityCount > 1)
@@ -181,7 +181,7 @@ namespace NeptunePhysics {
 		}
 		npVector3ui cellIdx = getLocationIndex(_volume.getTopLeft());
 		npObjectEntity* objE = new npObjectEntity(_volume, _bodyIdx);
-		addEntryToCell(cellIdx, objE);
+		addEntityToCell(cellIdx, objE);
 	}
 
 	void npUniformGrid::update(const npAabbUpdateData &_volume, const int &_bodyIdx)
@@ -193,10 +193,10 @@ namespace NeptunePhysics {
 
 		if (oldCellIdx != newCellIdx)
 		{
-			removeEntryFromCell(oldCellIdx, _bodyIdx);
+			removeEntityFromCell(oldCellIdx, _bodyIdx);
 
 			npObjectEntity* objE = new npObjectEntity(updatedAabb, _bodyIdx);
-			addEntryToCell(newCellIdx, objE);
+			addEntityToCell(newCellIdx, objE);
 		}
 		else
 		{
@@ -209,7 +209,7 @@ namespace NeptunePhysics {
 	bool npUniformGrid::remove(const npAabb &_volume, const int &_bodyIdx)
 	{
 		npVector3ui cellPos = getLocationIndex(_volume.getTopLeft());
-		removeEntryFromCell(cellPos, _bodyIdx);
+		removeEntityFromCell(cellPos, _bodyIdx);
 		return true;
 	}
 

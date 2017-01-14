@@ -39,7 +39,6 @@ namespace NeptunePhysics {
 
 	private:
 		void npDbvt::clean();
-		void recalculateBoundingVolumes(npDbvtNode* _node);
 	};
 
 }

@@ -63,8 +63,8 @@ namespace NeptunePhysics {
 		void printGrid();
 		void generateCells();
 		npVector3ui getLocationIndex(const npVector3r &_centerPos) const;
-		void addEntryToCell(const npVector3ui &_cellPos, npObjectEntity* _oEntity);
-		void removeEntryFromCell(const npVector3ui &_cellPos, const int &_data);
+		void addEntityToCell(const npVector3ui &_cellPos, npObjectEntity* _oEntity);
+		void removeEntityFromCell(const npVector3ui &_cellPos, const int &_data);
 		void updateEntityInCell(const npVector3ui &_cellPos, const npAabb &_volume, const int &_id);
 	};
 }
