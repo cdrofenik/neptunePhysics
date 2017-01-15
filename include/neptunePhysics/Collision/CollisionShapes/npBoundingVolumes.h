@@ -1,9 +1,47 @@
-#ifndef NEPTUNE_NPAABB_H
-#define NEPTUNE_NPAABB_H
+#ifndef NEPTUNE_NPBOUNDINGVOLUMES_H
+#define NEPTUNE_NPBOUNDINGVOLUMES_H
 
 #include "math/npVector3.hpp"
 
 namespace NeptunePhysics {
+
+	struct npSphere {
+		npVector3r center;
+		npReal radius;
+
+		npSphere(const npVector3r &_center = npVector3r(), const npReal &_radius = 1.0f) :
+			center(_center),
+			radius(_radius) {}
+
+		npReal getMax(const int &axis) const {
+			switch (axis)
+			{
+			case 0:
+				return center.x + radius;
+			case 1:
+				return center.y + radius;
+			case 2:
+				return center.z + radius;
+			default:
+				break;
+			}
+		}
+
+		npReal getMin(const int &axis) const {
+			switch (axis)
+			{
+			case 0:
+				return center.x - radius;
+			case 1:
+				return center.y - radius;
+			case 2:
+				return center.z - radius;
+			default:
+				break;
+			}
+		}
+
+	};
 
 	struct npAabb {
 
@@ -62,6 +100,11 @@ namespace NeptunePhysics {
 				(m_maxVec.x - m_minVec.x) / 2,
 				(m_maxVec.y - m_minVec.y) / 2,
 				(m_maxVec.z - m_minVec.z) / 2);
+		}
+
+		npSphere getBoundingSphere() const
+		{
+			return npSphere();
 		}
 	};
 

@@ -4,7 +4,6 @@
 #include "math/npVector3.hpp"
 #include "math/npTransform.hpp"
 
-#include "Collision/CollisionShapes/npAabb.h"
 #include "Collision/CollisionShapes/npBoxShape.h"
 #include "Collision/NarrowPhase/npCollisionAlgorithm.h"
 
@@ -16,7 +15,7 @@ namespace NeptunePhysics
 		m_pairManager = new npPairManager();
 		m_broadphase = new npSweepAndPrune(m_pairManager); //npDbvt, npUniformGrid, npSortAndSweep(m_pairManager)
 
-		npPUniformGrid* test = new npPUniformGrid();
+		npPUniformGrid* test = new npPUniformGrid(50, npVector3r(0.5, 0.5, 0.5));
 
 		numRigidBodies = 0;
 	}

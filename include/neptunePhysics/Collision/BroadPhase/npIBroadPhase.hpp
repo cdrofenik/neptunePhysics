@@ -1,7 +1,7 @@
 #ifndef NEPTUNE_BROAD_SEARCH_H
 #define NEPTUNE_BROAD_SEARCH_H
 
-#include "../CollisionShapes/npAabb.h"
+#include "../CollisionShapes/npBoundingVolumes.h"
 #include "../npPairManager.h"
 
 namespace NeptunePhysics {

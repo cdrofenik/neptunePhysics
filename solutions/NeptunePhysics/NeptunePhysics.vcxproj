@@ -24,7 +24,7 @@
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npPUniformGrid.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npSweepAndPrune.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npUniformGrid.h" />
-    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npAabb.h" />
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npBoundingVolumes.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npBoxShape.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npCollisionShape.h" />
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npSphereShape.h" />

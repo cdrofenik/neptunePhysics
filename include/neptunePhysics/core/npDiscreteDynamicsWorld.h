@@ -3,7 +3,7 @@
 
 #include "npForceGenerator.h"
 
-#include "../Collision/CollisionShapes/npAabb.h"
+#include "../Collision/CollisionShapes/npBoundingVolumes.h"
 #include "../Dynamics/npParticle.h"
 #include "../Dynamics/npRigidBody.h"
 #include "../Collision/BroadPhase/npDbvt.h"

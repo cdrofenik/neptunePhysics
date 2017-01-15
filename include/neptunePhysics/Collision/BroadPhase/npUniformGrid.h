@@ -38,10 +38,8 @@ namespace NeptunePhysics {
 	class npUniformGrid : public npIBroadPhase
 	{
 	public:
-		npUniformGrid();
+		npUniformGrid(const int &_gridSize, const npVector3r &_cellSize);
 		~npUniformGrid();
-
-		void init(const int &_gridSize, const npVector3r &_cellSize);
 
 		virtual void insert(const npAabb &_volume, const int &_bodyIdx);
 		virtual void update(const npAabbUpdateData &_volumeData, const int &_bodyIdx);
@@ -52,7 +50,6 @@ namespace NeptunePhysics {
 		unsigned int m_xExtent;
 		unsigned int m_yExtent;
 		unsigned int m_zExtent;
-		bool m_initialized;
 
 		npCell*** m_cells;
 		npAlignedArray<npVector3ui> m_activeCellIds;

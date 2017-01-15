@@ -78,9 +78,6 @@
     <ClInclude Include="..\..\include\neptunePhysics\Dynamics\npRigidBody.h">
       <Filter>Dynamics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npAabb.h">
-      <Filter>Collision\CollisionShapes</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npCollisionShape.h">
       <Filter>Collision\CollisionShapes</Filter>
     </ClInclude>
@@ -113,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\neptunePhysics\Collision\BroadPhase\npPUniformGrid.h">
       <Filter>Collision\BroadPhase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\neptunePhysics\Collision\CollisionShapes\npBoundingVolumes.h">
+      <Filter>Collision\CollisionShapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

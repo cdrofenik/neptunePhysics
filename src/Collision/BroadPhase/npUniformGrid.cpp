@@ -175,10 +175,6 @@ namespace NeptunePhysics {
 
 	void npUniformGrid::insert(const npAabb &_volume, const int &_bodyIdx)
 	{
-		if (!m_initialized) {
-			init(10, _volume.getAabbSize());
-			m_initialized = true;
-		}
 		npVector3ui cellIdx = getLocationIndex(_volume.getTopLeft());
 		npObjectEntity* objE = new npObjectEntity(_volume, _bodyIdx);
 		addEntityToCell(cellIdx, objE);
@@ -264,7 +260,7 @@ namespace NeptunePhysics {
 		m_activeCellIds.clear();
 	}
 
-	void npUniformGrid::init(const int &_gridSize, const npVector3r &_cellSize)
+	npUniformGrid::npUniformGrid(const int &_gridSize, const npVector3r &_cellSize)
 	{
 		//Init
 		m_xExtent = 100;
@@ -277,14 +273,9 @@ namespace NeptunePhysics {
 			-(_cellSize.x * (_gridSize / 2)) + (_cellSize.x / 2),
 			-(_cellSize.y * (_gridSize / 2)) + (_cellSize.y / 2),
 			-(_cellSize.z * (_gridSize / 2)) + (_cellSize.z / 2)
-			);
+		);
 
 		generateCells();
-	}
-
-	npUniformGrid::npUniformGrid()
-	{
-		m_initialized = false;
 		m_activeCellIds = npAlignedArray<npVector3ui>();
 	}
 
